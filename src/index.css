@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 23% 97%;
+    --foreground: 224 45% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 45% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 45% 12%;
+    --primary: 236 58% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 224 30% 94%;
+    --secondary-foreground: 224 45% 18%;
+    --muted: 220 20% 95%;
+    --muted-foreground: 222 13% 44%;
+    --accent: 232 60% 96%;
+    --accent-foreground: 236 50% 36%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 20% 89%;
+    --input: 222 18% 85%;
+    --ring: 236 58% 55%;
+    --radius: 0.625rem;
+
+    --sidebar: 225 54% 13%;
+    --sidebar-foreground: 225 40% 92%;
+    --sidebar-muted: 225 20% 65%;
+    --sidebar-accent: 228 45% 21%;
+    --sidebar-border: 225 40% 19%;
+
+    --success: 152 60% 36%;
+    --warning: 35 92% 45%;
+    --info: 204 80% 45%;
+
+    --chart-1: 236 58% 55%;
+    --chart-2: 199 80% 48%;
+    --chart-3: 168 60% 40%;
+    --chart-4: 35 90% 52%;
+    --chart-5: 330 65% 55%;
+    --chart-6: 262 55% 60%;
+  }
+
+  .dark {
+    --background: 225 38% 7%;
+    --foreground: 222 30% 92%;
+    --card: 225 33% 10%;
+    --card-foreground: 222 30% 92%;
+    --popover: 225 33% 11%;
+    --popover-foreground: 222 30% 92%;
+    --primary: 235 80% 68%;
+    --primary-foreground: 225 50% 10%;
+    --secondary: 225 25% 16%;
+    --secondary-foreground: 222 30% 90%;
+    --muted: 225 25% 14%;
+    --muted-foreground: 222 14% 62%;
+    --accent: 232 35% 19%;
+    --accent-foreground: 232 80% 85%;
+    --destructive: 0 70% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 225 22% 18%;
+    --input: 225 20% 24%;
+    --ring: 235 80% 68%;
+
+    --sidebar: 226 40% 8%;
+    --sidebar-foreground: 222 30% 90%;
+    --sidebar-muted: 222 14% 58%;
+    --sidebar-accent: 226 30% 15%;
+    --sidebar-border: 226 25% 14%;
+
+    --success: 152 55% 48%;
+    --warning: 38 92% 58%;
+    --info: 204 80% 60%;
+
+    --chart-1: 235 80% 68%;
+    --chart-2: 199 80% 60%;
+    --chart-3: 168 55% 50%;
+    --chart-4: 38 90% 60%;
+    --chart-5: 330 70% 65%;
+    --chart-6: 262 65% 70%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+  }
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator,
+  input[type='month']::-webkit-calendar-picker-indicator,
+  input[type='datetime-local']::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+  .dark input[type='date']::-webkit-calendar-picker-indicator,
+  .dark input[type='month']::-webkit-calendar-picker-indicator,
+  .dark input[type='datetime-local']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
