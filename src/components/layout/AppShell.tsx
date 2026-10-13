@@ -293,7 +293,7 @@ export function AppShell() {
       </D.Root>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-40 flex h-14 items-center gap-2 border-b bg-card/85 px-3 backdrop-blur supports-[backdrop-filter]:bg-card/70 sm:px-5">
+        <header className="sticky top-[env(safe-area-inset-top,0px)] z-40 flex h-14 items-center gap-2 border-b bg-card/85 px-3 backdrop-blur supports-[backdrop-filter]:bg-card/70 sm:px-5">
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu">
             <Menu />
           </Button>

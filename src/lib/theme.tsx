@@ -5,7 +5,12 @@ const KEY = 'cems.theme';
 
 const Ctx = createContext<{ pref: ThemePref; resolved: 'light' | 'dark'; setPref: (p: ThemePref) => void; toggle: () => void } | null>(null);
 
-const systemDark = () => typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const systemDark = () => {
+  if (typeof window === 'undefined') return false;
+  const host = document.documentElement.dataset.theme;
+  if (host === 'dark' || host === 'light') return host === 'dark';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [pref, setPrefState] = useState<ThemePref>(() => {
@@ -18,9 +23,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [sys, setSys] = useState(systemDark());
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const fn = () => setSys(mq.matches);
+    const fn = () => setSys(systemDark());
     mq.addEventListener('change', fn);
-    return () => mq.removeEventListener('change', fn);
+    const obs = new MutationObserver(fn);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => {
+      mq.removeEventListener('change', fn);
+      obs.disconnect();
+    };
   }, []);
   const resolved = pref === 'system' ? (sys ? 'dark' : 'light') : pref;
   useEffect(() => {

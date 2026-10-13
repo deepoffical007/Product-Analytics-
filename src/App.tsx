@@ -1,4 +1,7 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+// Embedded/sandboxed hosts don't own the page URL, so they use in-memory routing.
+const Router = import.meta.env.VITE_ROUTER === 'memory' ? MemoryRouter : BrowserRouter;
 import { Toaster } from 'sonner';
 import { AuthProvider } from '@/auth/AuthContext';
 import { RequireAccess, RequireAuth } from '@/auth/guards';
@@ -32,7 +35,7 @@ export default function App() {
     <ThemeProvider>
       <TooltipProvider>
         <ConfirmProvider>
-          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <AuthProvider>
               <Routes>
                 <Route path="/login" element={<LoginPage />} />
@@ -61,7 +64,7 @@ export default function App() {
               </Routes>
               <ThemedToaster />
             </AuthProvider>
-          </BrowserRouter>
+          </Router>
         </ConfirmProvider>
       </TooltipProvider>
     </ThemeProvider>
