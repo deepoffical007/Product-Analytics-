@@ -1,0 +1,11 @@
+# Render.com blueprint: New > Blueprint > pick this repository. Free plan; the app sleeps when idle.
+services:
+  - type: web
+    name: gyaansetu
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: ANTHROPIC_API_KEY   # optional: paste your key in the Render dashboard to enable Claude
+        sync: false

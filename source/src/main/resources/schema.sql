@@ -1,0 +1,128 @@
+-- GyaanSetu schema. Runs unchanged on H2 (MODE=MySQL) and MySQL 8+.
+
+CREATE TABLE IF NOT EXISTS users (
+  id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name          VARCHAR(120) NOT NULL,
+  email         VARCHAR(190) UNIQUE,
+  password_hash VARCHAR(200),
+  is_guest      BOOLEAN DEFAULT FALSE NOT NULL,
+  points        INT DEFAULT 0 NOT NULL,
+  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS resources (
+  id            VARCHAR(40) PRIMARY KEY,
+  title         VARCHAR(300) NOT NULL,
+  content_type  VARCHAR(20) NOT NULL,
+  subject       VARCHAR(30) NOT NULL,
+  difficulty    VARCHAR(20) NOT NULL,
+  source        VARCHAR(120) NOT NULL,
+  url           VARCHAR(500),
+  length_label  VARCHAR(120),
+  published     DATE,
+  description   VARCHAR(2000) NOT NULL,
+  tags          VARCHAR(1000) NOT NULL,
+  views         BIGINT NOT NULL,
+  likes         BIGINT NOT NULL,
+  rating_sum    DOUBLE NOT NULL,
+  rating_count  INT NOT NULL,
+  helpful_yes   INT NOT NULL,
+  helpful_no    INT NOT NULL,
+  sort_order    INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS reviews (
+  id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+  resource_id VARCHAR(40) NOT NULL REFERENCES resources(id) ON DELETE CASCADE,
+  user_id     BIGINT REFERENCES users(id) ON DELETE SET NULL,
+  author      VARCHAR(120) NOT NULL,
+  body        VARCHAR(2000) NOT NULL,
+  stars       INT,
+  sentiment   DOUBLE NOT NULL,
+  upvotes     INT DEFAULT 0 NOT NULL,
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS likes (
+  user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  resource_id VARCHAR(40) NOT NULL REFERENCES resources(id) ON DELETE CASCADE,
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  PRIMARY KEY (user_id, resource_id)
+);
+
+CREATE TABLE IF NOT EXISTS ratings (
+  user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  resource_id VARCHAR(40) NOT NULL REFERENCES resources(id) ON DELETE CASCADE,
+  stars       INT NOT NULL,
+  PRIMARY KEY (user_id, resource_id)
+);
+
+CREATE TABLE IF NOT EXISTS feedback (
+  user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  resource_id VARCHAR(40) NOT NULL REFERENCES resources(id) ON DELETE CASCADE,
+  helpful     BOOLEAN NOT NULL,
+  PRIMARY KEY (user_id, resource_id)
+);
+
+CREATE TABLE IF NOT EXISTS saved (
+  user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  resource_id VARCHAR(40) NOT NULL REFERENCES resources(id) ON DELETE CASCADE,
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  PRIMARY KEY (user_id, resource_id)
+);
+
+CREATE TABLE IF NOT EXISTS completed (
+  user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  resource_id VARCHAR(40) NOT NULL REFERENCES resources(id) ON DELETE CASCADE,
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  PRIMARY KEY (user_id, resource_id)
+);
+
+CREATE TABLE IF NOT EXISTS review_votes (
+  user_id   BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  review_id BIGINT NOT NULL REFERENCES reviews(id) ON DELETE CASCADE,
+  PRIMARY KEY (user_id, review_id)
+);
+
+CREATE TABLE IF NOT EXISTS searches (
+  id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  query_text VARCHAR(200) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS goals (
+  id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  goal_text  VARCHAR(200) NOT NULL,
+  plan_day   VARCHAR(3) NOT NULL,
+  done       BOOLEAN DEFAULT FALSE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS threads (
+  id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id    BIGINT REFERENCES users(id) ON DELETE SET NULL,
+  author     VARCHAR(120) NOT NULL,
+  title      VARCHAR(200) NOT NULL,
+  body       VARCHAR(2000) NOT NULL,
+  subject    VARCHAR(30) NOT NULL,
+  votes      INT DEFAULT 0 NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS answers (
+  id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+  thread_id  BIGINT NOT NULL REFERENCES threads(id) ON DELETE CASCADE,
+  user_id    BIGINT REFERENCES users(id) ON DELETE SET NULL,
+  author     VARCHAR(120) NOT NULL,
+  body       VARCHAR(4000) NOT NULL,
+  is_ai      BOOLEAN DEFAULT FALSE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS thread_votes (
+  user_id   BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  thread_id BIGINT NOT NULL REFERENCES threads(id) ON DELETE CASCADE,
+  PRIMARY KEY (user_id, thread_id)
+);

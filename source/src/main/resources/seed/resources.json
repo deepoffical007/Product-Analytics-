@@ -1,0 +1,1332 @@
+[
+ {
+  "id": "py",
+  "title": "Learn Python – Full Course for Beginners",
+  "type": "video",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "freeCodeCamp",
+  "url": "https://www.freecodecamp.org/learn",
+  "len": "4 h 26 m",
+  "date": "2018-07-11",
+  "desc": "A beginner course covering variables, data types, loops, functions, files, classes and small projects in Python 3.",
+  "tags": [
+   "python",
+   "programming",
+   "coding",
+   "beginner",
+   "python tutorial"
+  ],
+  "views": 45000000,
+  "likes": 1100000,
+  "rating": 4.7,
+  "ratings": 8800,
+  "hy": 1900,
+  "hn": 140,
+  "comments": [
+   "Perfect starting point, very clear explanations.",
+   "Helped me land my first internship, thank you!",
+   "A bit slow in the middle sections."
+  ]
+ },
+ {
+  "id": "pydoc",
+  "title": "The Python Tutorial (official)",
+  "type": "article",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "Python Software Foundation",
+  "url": "https://docs.python.org/3/tutorial/",
+  "len": "16 chapters",
+  "date": "2026-10-01",
+  "desc": "The official tutorial from python.org: control flow, data structures, modules, errors, classes and the standard library.",
+  "tags": [
+   "python",
+   "python tutorial",
+   "programming",
+   "standard library"
+  ],
+  "views": 9600000,
+  "likes": 88000,
+  "rating": 4.6,
+  "ratings": 2300,
+  "hy": 820,
+  "hn": 60,
+  "comments": [
+   "Authoritative and accurate, the best reference once you know the basics.",
+   "Dense for absolute beginners."
+  ]
+ },
+ {
+  "id": "w3py",
+  "title": "Python Tutorial – W3Schools",
+  "type": "tutorial",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "W3Schools",
+  "url": "https://www.w3schools.com/python/",
+  "len": "100+ lessons",
+  "date": "2025-06-14",
+  "desc": "Short lessons with a \"Try it yourself\" editor covering syntax, strings, lists, dictionaries, functions and file handling.",
+  "tags": [
+   "python",
+   "python tutorial",
+   "coding",
+   "exercises"
+  ],
+  "views": 18000000,
+  "likes": 120000,
+  "rating": 4.2,
+  "ratings": 5700,
+  "hy": 1100,
+  "hn": 260,
+  "comments": [
+   "Easy to follow with lots of examples.",
+   "Too shallow for real projects but good for quick lookups."
+  ]
+ },
+ {
+  "id": "cs50",
+  "title": "CS50x: Introduction to Computer Science",
+  "type": "video",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "Harvard CS50",
+  "url": "https://cs50.harvard.edu/x/",
+  "len": "11 weeks · lectures + problem sets",
+  "date": "2026-01-02",
+  "desc": "Harvard's introduction to computer science: C, Python, SQL, algorithms, memory and web development, with graded problem sets.",
+  "tags": [
+   "computer science",
+   "algorithms",
+   "python",
+   "c",
+   "sql",
+   "web development"
+  ],
+  "views": 21000000,
+  "likes": 640000,
+  "rating": 4.9,
+  "ratings": 6100,
+  "hy": 1700,
+  "hn": 40,
+  "comments": [
+   "The best intro course anywhere. David Malan is brilliant.",
+   "Problem sets are hard but incredibly rewarding.",
+   "Changed my career, highly recommend."
+  ]
+ },
+ {
+  "id": "nn",
+  "title": "Neural Networks",
+  "type": "video",
+  "subject": "cs",
+  "level": "Intermediate",
+  "source": "3Blue1Brown",
+  "url": "https://www.3blue1brown.com/topics/neural-networks",
+  "len": "8 episodes · 2 h 10 m",
+  "date": "2017-10-05",
+  "desc": "How a network learns to recognise handwritten digits: gradient descent, backpropagation, and later chapters on transformers and attention.",
+  "tags": [
+   "neural network",
+   "deep learning",
+   "backpropagation",
+   "gradient descent",
+   "machine learning",
+   "transformers"
+  ],
+  "views": 7200000,
+  "likes": 260000,
+  "rating": 4.9,
+  "ratings": 2410,
+  "hy": 740,
+  "hn": 19,
+  "comments": [
+   "Clear and beautifully animated, backpropagation finally makes sense.",
+   "Really helpful before starting a deep learning course.",
+   "Chapter 4 got hard for me, I had to rewatch it twice."
+  ]
+ },
+ {
+  "id": "ml10",
+  "title": "Learn Machine Learning in 10 Minutes (No Math!)",
+  "type": "video",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "Sample uploader",
+  "url": null,
+  "len": "10 m",
+  "date": "2023-03-10",
+  "desc": "A fast overview of machine learning buzzwords with a copy-paste demo. Included in the sample set to show that views alone do not decide the ranking.",
+  "tags": [
+   "machine learning",
+   "ai",
+   "beginner"
+  ],
+  "views": 14500000,
+  "likes": 180000,
+  "rating": 2.9,
+  "ratings": 1900,
+  "hy": 210,
+  "hn": 640,
+  "comments": [
+   "Clickbait. Shallow and misleading, nothing about how models actually learn.",
+   "Some definitions are wrong and the code has errors.",
+   "Not useful at all, a waste of time.",
+   "Good energy, fun to watch."
+  ]
+ },
+ {
+  "id": "r2d3",
+  "title": "A Visual Introduction to Machine Learning",
+  "type": "article",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "R2D3",
+  "url": "http://www.r2d3.us/visual-intro-to-machine-learning-part-1/",
+  "len": "Interactive essay · 15 min",
+  "date": "2015-07-30",
+  "desc": "A scrolling, interactive essay that explains classification and decision trees using a housing dataset.",
+  "tags": [
+   "machine learning",
+   "decision trees",
+   "classification",
+   "data visualization"
+  ],
+  "views": 640000,
+  "likes": 21000,
+  "rating": 4.8,
+  "ratings": 410,
+  "hy": 240,
+  "hn": 6,
+  "comments": [
+   "Beautiful interactive explanation of decision trees.",
+   "Clear and intuitive, perfect for beginners."
+  ]
+ },
+ {
+  "id": "pdsh",
+  "title": "Python Data Science Handbook",
+  "type": "article",
+  "subject": "cs",
+  "level": "Intermediate",
+  "source": "Jake VanderPlas",
+  "url": "https://jakevdp.github.io/PythonDataScienceHandbook/",
+  "len": "Online book · 5 chapters",
+  "date": "2016-11-21",
+  "desc": "NumPy, Pandas, Matplotlib and Scikit-Learn explained through runnable notebooks, from arrays to machine learning models.",
+  "tags": [
+   "python",
+   "data science",
+   "machine learning",
+   "pandas",
+   "numpy"
+  ],
+  "views": 2300000,
+  "likes": 47000,
+  "rating": 4.8,
+  "ratings": 820,
+  "hy": 380,
+  "hn": 15,
+  "comments": [
+   "Excellent practical guide to machine learning in Python.",
+   "Clear code examples, highly recommend."
+  ]
+ },
+ {
+  "id": "mit6006",
+  "title": "Introduction to Algorithms (6.006) Lecture Notes",
+  "type": "pdf",
+  "subject": "cs",
+  "level": "Intermediate",
+  "source": "MIT OpenCourseWare",
+  "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+  "len": "21 lectures · PDF",
+  "date": "2020-06-01",
+  "desc": "Lecture notes, problem sets and solutions covering sorting, hashing, graphs, shortest paths and dynamic programming.",
+  "tags": [
+   "algorithms",
+   "data structures",
+   "dynamic programming",
+   "graphs",
+   "sorting",
+   "big-o"
+  ],
+  "views": 1400000,
+  "likes": 48000,
+  "rating": 4.8,
+  "ratings": 980,
+  "hy": 410,
+  "hn": 18,
+  "comments": [
+   "Rigorous and well structured. The problem sets are excellent.",
+   "Hard but worth it, I recommend pairing it with the lecture videos."
+  ]
+ },
+ {
+  "id": "bigo",
+  "title": "Big-O Complexity Cheat Sheet",
+  "type": "image",
+  "subject": "cs",
+  "level": "Intermediate",
+  "source": "bigocheatsheet.com",
+  "url": "https://www.bigocheatsheet.com/",
+  "len": "Chart · 1 page",
+  "date": "2019-02-14",
+  "desc": "A one-page chart of time and space complexity for common data structures and sorting algorithms, colour-coded from excellent to horrible.",
+  "tags": [
+   "big-o",
+   "algorithms",
+   "data structures",
+   "complexity",
+   "sorting",
+   "cheat sheet"
+  ],
+  "views": 2600000,
+  "likes": 39000,
+  "rating": 4.5,
+  "ratings": 760,
+  "hy": 500,
+  "hn": 40,
+  "comments": [
+   "Useful for interview revision.",
+   "Great quick reference to print."
+  ]
+ },
+ {
+  "id": "dbms",
+  "title": "Database System Concepts – Slides & Notes",
+  "type": "pdf",
+  "subject": "cs",
+  "level": "Intermediate",
+  "source": "db-book.com",
+  "url": "https://www.db-book.com/",
+  "len": "32 chapters · slides",
+  "date": "2019-03-01",
+  "desc": "Chapter slides for the classic DBMS textbook: relational model, SQL, normalisation, indexing, transactions and concurrency control.",
+  "tags": [
+   "dbms",
+   "database",
+   "sql",
+   "normalization",
+   "transactions",
+   "dbms notes"
+  ],
+  "views": 3100000,
+  "likes": 41000,
+  "rating": 4.5,
+  "ratings": 1200,
+  "hy": 520,
+  "hn": 45,
+  "comments": [
+   "Exactly what I needed for my DBMS exam. Clear diagrams.",
+   "Good notes, though some slides are text heavy."
+  ]
+ },
+ {
+  "id": "sql",
+  "title": "SQL Tutorial",
+  "type": "tutorial",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "W3Schools",
+  "url": "https://www.w3schools.com/sql/",
+  "len": "60+ lessons",
+  "date": "2024-01-10",
+  "desc": "Short, runnable examples for SELECT, JOIN, GROUP BY and database design, with an in-browser editor.",
+  "tags": [
+   "sql",
+   "database",
+   "queries",
+   "joins",
+   "dbms"
+  ],
+  "views": 12000000,
+  "likes": 95000,
+  "rating": 4.4,
+  "ratings": 2900,
+  "hy": 900,
+  "hn": 120,
+  "comments": [
+   "Easy to follow with good examples.",
+   "Too basic once you need window functions."
+  ]
+ },
+ {
+  "id": "java",
+  "title": "Java Tutorials: Object-Oriented Programming Concepts",
+  "type": "article",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "Oracle",
+  "url": "https://docs.oracle.com/javase/tutorial/java/concepts/",
+  "len": "Lesson · 6 parts",
+  "date": "2022-04-12",
+  "desc": "Objects, classes, inheritance, interfaces and packages explained with Java examples from the official Java Tutorials.",
+  "tags": [
+   "java",
+   "java oop",
+   "oop",
+   "classes",
+   "inheritance",
+   "interfaces"
+  ],
+  "views": 5400000,
+  "likes": 52000,
+  "rating": 4.4,
+  "ratings": 1500,
+  "hy": 600,
+  "hn": 70,
+  "comments": [
+   "Clear explanation of inheritance and interfaces.",
+   "A bit dated, but the concepts are still accurate."
+  ]
+ },
+ {
+  "id": "mdn",
+  "title": "Learn Web Development",
+  "type": "tutorial",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "MDN Web Docs",
+  "url": "https://developer.mozilla.org/en-US/docs/Learn",
+  "len": "Modules · HTML, CSS, JavaScript",
+  "date": "2026-08-20",
+  "desc": "A structured curriculum from Mozilla: HTML, CSS layout, JavaScript, accessibility and frameworks, with assessments.",
+  "tags": [
+   "web development",
+   "html",
+   "css",
+   "javascript",
+   "accessibility"
+  ],
+  "views": 16000000,
+  "likes": 210000,
+  "rating": 4.8,
+  "ratings": 3900,
+  "hy": 1300,
+  "hn": 50,
+  "comments": [
+   "The most accurate web docs anywhere. Excellent.",
+   "Great structure for self-learners."
+  ]
+ },
+ {
+  "id": "rwd",
+  "title": "Responsive Web Design Certification",
+  "type": "tutorial",
+  "subject": "cs",
+  "level": "Beginner",
+  "source": "freeCodeCamp",
+  "url": "https://www.freecodecamp.org/learn",
+  "len": "~300 hours · projects",
+  "date": "2023-08-22",
+  "desc": "Interactive, project-based lessons on HTML and CSS: flexbox, grid, accessibility and responsive layouts.",
+  "tags": [
+   "html",
+   "css",
+   "web development",
+   "flexbox",
+   "accessibility"
+  ],
+  "views": 6800000,
+  "likes": 150000,
+  "rating": 4.6,
+  "ratings": 4100,
+  "hy": 1200,
+  "hn": 90,
+  "comments": [
+   "Hands-on projects make it stick. Excellent.",
+   "Some steps are confusing but the forum helps."
+  ]
+ },
+ {
+  "id": "git",
+  "title": "Pro Git",
+  "type": "pdf",
+  "subject": "cs",
+  "level": "Intermediate",
+  "source": "git-scm.com",
+  "url": "https://git-scm.com/book/en/v2",
+  "len": "Book · 500 pages",
+  "date": "2014-11-18",
+  "desc": "The free, complete book on Git: branching, rebasing, remotes, internals and team workflows.",
+  "tags": [
+   "git",
+   "version control",
+   "branching"
+  ],
+  "views": 3900000,
+  "likes": 52000,
+  "rating": 4.8,
+  "ratings": 1300,
+  "hy": 610,
+  "hn": 25,
+  "comments": [
+   "The definitive Git reference. Thorough and well written.",
+   "The chapter on internals is amazing."
+  ]
+ },
+ {
+  "id": "la",
+  "title": "Essence of Linear Algebra",
+  "type": "video",
+  "subject": "math",
+  "level": "Beginner",
+  "source": "3Blue1Brown",
+  "url": "https://www.3blue1brown.com/topics/linear-algebra",
+  "len": "16 episodes · 3 h",
+  "date": "2016-08-06",
+  "desc": "A visual series that builds intuition for vectors, linear transformations, determinants and eigenvectors through animation.",
+  "tags": [
+   "linear algebra",
+   "vectors",
+   "matrices",
+   "eigenvalues",
+   "determinant"
+  ],
+  "views": 9800000,
+  "likes": 412000,
+  "rating": 4.9,
+  "ratings": 3120,
+  "hy": 860,
+  "hn": 22,
+  "comments": [
+   "Finally understood eigenvectors after years of confusion. Brilliant animations.",
+   "The best intuition-first explanation of matrices I have seen.",
+   "Great, but you still need practice problems alongside it."
+  ]
+ },
+ {
+  "id": "calc1",
+  "title": "Calculus Volume 1",
+  "type": "pdf",
+  "subject": "math",
+  "level": "Beginner",
+  "source": "OpenStax",
+  "url": "https://openstax.org/details/books/calculus-volume-1",
+  "len": "Textbook · 873 pages",
+  "date": "2016-03-30",
+  "desc": "Peer-reviewed open textbook on limits, derivatives and integration with worked examples and exercises.",
+  "tags": [
+   "calculus",
+   "derivatives",
+   "limits",
+   "integrals"
+  ],
+  "views": 5200000,
+  "likes": 61000,
+  "rating": 4.7,
+  "ratings": 2100,
+  "hy": 700,
+  "hn": 45,
+  "comments": [
+   "Clear worked examples and free. Excellent for self-study.",
+   "Good textbook, the answer key helps a lot."
+  ]
+ },
+ {
+  "id": "eoc",
+  "title": "Essence of Calculus",
+  "type": "video",
+  "subject": "math",
+  "level": "Beginner",
+  "source": "3Blue1Brown",
+  "url": "https://www.3blue1brown.com/topics/calculus",
+  "len": "12 episodes · 2 h 40 m",
+  "date": "2017-04-28",
+  "desc": "A visual series that rediscovers derivatives, the chain rule, integrals and Taylor series from first principles.",
+  "tags": [
+   "calculus",
+   "derivatives",
+   "integrals",
+   "chain rule",
+   "taylor series"
+  ],
+  "views": 6100000,
+  "likes": 230000,
+  "rating": 4.9,
+  "ratings": 2000,
+  "hy": 720,
+  "hn": 15,
+  "comments": [
+   "Beautiful and intuitive, I wish school taught calculus like this.",
+   "Really clear explanation of the chain rule."
+  ]
+ },
+ {
+  "id": "khint",
+  "title": "Integral Calculus",
+  "type": "tutorial",
+  "subject": "math",
+  "level": "Intermediate",
+  "source": "Khan Academy",
+  "url": "https://www.khanacademy.org/math/integral-calculus",
+  "len": "6 units · exercises",
+  "date": "2021-05-04",
+  "desc": "Practice-driven unit on integration techniques, applications and series, with instant-feedback exercises.",
+  "tags": [
+   "calculus",
+   "integrals",
+   "integration",
+   "series",
+   "practice"
+  ],
+  "views": 4400000,
+  "likes": 70000,
+  "rating": 4.6,
+  "ratings": 1800,
+  "hy": 820,
+  "hn": 60,
+  "comments": [
+   "Practice exercises with hints are very helpful.",
+   "Good, but some videos are outdated."
+  ]
+ },
+ {
+  "id": "unit",
+  "title": "Unit Circle Diagram",
+  "type": "image",
+  "subject": "math",
+  "level": "Beginner",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Unit_circle",
+  "len": "Diagram",
+  "date": "2022-10-02",
+  "desc": "Labelled diagram of the unit circle showing angles in degrees and radians with sine and cosine coordinates.",
+  "tags": [
+   "trigonometry",
+   "unit circle",
+   "radians",
+   "sine",
+   "cosine"
+  ],
+  "views": 1900000,
+  "likes": 18000,
+  "rating": 4.5,
+  "ratings": 430,
+  "hy": 260,
+  "hn": 20,
+  "comments": [
+   "Saved me during my trig exam. Clear and useful."
+  ]
+ },
+ {
+  "id": "stats",
+  "title": "Statistics and Probability",
+  "type": "tutorial",
+  "subject": "math",
+  "level": "Beginner",
+  "source": "Khan Academy",
+  "url": "https://www.khanacademy.org/math/statistics-probability",
+  "len": "16 units · exercises",
+  "date": "2022-02-17",
+  "desc": "Full course on data analysis, distributions, sampling, confidence intervals and hypothesis testing.",
+  "tags": [
+   "statistics",
+   "probability",
+   "hypothesis testing",
+   "distributions",
+   "data analysis"
+  ],
+  "views": 8300000,
+  "likes": 110000,
+  "rating": 4.7,
+  "ratings": 3500,
+  "hy": 1100,
+  "hn": 70,
+  "comments": [
+   "Great structure and easy to understand.",
+   "I love the practice quizzes."
+  ]
+ },
+ {
+  "id": "prob",
+  "title": "Probability theory",
+  "type": "article",
+  "subject": "math",
+  "level": "Advanced",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Probability_theory",
+  "len": "Article · 25 min read",
+  "date": "2026-07-30",
+  "desc": "Formal treatment of probability: measure-theoretic foundations, random variables, convergence and limit theorems.",
+  "tags": [
+   "probability",
+   "random variables",
+   "statistics",
+   "measure theory"
+  ],
+  "views": 1200000,
+  "likes": 6000,
+  "rating": 3.9,
+  "ratings": 210,
+  "hy": 90,
+  "hn": 55,
+  "comments": [
+   "Too abstract for beginners, confusing notation.",
+   "Good reference if you already know measure theory."
+  ]
+ },
+ {
+  "id": "ccphys",
+  "title": "Crash Course Physics",
+  "type": "video",
+  "subject": "physics",
+  "level": "Beginner",
+  "source": "CrashCourse",
+  "url": "https://thecrashcourse.com/",
+  "len": "46 episodes · 8 h",
+  "date": "2016-03-31",
+  "desc": "Fast-paced episodes from motion and Newton's laws to electricity, optics and quantum mechanics.",
+  "tags": [
+   "physics",
+   "mechanics",
+   "newton's laws",
+   "electricity",
+   "optics"
+  ],
+  "views": 11000000,
+  "likes": 240000,
+  "rating": 4.5,
+  "ratings": 2600,
+  "hy": 780,
+  "hn": 130,
+  "comments": [
+   "Fun and engaging overview.",
+   "Too fast to really learn from, but great for revision."
+  ]
+ },
+ {
+  "id": "uphys",
+  "title": "University Physics Volume 1",
+  "type": "pdf",
+  "subject": "physics",
+  "level": "Intermediate",
+  "source": "OpenStax",
+  "url": "https://openstax.org/details/books/university-physics-volume-1",
+  "len": "Textbook · 1,180 pages",
+  "date": "2016-09-19",
+  "desc": "Calculus-based textbook covering mechanics, waves, sound and thermodynamics.",
+  "tags": [
+   "physics",
+   "mechanics",
+   "waves",
+   "thermodynamics",
+   "calculus"
+  ],
+  "views": 2700000,
+  "likes": 30000,
+  "rating": 4.6,
+  "ratings": 900,
+  "hy": 380,
+  "hn": 30,
+  "comments": [
+   "Thorough and well illustrated.",
+   "Good problems and a helpful solutions manual."
+  ]
+ },
+ {
+  "id": "feyn",
+  "title": "The Feynman Lectures on Physics",
+  "type": "article",
+  "subject": "physics",
+  "level": "Advanced",
+  "source": "Caltech",
+  "url": "https://www.feynmanlectures.caltech.edu/",
+  "len": "3 volumes · online",
+  "date": "2013-09-13",
+  "desc": "The complete three-volume lectures, free online, covering mechanics, electromagnetism and quantum mechanics in Feynman's own words.",
+  "tags": [
+   "physics",
+   "quantum mechanics",
+   "electromagnetism",
+   "mechanics"
+  ],
+  "views": 6600000,
+  "likes": 140000,
+  "rating": 4.9,
+  "ratings": 2200,
+  "hy": 690,
+  "hn": 40,
+  "comments": [
+   "A timeless classic, brilliant insight on every page.",
+   "Hard going without a strong math background."
+  ]
+ },
+ {
+  "id": "ems",
+  "title": "Electromagnetic Spectrum Chart",
+  "type": "image",
+  "subject": "physics",
+  "level": "Beginner",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Electromagnetic_spectrum",
+  "len": "Chart",
+  "date": "2024-04-11",
+  "desc": "Chart of radio, microwave, infrared, visible, ultraviolet, X-ray and gamma bands with wavelength and frequency scales.",
+  "tags": [
+   "electromagnetic spectrum",
+   "light",
+   "waves",
+   "wavelength",
+   "frequency"
+  ],
+  "views": 2200000,
+  "likes": 22000,
+  "rating": 4.6,
+  "ratings": 520,
+  "hy": 300,
+  "hn": 15,
+  "comments": [
+   "Clear and accurate, perfect for my class slides."
+  ]
+ },
+ {
+  "id": "qm",
+  "title": "Quantum mechanics",
+  "type": "article",
+  "subject": "physics",
+  "level": "Advanced",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Quantum_mechanics",
+  "len": "Article · 45 min read",
+  "date": "2026-08-21",
+  "desc": "Overview of wave functions, the uncertainty principle, superposition, entanglement and interpretations.",
+  "tags": [
+   "quantum mechanics",
+   "physics",
+   "wave function",
+   "uncertainty principle",
+   "entanglement"
+  ],
+  "views": 4000000,
+  "likes": 19000,
+  "rating": 4.1,
+  "ratings": 380,
+  "hy": 150,
+  "hn": 70,
+  "comments": [
+   "Good overview but confusing in places.",
+   "Excellent history section."
+  ]
+ },
+ {
+  "id": "bio2e",
+  "title": "Biology 2e",
+  "type": "pdf",
+  "subject": "biology",
+  "level": "Beginner",
+  "source": "OpenStax",
+  "url": "https://openstax.org/details/books/biology-2e",
+  "len": "Textbook · 1,500 pages",
+  "date": "2018-03-28",
+  "desc": "Open textbook for introductory biology: cells, genetics, evolution, ecology and human physiology.",
+  "tags": [
+   "biology",
+   "cells",
+   "genetics",
+   "evolution",
+   "ecology"
+  ],
+  "views": 4800000,
+  "likes": 55000,
+  "rating": 4.7,
+  "ratings": 1700,
+  "hy": 640,
+  "hn": 35,
+  "comments": [
+   "Clear diagrams and free. Excellent.",
+   "Great for AP Biology revision."
+  ]
+ },
+ {
+  "id": "ccbio",
+  "title": "Crash Course Biology",
+  "type": "video",
+  "subject": "biology",
+  "level": "Beginner",
+  "source": "CrashCourse",
+  "url": "https://thecrashcourse.com/",
+  "len": "40 episodes · 7 h",
+  "date": "2012-01-30",
+  "desc": "Episodes on DNA structure and replication, cell division, photosynthesis, evolution and ecosystems.",
+  "tags": [
+   "biology",
+   "dna",
+   "genetics",
+   "photosynthesis",
+   "evolution",
+   "cells"
+  ],
+  "views": 9400000,
+  "likes": 200000,
+  "rating": 4.5,
+  "ratings": 2300,
+  "hy": 700,
+  "hn": 110,
+  "comments": [
+   "Engaging and easy to understand.",
+   "Fast, but I really like the animations."
+  ]
+ },
+ {
+  "id": "photo",
+  "title": "Photosynthesis",
+  "type": "tutorial",
+  "subject": "biology",
+  "level": "Beginner",
+  "source": "Khan Academy",
+  "url": "https://www.khanacademy.org/science/biology/photosynthesis-in-plants",
+  "len": "5 lessons · exercises",
+  "date": "2020-09-08",
+  "desc": "Light-dependent reactions, the Calvin cycle and C4/CAM plants, with practice questions.",
+  "tags": [
+   "photosynthesis",
+   "plants",
+   "calvin cycle",
+   "chloroplast",
+   "biology"
+  ],
+  "views": 3300000,
+  "likes": 44000,
+  "rating": 4.6,
+  "ratings": 1200,
+  "hy": 520,
+  "hn": 30,
+  "comments": [
+   "Very clear explanation of the Calvin cycle.",
+   "Helpful practice questions."
+  ]
+ },
+ {
+  "id": "cell",
+  "title": "Animal Cell Structure Diagram",
+  "type": "image",
+  "subject": "biology",
+  "level": "Beginner",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Cell_(biology)",
+  "len": "Diagram",
+  "date": "2023-06-19",
+  "desc": "Labelled cross-section of a eukaryotic animal cell: nucleus, mitochondria, ER, Golgi apparatus and membrane.",
+  "tags": [
+   "cells",
+   "cell structure",
+   "organelles",
+   "biology",
+   "mitochondria"
+  ],
+  "views": 2900000,
+  "likes": 26000,
+  "rating": 4.4,
+  "ratings": 610,
+  "hy": 330,
+  "hn": 28,
+  "comments": [
+   "Useful for labelling practice.",
+   "Good, but the label font is small."
+  ]
+ },
+ {
+  "id": "gen",
+  "title": "Introduction to genetics",
+  "type": "article",
+  "subject": "biology",
+  "level": "Beginner",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Introduction_to_genetics",
+  "len": "Article · 15 min read",
+  "date": "2025-12-02",
+  "desc": "Plain-language introduction to genes, DNA, inheritance, mutation and how traits pass between generations.",
+  "tags": [
+   "genetics",
+   "dna",
+   "genes",
+   "inheritance",
+   "heredity"
+  ],
+  "views": 1600000,
+  "likes": 12000,
+  "rating": 4.3,
+  "ratings": 300,
+  "hy": 190,
+  "hn": 20,
+  "comments": [
+   "Easy to read, a good starting point."
+  ]
+ },
+ {
+  "id": "chem2e",
+  "title": "Chemistry 2e",
+  "type": "pdf",
+  "subject": "chemistry",
+  "level": "Beginner",
+  "source": "OpenStax",
+  "url": "https://openstax.org/details/books/chemistry-2e",
+  "len": "Textbook · 1,300 pages",
+  "date": "2019-02-14",
+  "desc": "Introductory textbook on atomic structure, bonding, stoichiometry, thermochemistry and equilibrium.",
+  "tags": [
+   "chemistry",
+   "atoms",
+   "bonding",
+   "stoichiometry",
+   "equilibrium"
+  ],
+  "views": 3600000,
+  "likes": 38000,
+  "rating": 4.6,
+  "ratings": 1100,
+  "hy": 450,
+  "hn": 33,
+  "comments": [
+   "Clear and well organised.",
+   "Great end-of-chapter exercises."
+  ]
+ },
+ {
+  "id": "ptable",
+  "title": "Ptable: Interactive Periodic Table",
+  "type": "image",
+  "subject": "chemistry",
+  "level": "Beginner",
+  "source": "ptable.com",
+  "url": "https://ptable.com/",
+  "len": "Interactive chart",
+  "date": "2024-09-01",
+  "desc": "Interactive periodic table with properties, electron configurations, isotopes and compounds for every element.",
+  "tags": [
+   "periodic table",
+   "elements",
+   "chemistry",
+   "electron configuration"
+  ],
+  "views": 8900000,
+  "likes": 120000,
+  "rating": 4.8,
+  "ratings": 2700,
+  "hy": 980,
+  "hn": 25,
+  "comments": [
+   "The best periodic table on the web. Amazing.",
+   "Super useful for homework."
+  ]
+ },
+ {
+  "id": "ccchem",
+  "title": "Crash Course Chemistry",
+  "type": "video",
+  "subject": "chemistry",
+  "level": "Beginner",
+  "source": "CrashCourse",
+  "url": "https://thecrashcourse.com/",
+  "len": "46 episodes · 8 h",
+  "date": "2013-02-11",
+  "desc": "Episodes on the nucleus, electrons, stoichiometry, gas laws, acids and bases, and organic chemistry.",
+  "tags": [
+   "chemistry",
+   "atoms",
+   "stoichiometry",
+   "acids",
+   "gas laws"
+  ],
+  "views": 7700000,
+  "likes": 150000,
+  "rating": 4.3,
+  "ratings": 1900,
+  "hy": 520,
+  "hn": 180,
+  "comments": [
+   "Entertaining, but too fast and some topics feel rushed.",
+   "Good overview for revision.",
+   "Confusing at times."
+  ]
+ },
+ {
+  "id": "orgo",
+  "title": "Organic Chemistry",
+  "type": "tutorial",
+  "subject": "chemistry",
+  "level": "Advanced",
+  "source": "Khan Academy",
+  "url": "https://www.khanacademy.org/science/organic-chemistry",
+  "len": "14 units",
+  "date": "2019-08-26",
+  "desc": "Structure, bonding, resonance, stereochemistry, and substitution and elimination reactions.",
+  "tags": [
+   "organic chemistry",
+   "chemistry",
+   "reactions",
+   "stereochemistry",
+   "resonance"
+  ],
+  "views": 2400000,
+  "likes": 33000,
+  "rating": 4.5,
+  "ratings": 870,
+  "hy": 360,
+  "hn": 40,
+  "comments": [
+   "Helpful walk-throughs of reaction mechanisms.",
+   "Hard topic, explained well."
+  ]
+ },
+ {
+  "id": "ccwh",
+  "title": "Crash Course World History",
+  "type": "video",
+  "subject": "history",
+  "level": "Beginner",
+  "source": "CrashCourse",
+  "url": "https://thecrashcourse.com/",
+  "len": "42 episodes · 8 h",
+  "date": "2012-01-26",
+  "desc": "Survey from the agricultural revolution through empires, revolutions and globalisation.",
+  "tags": [
+   "world history",
+   "history",
+   "empires",
+   "revolutions",
+   "globalization"
+  ],
+  "views": 15000000,
+  "likes": 330000,
+  "rating": 4.6,
+  "ratings": 3300,
+  "hy": 900,
+  "hn": 110,
+  "comments": [
+   "Funny and informative, I love this series.",
+   "Good overview but simplifies a lot."
+  ]
+ },
+ {
+  "id": "ww2",
+  "title": "World War II",
+  "type": "article",
+  "subject": "history",
+  "level": "Intermediate",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/World_War_II",
+  "len": "Article · 90 min read",
+  "date": "2026-10-01",
+  "desc": "Comprehensive account of causes, major theatres, the Holocaust, home fronts and the war's aftermath, 1939–1945.",
+  "tags": [
+   "world war ii",
+   "ww2",
+   "history",
+   "20th century",
+   "holocaust"
+  ],
+  "views": 6300000,
+  "likes": 35000,
+  "rating": 4.5,
+  "ratings": 820,
+  "hy": 400,
+  "hn": 40,
+  "comments": [
+   "Thorough and well sourced.",
+   "Very long but excellent."
+  ]
+ },
+ {
+  "id": "indrev",
+  "title": "Industrial Revolution Timeline",
+  "type": "image",
+  "subject": "history",
+  "level": "Beginner",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Industrial_Revolution",
+  "len": "Timeline graphic",
+  "date": "2021-11-15",
+  "desc": "Timeline of key inventions and events from 1760 to 1840: steam power, textiles, railways and factories.",
+  "tags": [
+   "industrial revolution",
+   "history",
+   "timeline",
+   "steam engine",
+   "inventions"
+  ],
+  "views": 880000,
+  "likes": 7000,
+  "rating": 4.1,
+  "ratings": 190,
+  "hy": 90,
+  "hn": 20,
+  "comments": [
+   "Useful summary for my essay."
+  ]
+ },
+ {
+  "id": "ushist",
+  "title": "U.S. History",
+  "type": "pdf",
+  "subject": "history",
+  "level": "Beginner",
+  "source": "OpenStax",
+  "url": "https://openstax.org/details/books/us-history",
+  "len": "Textbook · 1,000 pages",
+  "date": "2014-12-30",
+  "desc": "Survey textbook from pre-Columbian America through the 21st century, with primary-source features.",
+  "tags": [
+   "us history",
+   "american history",
+   "history",
+   "civil war"
+  ],
+  "views": 2100000,
+  "likes": 21000,
+  "rating": 4.5,
+  "ratings": 640,
+  "hy": 260,
+  "hn": 22,
+  "comments": [
+   "Balanced and clear, great primary sources."
+  ]
+ },
+ {
+  "id": "econ",
+  "title": "Principles of Economics 3e",
+  "type": "pdf",
+  "subject": "economics",
+  "level": "Beginner",
+  "source": "OpenStax",
+  "url": "https://openstax.org/details/books/principles-economics-3e",
+  "len": "Textbook · 900 pages",
+  "date": "2022-12-14",
+  "desc": "Micro and macro fundamentals: supply and demand, elasticity, market structures, GDP, inflation and policy.",
+  "tags": [
+   "economics",
+   "supply and demand",
+   "microeconomics",
+   "macroeconomics",
+   "inflation",
+   "management"
+  ],
+  "views": 2800000,
+  "likes": 29000,
+  "rating": 4.6,
+  "ratings": 760,
+  "hy": 330,
+  "hn": 26,
+  "comments": [
+   "Clear with real-world examples. Great."
+  ]
+ },
+ {
+  "id": "sd",
+  "title": "Supply and demand",
+  "type": "article",
+  "subject": "economics",
+  "level": "Beginner",
+  "source": "Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Supply_and_demand",
+  "len": "Article · 20 min read",
+  "date": "2026-05-09",
+  "desc": "The core price-determination model: demand and supply curves, equilibrium, shifts and elasticity.",
+  "tags": [
+   "supply and demand",
+   "economics",
+   "equilibrium",
+   "elasticity",
+   "markets"
+  ],
+  "views": 1800000,
+  "likes": 9000,
+  "rating": 4.2,
+  "ratings": 260,
+  "hy": 140,
+  "hn": 25,
+  "comments": [
+   "Good diagrams, a bit dry."
+  ]
+ },
+ {
+  "id": "macro",
+  "title": "Macroeconomics",
+  "type": "tutorial",
+  "subject": "economics",
+  "level": "Intermediate",
+  "source": "Khan Academy",
+  "url": "https://www.khanacademy.org/economics-finance-domain/macroeconomics",
+  "len": "8 units · exercises",
+  "date": "2021-03-22",
+  "desc": "GDP, inflation, aggregate demand and supply, and monetary and fiscal policy, with practice exercises.",
+  "tags": [
+   "macroeconomics",
+   "economics",
+   "gdp",
+   "inflation",
+   "monetary policy"
+  ],
+  "views": 3000000,
+  "likes": 41000,
+  "rating": 4.6,
+  "ratings": 990,
+  "hy": 420,
+  "hn": 35,
+  "comments": [
+   "Very helpful for my AP exam.",
+   "Clear explanations of monetary policy."
+  ]
+ },
+ {
+  "id": "ccecon",
+  "title": "Crash Course Economics",
+  "type": "video",
+  "subject": "economics",
+  "level": "Beginner",
+  "source": "CrashCourse",
+  "url": "https://thecrashcourse.com/",
+  "len": "35 episodes · 6 h",
+  "date": "2015-07-08",
+  "desc": "Episodes on markets, inflation, banking, trade, recessions and economic systems.",
+  "tags": [
+   "economics",
+   "inflation",
+   "banking",
+   "trade",
+   "markets"
+  ],
+  "views": 5500000,
+  "likes": 110000,
+  "rating": 4.4,
+  "ratings": 1400,
+  "hy": 380,
+  "hn": 70,
+  "comments": [
+   "Entertaining and useful.",
+   "Some episodes feel a bit biased."
+  ]
+ },
+ {
+  "id": "owl",
+  "title": "Purdue OWL: Grammar",
+  "type": "article",
+  "subject": "language",
+  "level": "Beginner",
+  "source": "Purdue OWL",
+  "url": "https://owl.purdue.edu/owl/general_writing/grammar/index.html",
+  "len": "Guide · 30 pages",
+  "date": "2025-01-20",
+  "desc": "Concise guides to English grammar, punctuation, sentence clarity and academic citation styles.",
+  "tags": [
+   "english",
+   "grammar",
+   "writing",
+   "punctuation",
+   "citation"
+  ],
+  "views": 7100000,
+  "likes": 60000,
+  "rating": 4.7,
+  "ratings": 1500,
+  "hy": 700,
+  "hn": 40,
+  "comments": [
+   "My go-to writing reference. Excellent.",
+   "Helpful citation guides."
+  ]
+ }
+]
