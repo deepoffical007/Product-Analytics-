@@ -1,0 +1,1822 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>GyaanSetu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: product UI from the GyaanSetu mockup, white throughout: white header, hero and cards with a royal-blue accent, left app-sidebar for Assistant/Dashboard/Community, bottom tab bar on phones. */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --sunk: #f5f7fc;
+  --ink: #0f1733;
+  --muted: #5b6584;
+  --line: #e5e8f2;
+  --navy: #ffffff;
+  --navy-2: #eef1ff;
+  --on-navy: #0f1733;
+  --on-navy-muted: #5b6584;
+  --accent: #3346e0;
+  --accent-ink: #ffffff;
+  --accent-soft: #eef1ff;
+  --good: #12925f;
+  --warn: #c97a08;
+  --bad: #cc3d3d;
+  --star: #f2a01b;
+  --t-video: #3456e0;
+  --t-pdf: #cc3d3d;
+  --t-article: #12925f;
+  --t-tutorial: #c97a08;
+  --t-image: #7d4fe0;
+  --shadow: 0 1px 2px rgba(15,23,51,.04), 0 12px 32px rgba(15,23,51,.07);
+  --f-display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--navy); }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3, h4 { font-family: var(--f-display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+p { margin: 0; }
+a { color: var(--accent); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+svg.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* Buttons and chips */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 9px 16px; border-radius: 9px; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.07); }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--accent); padding-inline: 8px; }
+.btn.sm { padding: 6px 12px; font-size: 13px; border-radius: 8px; }
+.btn[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.btn.like[aria-pressed="true"] { background: color-mix(in srgb, var(--bad) 14%, var(--surface)); border-color: var(--bad); color: var(--bad); }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 800; letter-spacing: .03em; padding: 2px 9px; border-radius: 6px; color: var(--c); background: color-mix(in srgb, var(--c) 13%, transparent); }
+.tag.video { --c: var(--t-video); } .tag.pdf { --c: var(--t-pdf); } .tag.article { --c: var(--t-article); } .tag.tutorial { --c: var(--t-tutorial); } .tag.image { --c: var(--t-image); }
+.pill { display: inline-flex; font-size: 11.5px; font-weight: 700; padding: 1px 9px; border-radius: 999px; border: 1px solid currentColor; }
+.pill.pos { color: var(--good); } .pill.neg { color: var(--bad); } .pill.neu { color: var(--muted); }
+.stars { color: var(--star); letter-spacing: 1px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.card.pad { padding: 20px; }
+input.field, textarea.field, select.field { width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 9px; padding: 10px 12px; outline: none; }
+input.field:focus, textarea.field:focus, select.field:focus { border-color: var(--accent); }
+textarea.field { resize: vertical; min-height: 80px; }
+mark { background: color-mix(in srgb, var(--star) 35%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+
+/* Header */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(10px); color: var(--on-navy); border-bottom: 1px solid var(--line); }
+.navin { display: flex; align-items: center; gap: 18px; padding-block: 10px; min-height: 60px; }
+.brand { display: flex; align-items: center; gap: 9px; background: none; border: 0; padding: 0; color: var(--on-navy); flex: none; }
+.brand b { font-family: var(--f-display); font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+.brand b span { color: var(--accent); }
+.brand > svg { background: var(--accent); color: #fff; border-radius: 9px; padding: 4px; }
+.brand svg { width: 30px; height: 30px; }
+.hsearch { flex: 1; max-width: 520px; display: flex; align-items: center; background: var(--sunk); border: 1px solid var(--line); border-radius: 9px; overflow: hidden; min-width: 0; }
+.hsearch input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 9px 12px; outline: none; color: var(--ink); }
+.hsearch button { border: 0; background: var(--accent); color: var(--accent-ink); width: 42px; align-self: stretch; display: grid; place-items: center; }
+.links { display: flex; gap: 4px; margin-left: auto; }
+.links button { background: none; border: 0; color: var(--on-navy-muted); font-weight: 700; font-size: 14px; padding: 8px 10px; border-radius: 8px; }
+.links button:hover { color: var(--ink); background: var(--sunk); }
+.links button.on { color: var(--accent); background: var(--accent-soft); }
+.userchip { display: flex; align-items: center; gap: 8px; background: none; border: 0; color: var(--on-navy); font-weight: 700; font-size: 14px; flex: none; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 13px; background: var(--accent); color: var(--accent-ink); flex: none; }
+.authbtn { background: var(--accent); color: var(--accent-ink); border: 0; font-weight: 800; font-size: 13px; padding: 8px 14px; border-radius: 8px; flex: none; }
+@media (max-width: 980px) { .links { display: none; } .hsearch { max-width: none; } }
+@media (max-width: 760px) { .userchip span:not(.avatar), .authbtn { display: none; } .nav.onhome .hsearch { display: none; } .nav.onhome .navin { justify-content: space-between; } }
+
+/* Bottom tab bar on phones */
+.tabbar { display: none; }
+@media (max-width: 760px) {
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  .tabbar { display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--surface); border-top: 1px solid var(--line); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
+  .tabbar button { background: none; border: 0; display: grid; justify-items: center; gap: 2px; font-size: 11px; font-weight: 700; color: var(--muted); padding: 4px 0; }
+  .tabbar button.on { color: var(--accent); }
+  .tabbar svg.i { width: 22px; height: 22px; }
+}
+
+/* Home */
+.hero { background: radial-gradient(60% 80% at 85% 20%, #eef1ff 0%, rgba(238,241,255,0) 70%), #fff; color: var(--on-navy); border-bottom: 1px solid var(--line); }
+.heroin { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 24px; align-items: center; padding-block: 44px 40px; }
+.hero h1 { font-size: clamp(30px, 4.4vw, 48px); font-weight: 800; line-height: 1.1; max-width: 16ch; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero .tagline { color: var(--on-navy-muted); font-weight: 700; margin-top: 12px; letter-spacing: .02em; }
+.bigsearch { margin-top: 26px; display: flex; background: var(--surface); border: 1px solid #d4d9e8; border-radius: 12px; padding: 6px; gap: 6px; max-width: 640px; box-shadow: var(--shadow); }
+.bigsearch input { flex: 1; min-width: 0; border: 0; outline: none; background: transparent; padding: 10px 12px; font-size: 16px; color: var(--ink); }
+.bigsearch button { border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 9px; padding: 0 18px; display: flex; align-items: center; gap: 8px; font-weight: 800; }
+.quicktypes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.quicktypes button { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 9px; padding: 9px 14px; font-weight: 700; font-size: 14px; }
+.quicktypes button svg { color: var(--c); }
+.heroart { justify-self: end; width: 100%; max-width: 360px; }
+.heroart svg { width: 100%; height: auto; display: block; }
+@media (max-width: 760px) { .heroin { grid-template-columns: 1fr; padding-block: 28px; } .heroart { display: none; } .bigsearch button span { display: none; } }
+.homegrid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; padding-block: 24px; }
+@media (max-width: 900px) { .homegrid { grid-template-columns: 1fr; } }
+.sectionhead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.sectionhead h2 { font-size: 19px; font-weight: 800; }
+.subjects { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 12px; }
+.subj { display: grid; justify-items: center; gap: 8px; text-align: center; background: none; border: 1px solid transparent; border-radius: 12px; padding: 12px 6px; font-size: 13px; font-weight: 700; }
+.subj:hover { border-color: var(--line); background: var(--sunk); }
+.subj .ic { width: 50px; height: 50px; border-radius: 13px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 13%, var(--surface)); }
+.subj .ic svg { width: 26px; height: 26px; }
+.subj small { color: var(--muted); font-weight: 600; font-size: 11.5px; }
+ol.trend { list-style: none; margin: 0; padding: 0; display: grid; }
+ol.trend li button { width: 100%; display: flex; align-items: center; gap: 12px; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 10px 2px; text-align: left; font-weight: 600; }
+ol.trend li:last-child button { border-bottom: 0; }
+ol.trend li button:hover { color: var(--accent); }
+ol.trend .n { font-family: var(--f-mono); font-size: 12px; color: var(--muted); width: 22px; }
+ol.trend .ct { margin-left: auto; font-size: 12px; color: var(--muted); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+.tile { display: grid; grid-template-rows: auto 1fr; overflow: hidden; text-align: left; padding: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 14px; }
+.tile:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); box-shadow: var(--shadow); }
+.tile .th { aspect-ratio: 16 / 9; max-width: 100%; }
+.tile .th svg { width: 100%; height: 100%; display: block; }
+.tile .tb { padding: 12px 14px 14px; display: grid; gap: 6px; align-content: start; }
+.tile .tt { font-family: var(--f-display); font-weight: 700; font-size: 15px; line-height: 1.3; }
+.tile .meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 12.5px; color: var(--muted); }
+.features { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+.feature { display: flex; gap: 14px; align-items: start; text-align: left; padding: 16px; border: 1px solid var(--line); background: var(--surface); border-radius: 14px; }
+.feature:hover { border-color: var(--accent); }
+.feature .ic { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; color: #fff; background: var(--c); flex: none; }
+.feature b { font-family: var(--f-display); display: block; margin-bottom: 2px; }
+.feature span { font-size: 13px; color: var(--muted); }
+.foot { padding-block: 28px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); margin-top: 28px; }
+.foot b { color: var(--ink); font-family: var(--f-display); }
+
+/* Results */
+.resgrid { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 24px; padding-block: 24px 48px; align-items: start; }
+@media (max-width: 900px) { .resgrid { grid-template-columns: minmax(0, 1fr); gap: 14px; } }
+.filters { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 76px); max-height: calc(100vh - 92px); overflow: auto; }
+@media (max-width: 900px) { .filters { position: static; max-height: none; } }
+.filters > summary { list-style: none; padding: 14px 18px; font-family: var(--f-display); font-weight: 800; display: flex; justify-content: space-between; cursor: pointer; }
+.filters > summary::-webkit-details-marker { display: none; }
+.filters > summary::after { content: "+"; color: var(--muted); }
+.filters[open] > summary::after { content: "–"; }
+.fbody { padding: 0 18px 18px; display: grid; gap: 18px; }
+.fgroup { display: grid; gap: 6px; }
+.fgroup > .lbl { font-size: 12px; font-weight: 800; color: var(--ink); }
+.opt { display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 4px 0; cursor: pointer; }
+.opt input { accent-color: var(--accent); margin: 0; width: 16px; height: 16px; }
+.opt .ct { margin-left: auto; font-size: 12px; color: var(--muted); font-family: var(--f-mono); }
+.weights { display: grid; gap: 10px; }
+.weight { display: grid; grid-template-columns: 10px 1fr auto; gap: 2px 8px; align-items: center; font-size: 13px; }
+.weight .sw { width: 10px; height: 10px; border-radius: 3px; }
+.weight output { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.weight input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); margin: 0; }
+.formula { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); background: var(--sunk); border-radius: 8px; padding: 10px; line-height: 1.6; }
+.reshead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; margin-bottom: 14px; }
+.reshead h1 { font-size: 22px; font-weight: 800; }
+.reshead .acts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.reshead select { width: auto; padding: 8px 10px; }
+.expandnote { font-size: 13px; color: var(--muted); margin: -4px 0 12px; }
+.expandnote b { color: var(--ink); }
+ol.results { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.result { display: grid; grid-template-columns: 168px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.result:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.result .th { display: block; padding: 0; border: 0; border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 10; max-width: 100%; background: var(--sunk); }
+.result .th svg { width: 100%; height: 100%; display: block; }
+.result .rb { min-width: 0; display: grid; gap: 5px; }
+.result .rt { font-family: var(--f-display); font-weight: 700; font-size: 16.5px; line-height: 1.3; }
+.result .rt button { all: unset; cursor: pointer; }
+.result .rt button:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.result .rt button:focus-visible { outline: 2px solid var(--accent); border-radius: 3px; }
+.result .src { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.result .desc { font-size: 13.5px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.result .st { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); align-items: center; }
+.result .st .mono { color: var(--ink); font-size: 12.5px; }
+.result .side { display: grid; justify-items: end; gap: 8px; text-align: right; min-width: 96px; }
+.qchip { display: grid; justify-items: end; }
+.qchip b { font-family: var(--f-mono); font-size: 22px; line-height: 1; }
+.qchip b small { font-size: 11px; color: var(--muted); font-weight: 500; }
+.qchip span { font-size: 11.5px; font-weight: 800; }
+.sbar { display: flex; width: 96px; height: 5px; border-radius: 3px; overflow: hidden; background: var(--sunk); }
+.sbar i { display: block; height: 100%; }
+.iconbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; width: 34px; height: 34px; display: grid; place-items: center; color: var(--muted); }
+.iconbtn:hover { color: var(--accent); border-color: var(--accent); }
+.iconbtn[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.iconbtn[aria-pressed="true"] svg { fill: currentColor; }
+.rank { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+@media (max-width: 680px) {
+  .result { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; align-items: start; }
+  .result .side { grid-column: 1 / -1; grid-template-columns: auto auto 1fr auto; justify-items: start; align-items: center; text-align: left; }
+  .result .side .iconbtn { justify-self: end; }
+  .qchip { justify-items: start; }
+  .result .desc { display: none; }
+}
+.aipath { border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line)); background: linear-gradient(180deg, var(--accent-soft), var(--surface)); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; display: grid; gap: 10px; }
+.aipath h3 { font-size: 15px; display: flex; gap: 8px; align-items: center; }
+.aipath ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
+.aipath li button { all: unset; cursor: pointer; font-weight: 800; color: var(--accent); }
+.aipath li button:hover { text-decoration: underline; }
+.aipath li p { font-size: 13.5px; color: var(--muted); }
+.empty { padding: 28px; display: grid; gap: 10px; justify-items: start; }
+
+/* Detail */
+.back { margin-block: 18px 12px; }
+.dtop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 24px; padding: 20px; }
+@media (max-width: 860px) { .dtop { grid-template-columns: 1fr; } }
+.dmedia { border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 9; max-width: 100%; background: var(--sunk); position: relative; }
+.dmedia svg { width: 100%; height: 100%; display: block; }
+.dinfo { display: grid; gap: 10px; align-content: start; }
+.dinfo h1 { font-size: clamp(22px, 2.6vw, 28px); font-weight: 800; line-height: 1.2; }
+.dinfo .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13.5px; color: var(--muted); align-items: center; }
+.dacts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.dgrid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 18px; margin-top: 18px; }
+@media (max-width: 860px) { .dgrid { grid-template-columns: 1fr; } }
+.kv { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 8px 12px; font-size: 14px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; font-weight: 600; }
+.card h2 { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+.gaugewrap { display: grid; justify-items: center; gap: 4px; }
+.gauge { width: 140px; height: 140px; }
+.gauge text { font-family: var(--f-display); }
+.checks { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 7px; font-size: 14px; }
+.checks li { display: flex; gap: 9px; align-items: center; }
+.checks li.ok svg { color: var(--good); }
+.checks li.no { color: var(--muted); }
+.breakdown { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+.breakdown td, .breakdown th { padding: 6px 4px; border-bottom: 1px solid var(--line); text-align: left; }
+.breakdown th { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.breakdown .num { text-align: right; font-family: var(--f-mono); white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+.reviewtop { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: center; }
+@media (max-width: 560px) { .reviewtop { grid-template-columns: 1fr; } }
+.bigrate b { font-family: var(--f-display); font-size: 40px; font-weight: 800; line-height: 1; }
+.dist { display: grid; gap: 4px; font-size: 12px; }
+.dist div { display: grid; grid-template-columns: 26px 1fr 40px; gap: 8px; align-items: center; }
+.dist .bar { height: 7px; background: var(--sunk); border-radius: 4px; overflow: hidden; }
+.dist .bar i { display: block; height: 100%; background: var(--star); }
+.rateinput { display: flex; align-items: center; gap: 2px; }
+.rateinput button { background: none; border: 0; padding: 0 2px; font-size: 26px; line-height: 1; color: var(--line); }
+.rateinput button.on { color: var(--star); }
+.reviews { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.review { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.review .avatar { width: 36px; height: 36px; background: var(--c, var(--accent)); color: #fff; }
+.review .rh { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; }
+.review .rh b { font-size: 14px; }
+.review p { font-size: 14px; margin-top: 2px; }
+.review .rf { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 4px; align-items: center; }
+.review .rf button { background: none; border: 0; color: var(--muted); padding: 0; font-weight: 700; font-size: 12px; display: inline-flex; gap: 4px; align-items: center; }
+.review .rf button[aria-pressed="true"] { color: var(--accent); }
+
+/* App shell: sidebar views */
+.appgrid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; padding-block: 24px 48px; align-items: start; }
+@media (max-width: 900px) { .appgrid { grid-template-columns: minmax(0, 1fr); } .sidenav { display: none; } }
+.sidenav { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 76px); padding: 10px; display: grid; gap: 2px; }
+.sidenav button { display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 10px 12px; border-radius: 9px; font-weight: 700; font-size: 14px; color: var(--muted); text-align: left; }
+.sidenav button:hover { background: var(--sunk); color: var(--ink); }
+.sidenav button.on { background: var(--accent-soft); color: var(--accent); }
+.pagehead { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: end; margin-bottom: 18px; }
+.pagehead h1 { font-size: clamp(22px, 2.6vw, 28px); font-weight: 800; }
+.pagehead p { color: var(--muted); margin-top: 4px; }
+
+/* Assistant */
+.aistatus { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
+.aistatus i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.aistatus.on i { background: var(--good); }
+.aistatus.off i { background: var(--warn); }
+.material { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 14px 16px; }
+.material .fic { width: 44px; height: 52px; border-radius: 8px; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #fff; background: var(--t-pdf); flex: none; }
+.material .fname { font-weight: 800; word-break: break-all; }
+.material .grow { flex: 1; min-width: 160px; }
+.material .mact { display: flex; flex-wrap: wrap; gap: 8px; }
+.srcpick { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-top: 10px; }
+.pastebox { margin-top: 10px; display: grid; gap: 8px; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-block: 16px 12px; }
+.tabs button { border: 1px solid var(--line); background: var(--surface); padding: 7px 16px; border-radius: 999px; font-weight: 800; font-size: 13.5px; display: inline-flex; gap: 7px; align-items: center; }
+.tabs button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.aiout { padding: 20px; min-height: 240px; display: grid; gap: 12px; align-content: start; }
+.aiout .md { display: grid; gap: 10px; font-size: 15px; }
+.md h4 { font-size: 15px; font-weight: 800; margin-top: 6px; }
+.md ul, .md ol { margin: 0; padding-left: 22px; display: grid; gap: 5px; }
+.md code { font-family: var(--f-mono); font-size: 13px; background: var(--sunk); padding: 1px 5px; border-radius: 4px; }
+.thinking { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font-weight: 700; }
+.dots i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 3px; opacity: .3; }
+@media (prefers-reduced-motion: no-preference) { .dots i { animation: blink 1s infinite; } .dots i:nth-child(2) { animation-delay: .2s; } .dots i:nth-child(3) { animation-delay: .4s; } @keyframes blink { 50% { opacity: 1; } } }
+.chat { display: grid; gap: 12px; }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 12px; font-size: 14.5px; }
+.msg.me { justify-self: end; background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 4px; }
+.msg.ai { justify-self: start; background: var(--sunk); border-bottom-left-radius: 4px; }
+.askbar { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+.askbar input { flex: 1; min-width: 0; }
+.quiz { display: grid; gap: 16px; }
+.qitem { display: grid; gap: 8px; }
+.qitem .qq { font-weight: 800; }
+.qopts { display: grid; gap: 6px; }
+.qopts button { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 9px; padding: 9px 12px; font-size: 14px; }
+.qopts button:hover:not(:disabled) { border-color: var(--accent); }
+.qopts button.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface)); }
+.qopts button.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--surface)); }
+.qopts button:disabled { cursor: default; }
+.qwhy { font-size: 13.5px; color: var(--muted); }
+.notice { font-size: 13px; padding: 10px 12px; border-radius: 9px; background: color-mix(in srgb, var(--warn) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--warn) 40%, var(--line)); }
+.suggests { display: flex; flex-wrap: wrap; gap: 8px; }
+.suggests button { border: 1px dashed var(--line); background: var(--surface); border-radius: 999px; padding: 5px 12px; font-size: 13px; }
+.suggests button:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Dashboard */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 18px; }
+.stat { display: flex; align-items: center; gap: 14px; padding: 16px; }
+.stat .ic { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 14%, var(--surface)); flex: none; }
+.stat b { font-family: var(--f-display); font-size: 24px; font-weight: 800; line-height: 1; display: block; }
+.stat span { font-size: 13px; color: var(--muted); }
+.dashgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+@media (max-width: 1100px) { .dashgrid { grid-template-columns: 1fr; } }
+.dashgrid .wide { grid-column: 1 / -1; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; }
+.list li { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; min-width: 0; }
+.list li:last-child { border-bottom: 0; }
+.list li .grow { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list li button.link { all: unset; cursor: pointer; font-weight: 700; }
+.list li button.link:hover { color: var(--accent); }
+.goal input[type=checkbox] { accent-color: var(--good); width: 17px; height: 17px; margin: 0; flex: none; }
+.goal.done .grow { text-decoration: line-through; color: var(--muted); }
+.day { font-family: var(--f-mono); font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-soft); padding: 2px 7px; border-radius: 5px; flex: none; }
+.addgoal { display: grid; grid-template-columns: minmax(0, 1fr) 90px auto; gap: 8px; margin-top: 12px; }
+@media (max-width: 480px) { .addgoal { grid-template-columns: 1fr 1fr; } .addgoal input { grid-column: 1 / -1; } }
+.lb .pos { font-family: var(--f-mono); width: 22px; color: var(--muted); font-size: 12px; }
+.lb li.me { background: var(--accent-soft); border-radius: 8px; padding-inline: 8px; }
+.lb .pts { font-family: var(--f-mono); font-weight: 600; }
+.progress { height: 8px; background: var(--sunk); border-radius: 4px; overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--good); }
+
+/* Community */
+.threads { display: grid; gap: 12px; }
+.thread { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 14px; padding: 16px; }
+.votes { display: grid; justify-items: center; gap: 2px; align-content: start; }
+.votes button { background: none; border: 1px solid var(--line); border-radius: 8px; width: 36px; height: 30px; color: var(--muted); }
+.votes button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.votes b { font-family: var(--f-mono); }
+.thread h3 { font-size: 16px; }
+.thread h3 button { all: unset; cursor: pointer; }
+.thread h3 button:hover { color: var(--accent); }
+.thread .tm { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12.5px; color: var(--muted); margin-top: 6px; align-items: center; }
+.answers { display: grid; gap: 10px; margin-top: 14px; }
+.answer { padding: 12px 14px; border-radius: 10px; background: var(--sunk); font-size: 14px; display: grid; gap: 4px; }
+.answer.ai { border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line)); background: var(--accent-soft); }
+.answer .ah { font-size: 12.5px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+.answer .ah b { color: var(--ink); }
+
+/* Login */
+.auth { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: calc(100vh - 60px); }
+@media (max-width: 860px) { .auth { grid-template-columns: 1fr; } .authside { display: none; } }
+.authside { border-right: 1px solid var(--line); background: radial-gradient(70% 70% at 30% 10%, #eef1ff, #fff 70%); color: var(--on-navy); padding: 48px max(32px, env(safe-area-inset-left, 0px)); display: grid; align-content: center; gap: 22px; }
+.authside h2 { font-size: 32px; font-weight: 800; line-height: 1.15; }
+.authside ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; color: var(--on-navy-muted); font-weight: 700; }
+.authside li { display: flex; gap: 12px; align-items: center; }
+.authside li svg { color: var(--on-navy); }
+.authside .art { max-width: 340px; }
+.authside .art svg { width: 100%; height: auto; display: block; }
+.authform { display: grid; align-content: center; justify-items: center; padding: 40px max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px)); }
+.authcard { width: min(100%, 420px); display: grid; gap: 16px; }
+.authtabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+.authtabs button { background: none; border: 0; padding: 12px; font-weight: 800; font-family: var(--f-display); color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -1px; }
+.authtabs button.on { color: var(--accent); border-bottom-color: var(--accent); }
+.fld { display: grid; gap: 6px; }
+.fld label { font-size: 13px; font-weight: 800; }
+.or { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; font-size: 12px; color: var(--muted); }
+.or::before, .or::after { content: ""; height: 1px; background: var(--line); }
+.rowbetween { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; flex-wrap: wrap; }
+
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 9px; font-size: 14px; font-weight: 600; z-index: 50; box-shadow: var(--shadow); max-width: calc(100% - 32px); }
+@media (max-width: 760px) { .toast { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); } }
+.note { font-size: 12px; color: var(--muted); margin-top: 18px; max-width: 90ch; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></symbol>
+  <symbol id="i-library" viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4v16h-4z"/><path d="m16 5 3.5-1 3 15.5-3.5 1z"/></symbol>
+  <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol>
+  <symbol id="i-dash" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></symbol>
+  <symbol id="i-community" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-article" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+  <symbol id="i-tutorial" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.5 1.5L7.5 5M3.5 12l1.5 1.5L7.5 11"/><circle cx="5" cy="18" r="1.5"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="15.5" cy="9" r="1.8"/><path d="m3 18 6-6 4 4 3-3 5 5"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12 20 4l-6 16-3-7z"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v6H4V6h6"/></symbol>
+  <symbol id="i-done" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H4v1a4 4 0 0 0 4 4M16 6h4v1a4 4 0 0 1-4 4M12 13v4M8 21h8M9 17h6v4H9z"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2 19 19M5 19l2.8-2.8M16.2 7.8 19 5"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+  <symbol id="i-thumb" viewBox="0 0 24 24"><path d="M7 10v10H4V10zM7 10l4-7c1.5 0 2.5 1 2.2 2.6L12.5 9H19a2 2 0 0 1 2 2.3l-1.2 6.8A2 2 0 0 1 17.8 20H7"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap navin">
+    <button class="brand" data-go="home" aria-label="GyaanSetu home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5 2 11.5 16 18l11-5.1V20h2.4v-8.5z" fill="currentColor"/><path d="M7 15.6V21c0 2.2 4 4 9 4s9-1.8 9-4v-5.4L16 20z" fill="currentColor" opacity=".85"/></svg>
+      <b>Gyaan<span>Setu</span></b>
+    </button>
+    <form class="hsearch" id="hSearch" role="search">
+      <input id="hq" type="search" list="suggest" autocomplete="off" placeholder="Search any topic…" aria-label="Search educational content">
+      <button type="submit" aria-label="Search"><svg class="i"><use href="#i-search"/></svg></button>
+    </form>
+    <nav class="links" aria-label="Main">
+      <button data-go="home">Home</button>
+      <button data-go="results">Explore</button>
+      <button data-go="assistant">AI Assistant</button>
+      <button data-go="community">Community</button>
+      <button data-go="dashboard">Dashboard</button>
+    </nav>
+    <div id="userSlot"></div>
+  </div>
+</header>
+<datalist id="suggest"></datalist>
+
+<main id="app">
+  <section id="v-home"></section>
+  <section id="v-results" hidden></section>
+  <section id="v-detail" hidden></section>
+  <section id="v-assistant" hidden></section>
+  <section id="v-dashboard" hidden></section>
+  <section id="v-community" hidden></section>
+  <section id="v-login" hidden></section>
+</main>
+
+<nav class="tabbar" aria-label="Main">
+  <button data-go="home"><svg class="i"><use href="#i-home"/></svg>Home</button>
+  <button data-go="results"><svg class="i"><use href="#i-search"/></svg>Search</button>
+  <button data-go="assistant"><svg class="i"><use href="#i-ai"/></svg>AI</button>
+  <button data-go="dashboard"><svg class="i"><use href="#i-library"/></svg>Library</button>
+  <button data-go="community"><svg class="i"><use href="#i-community"/></svg>Forum</button>
+</nav>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+/* ================= Reference data ================= */
+const SUBJ = {
+  cs:        { name: 'Computer Science', dewey: '005', color: '#3c5ee3', icon: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>' },
+  math:      { name: 'Mathematics',      dewey: '510', color: '#12a37a', icon: '<path d="M5 7h6M8 4v6M14 7h5M5 14l5 5M10 14l-5 5M14 15h5M14 19h5"/>' },
+  physics:   { name: 'Physics',          dewey: '530', color: '#7b5be6', icon: '<circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/>' },
+  chemistry: { name: 'Chemistry',        dewey: '540', color: '#1597b5', icon: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/>' },
+  biology:   { name: 'Biology',          dewey: '570', color: '#4f9d2d', icon: '<path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14z"/><path d="M5 19l8-8"/>' },
+  language:  { name: 'English',          dewey: '428', color: '#d9830b', icon: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M8 7h7M8 11h5"/>' },
+  economics: { name: 'Economics',        dewey: '330', color: '#c2417a', icon: '<path d="M4 20V11M10 20V5M16 20v-7M2 20h20"/>' },
+  history:   { name: 'History',          dewey: '900', color: '#8a5a2b', icon: '<path d="M3 21h18M5 21V11M9.5 21V11M14.5 21V11M19 21V11M2 11l10-6 10 6z"/>' }
+};
+const TYPE = {
+  video:    { label: 'Video',    code: 'VID', icon: 'i-video',    color: 'var(--t-video)',    cta: 'Watch video' },
+  pdf:      { label: 'PDF',      code: 'DOC', icon: 'i-pdf',      color: 'var(--t-pdf)',      cta: 'Open PDF' },
+  article:  { label: 'Article',  code: 'TXT', icon: 'i-article',  color: 'var(--t-article)',  cta: 'Read article' },
+  tutorial: { label: 'Tutorial', code: 'TUT', icon: 'i-tutorial', color: 'var(--t-tutorial)', cta: 'Start tutorial' },
+  image:    { label: 'Image',    code: 'IMG', icon: 'i-image',    color: 'var(--t-image)',    cta: 'View image' }
+};
+const VERIFIED = new Set(['3Blue1Brown','MIT OpenCourseWare','freeCodeCamp','OpenStax','Khan Academy','Wikipedia','Caltech','Harvard CS50','MDN Web Docs','Python Software Foundation','Oracle','Purdue OWL','git-scm.com','CrashCourse','W3Schools','R2D3','Jake VanderPlas','ptable.com','bigocheatsheet.com','db-book.com']);
+const CC = 'https://thecrashcourse.com/';
+const WIKI = t => 'https://en.wikipedia.org/wiki/' + t;
+
+/* Sample engagement figures. rating = average stars, ratings = count, hy/hn = helpful yes/no votes. */
+const ITEMS = [
+  { id:'py', title:'Learn Python – Full Course for Beginners', type:'video', subject:'cs', level:'Beginner', source:'freeCodeCamp', url:'https://www.freecodecamp.org/learn', len:'4 h 26 m', date:'2018-07-11',
+    desc:'A beginner course covering variables, data types, loops, functions, files, classes and small projects in Python 3.',
+    tags:['python','programming','coding','beginner','python tutorial'], views:45000000, likes:1100000, rating:4.7, ratings:8800, hy:1900, hn:140,
+    comments:['Perfect starting point, very clear explanations.','Helped me land my first internship, thank you!','A bit slow in the middle sections.'] },
+  { id:'pydoc', title:'The Python Tutorial (official)', type:'article', subject:'cs', level:'Beginner', source:'Python Software Foundation', url:'https://docs.python.org/3/tutorial/', len:'16 chapters', date:'2026-10-01',
+    desc:'The official tutorial from python.org: control flow, data structures, modules, errors, classes and the standard library.',
+    tags:['python','python tutorial','programming','standard library'], views:9600000, likes:88000, rating:4.6, ratings:2300, hy:820, hn:60,
+    comments:['Authoritative and accurate, the best reference once you know the basics.','Dense for absolute beginners.'] },
+  { id:'w3py', title:'Python Tutorial – W3Schools', type:'tutorial', subject:'cs', level:'Beginner', source:'W3Schools', url:'https://www.w3schools.com/python/', len:'100+ lessons', date:'2025-06-14',
+    desc:'Short lessons with a "Try it yourself" editor covering syntax, strings, lists, dictionaries, functions and file handling.',
+    tags:['python','python tutorial','coding','exercises'], views:18000000, likes:120000, rating:4.2, ratings:5700, hy:1100, hn:260,
+    comments:['Easy to follow with lots of examples.','Too shallow for real projects but good for quick lookups.'] },
+  { id:'cs50', title:'CS50x: Introduction to Computer Science', type:'video', subject:'cs', level:'Beginner', source:'Harvard CS50', url:'https://cs50.harvard.edu/x/', len:'11 weeks · lectures + problem sets', date:'2026-01-02',
+    desc:'Harvard\'s introduction to computer science: C, Python, SQL, algorithms, memory and web development, with graded problem sets.',
+    tags:['computer science','algorithms','python','c','sql','web development'], views:21000000, likes:640000, rating:4.9, ratings:6100, hy:1700, hn:40,
+    comments:['The best intro course anywhere. David Malan is brilliant.','Problem sets are hard but incredibly rewarding.','Changed my career, highly recommend.'] },
+  { id:'nn', title:'Neural Networks', type:'video', subject:'cs', level:'Intermediate', source:'3Blue1Brown', url:'https://www.3blue1brown.com/topics/neural-networks', len:'8 episodes · 2 h 10 m', date:'2017-10-05',
+    desc:'How a network learns to recognise handwritten digits: gradient descent, backpropagation, and later chapters on transformers and attention.',
+    tags:['neural network','deep learning','backpropagation','gradient descent','machine learning','transformers'], views:7200000, likes:260000, rating:4.9, ratings:2410, hy:740, hn:19,
+    comments:['Clear and beautifully animated, backpropagation finally makes sense.','Really helpful before starting a deep learning course.','Chapter 4 got hard for me, I had to rewatch it twice.'] },
+  { id:'ml10', title:'Learn Machine Learning in 10 Minutes (No Math!)', type:'video', subject:'cs', level:'Beginner', source:'Sample uploader', url:null, len:'10 m', date:'2023-03-10',
+    desc:'A fast overview of machine learning buzzwords with a copy-paste demo. Included in the sample set to show that views alone do not decide the ranking.',
+    tags:['machine learning','ai','beginner'], views:14500000, likes:180000, rating:2.9, ratings:1900, hy:210, hn:640,
+    comments:['Clickbait. Shallow and misleading, nothing about how models actually learn.','Some definitions are wrong and the code has errors.','Not useful at all, a waste of time.','Good energy, fun to watch.'] },
+  { id:'r2d3', title:'A Visual Introduction to Machine Learning', type:'article', subject:'cs', level:'Beginner', source:'R2D3', url:'http://www.r2d3.us/visual-intro-to-machine-learning-part-1/', len:'Interactive essay · 15 min', date:'2015-07-30',
+    desc:'A scrolling, interactive essay that explains classification and decision trees using a housing dataset.',
+    tags:['machine learning','decision trees','classification','data visualization'], views:640000, likes:21000, rating:4.8, ratings:410, hy:240, hn:6,
+    comments:['Beautiful interactive explanation of decision trees.','Clear and intuitive, perfect for beginners.'] },
+  { id:'pdsh', title:'Python Data Science Handbook', type:'article', subject:'cs', level:'Intermediate', source:'Jake VanderPlas', url:'https://jakevdp.github.io/PythonDataScienceHandbook/', len:'Online book · 5 chapters', date:'2016-11-21',
+    desc:'NumPy, Pandas, Matplotlib and Scikit-Learn explained through runnable notebooks, from arrays to machine learning models.',
+    tags:['python','data science','machine learning','pandas','numpy'], views:2300000, likes:47000, rating:4.8, ratings:820, hy:380, hn:15,
+    comments:['Excellent practical guide to machine learning in Python.','Clear code examples, highly recommend.'] },
+  { id:'mit6006', title:'Introduction to Algorithms (6.006) Lecture Notes', type:'pdf', subject:'cs', level:'Intermediate', source:'MIT OpenCourseWare', url:'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/', len:'21 lectures · PDF', date:'2020-06-01',
+    desc:'Lecture notes, problem sets and solutions covering sorting, hashing, graphs, shortest paths and dynamic programming.',
+    tags:['algorithms','data structures','dynamic programming','graphs','sorting','big-o'], views:1400000, likes:48000, rating:4.8, ratings:980, hy:410, hn:18,
+    comments:['Rigorous and well structured. The problem sets are excellent.','Hard but worth it, I recommend pairing it with the lecture videos.'] },
+  { id:'bigo', title:'Big-O Complexity Cheat Sheet', type:'image', subject:'cs', level:'Intermediate', source:'bigocheatsheet.com', url:'https://www.bigocheatsheet.com/', len:'Chart · 1 page', date:'2019-02-14',
+    desc:'A one-page chart of time and space complexity for common data structures and sorting algorithms, colour-coded from excellent to horrible.',
+    tags:['big-o','algorithms','data structures','complexity','sorting','cheat sheet'], views:2600000, likes:39000, rating:4.5, ratings:760, hy:500, hn:40,
+    comments:['Useful for interview revision.','Great quick reference to print.'] },
+  { id:'dbms', title:'Database System Concepts – Slides & Notes', type:'pdf', subject:'cs', level:'Intermediate', source:'db-book.com', url:'https://www.db-book.com/', len:'32 chapters · slides', date:'2019-03-01',
+    desc:'Chapter slides for the classic DBMS textbook: relational model, SQL, normalisation, indexing, transactions and concurrency control.',
+    tags:['dbms','database','sql','normalization','transactions','dbms notes'], views:3100000, likes:41000, rating:4.5, ratings:1200, hy:520, hn:45,
+    comments:['Exactly what I needed for my DBMS exam. Clear diagrams.','Good notes, though some slides are text heavy.'] },
+  { id:'sql', title:'SQL Tutorial', type:'tutorial', subject:'cs', level:'Beginner', source:'W3Schools', url:'https://www.w3schools.com/sql/', len:'60+ lessons', date:'2024-01-10',
+    desc:'Short, runnable examples for SELECT, JOIN, GROUP BY and database design, with an in-browser editor.',
+    tags:['sql','database','queries','joins','dbms'], views:12000000, likes:95000, rating:4.4, ratings:2900, hy:900, hn:120,
+    comments:['Easy to follow with good examples.','Too basic once you need window functions.'] },
+  { id:'java', title:'Java Tutorials: Object-Oriented Programming Concepts', type:'article', subject:'cs', level:'Beginner', source:'Oracle', url:'https://docs.oracle.com/javase/tutorial/java/concepts/', len:'Lesson · 6 parts', date:'2022-04-12',
+    desc:'Objects, classes, inheritance, interfaces and packages explained with Java examples from the official Java Tutorials.',
+    tags:['java','java oop','oop','classes','inheritance','interfaces'], views:5400000, likes:52000, rating:4.4, ratings:1500, hy:600, hn:70,
+    comments:['Clear explanation of inheritance and interfaces.','A bit dated, but the concepts are still accurate.'] },
+  { id:'mdn', title:'Learn Web Development', type:'tutorial', subject:'cs', level:'Beginner', source:'MDN Web Docs', url:'https://developer.mozilla.org/en-US/docs/Learn', len:'Modules · HTML, CSS, JavaScript', date:'2026-08-20',
+    desc:'A structured curriculum from Mozilla: HTML, CSS layout, JavaScript, accessibility and frameworks, with assessments.',
+    tags:['web development','html','css','javascript','accessibility'], views:16000000, likes:210000, rating:4.8, ratings:3900, hy:1300, hn:50,
+    comments:['The most accurate web docs anywhere. Excellent.','Great structure for self-learners.'] },
+  { id:'rwd', title:'Responsive Web Design Certification', type:'tutorial', subject:'cs', level:'Beginner', source:'freeCodeCamp', url:'https://www.freecodecamp.org/learn', len:'~300 hours · projects', date:'2023-08-22',
+    desc:'Interactive, project-based lessons on HTML and CSS: flexbox, grid, accessibility and responsive layouts.',
+    tags:['html','css','web development','flexbox','accessibility'], views:6800000, likes:150000, rating:4.6, ratings:4100, hy:1200, hn:90,
+    comments:['Hands-on projects make it stick. Excellent.','Some steps are confusing but the forum helps.'] },
+  { id:'git', title:'Pro Git', type:'pdf', subject:'cs', level:'Intermediate', source:'git-scm.com', url:'https://git-scm.com/book/en/v2', len:'Book · 500 pages', date:'2014-11-18',
+    desc:'The free, complete book on Git: branching, rebasing, remotes, internals and team workflows.',
+    tags:['git','version control','branching'], views:3900000, likes:52000, rating:4.8, ratings:1300, hy:610, hn:25,
+    comments:['The definitive Git reference. Thorough and well written.','The chapter on internals is amazing.'] },
+
+  { id:'la', title:'Essence of Linear Algebra', type:'video', subject:'math', level:'Beginner', source:'3Blue1Brown', url:'https://www.3blue1brown.com/topics/linear-algebra', len:'16 episodes · 3 h', date:'2016-08-06',
+    desc:'A visual series that builds intuition for vectors, linear transformations, determinants and eigenvectors through animation.',
+    tags:['linear algebra','vectors','matrices','eigenvalues','determinant'], views:9800000, likes:412000, rating:4.9, ratings:3120, hy:860, hn:22,
+    comments:['Finally understood eigenvectors after years of confusion. Brilliant animations.','The best intuition-first explanation of matrices I have seen.','Great, but you still need practice problems alongside it.'] },
+  { id:'calc1', title:'Calculus Volume 1', type:'pdf', subject:'math', level:'Beginner', source:'OpenStax', url:'https://openstax.org/details/books/calculus-volume-1', len:'Textbook · 873 pages', date:'2016-03-30',
+    desc:'Peer-reviewed open textbook on limits, derivatives and integration with worked examples and exercises.',
+    tags:['calculus','derivatives','limits','integrals'], views:5200000, likes:61000, rating:4.7, ratings:2100, hy:700, hn:45,
+    comments:['Clear worked examples and free. Excellent for self-study.','Good textbook, the answer key helps a lot.'] },
+  { id:'eoc', title:'Essence of Calculus', type:'video', subject:'math', level:'Beginner', source:'3Blue1Brown', url:'https://www.3blue1brown.com/topics/calculus', len:'12 episodes · 2 h 40 m', date:'2017-04-28',
+    desc:'A visual series that rediscovers derivatives, the chain rule, integrals and Taylor series from first principles.',
+    tags:['calculus','derivatives','integrals','chain rule','taylor series'], views:6100000, likes:230000, rating:4.9, ratings:2000, hy:720, hn:15,
+    comments:['Beautiful and intuitive, I wish school taught calculus like this.','Really clear explanation of the chain rule.'] },
+  { id:'khint', title:'Integral Calculus', type:'tutorial', subject:'math', level:'Intermediate', source:'Khan Academy', url:'https://www.khanacademy.org/math/integral-calculus', len:'6 units · exercises', date:'2021-05-04',
+    desc:'Practice-driven unit on integration techniques, applications and series, with instant-feedback exercises.',
+    tags:['calculus','integrals','integration','series','practice'], views:4400000, likes:70000, rating:4.6, ratings:1800, hy:820, hn:60,
+    comments:['Practice exercises with hints are very helpful.','Good, but some videos are outdated.'] },
+  { id:'unit', title:'Unit Circle Diagram', type:'image', subject:'math', level:'Beginner', source:'Wikipedia', url:WIKI('Unit_circle'), len:'Diagram', date:'2022-10-02',
+    desc:'Labelled diagram of the unit circle showing angles in degrees and radians with sine and cosine coordinates.',
+    tags:['trigonometry','unit circle','radians','sine','cosine'], views:1900000, likes:18000, rating:4.5, ratings:430, hy:260, hn:20,
+    comments:['Saved me during my trig exam. Clear and useful.'] },
+  { id:'stats', title:'Statistics and Probability', type:'tutorial', subject:'math', level:'Beginner', source:'Khan Academy', url:'https://www.khanacademy.org/math/statistics-probability', len:'16 units · exercises', date:'2022-02-17',
+    desc:'Full course on data analysis, distributions, sampling, confidence intervals and hypothesis testing.',
+    tags:['statistics','probability','hypothesis testing','distributions','data analysis'], views:8300000, likes:110000, rating:4.7, ratings:3500, hy:1100, hn:70,
+    comments:['Great structure and easy to understand.','I love the practice quizzes.'] },
+  { id:'prob', title:'Probability theory', type:'article', subject:'math', level:'Advanced', source:'Wikipedia', url:WIKI('Probability_theory'), len:'Article · 25 min read', date:'2026-07-30',
+    desc:'Formal treatment of probability: measure-theoretic foundations, random variables, convergence and limit theorems.',
+    tags:['probability','random variables','statistics','measure theory'], views:1200000, likes:6000, rating:3.9, ratings:210, hy:90, hn:55,
+    comments:['Too abstract for beginners, confusing notation.','Good reference if you already know measure theory.'] },
+
+  { id:'ccphys', title:'Crash Course Physics', type:'video', subject:'physics', level:'Beginner', source:'CrashCourse', url:CC, len:'46 episodes · 8 h', date:'2016-03-31',
+    desc:"Fast-paced episodes from motion and Newton's laws to electricity, optics and quantum mechanics.",
+    tags:['physics','mechanics',"newton's laws",'electricity','optics'], views:11000000, likes:240000, rating:4.5, ratings:2600, hy:780, hn:130,
+    comments:['Fun and engaging overview.','Too fast to really learn from, but great for revision.'] },
+  { id:'uphys', title:'University Physics Volume 1', type:'pdf', subject:'physics', level:'Intermediate', source:'OpenStax', url:'https://openstax.org/details/books/university-physics-volume-1', len:'Textbook · 1,180 pages', date:'2016-09-19',
+    desc:'Calculus-based textbook covering mechanics, waves, sound and thermodynamics.',
+    tags:['physics','mechanics','waves','thermodynamics','calculus'], views:2700000, likes:30000, rating:4.6, ratings:900, hy:380, hn:30,
+    comments:['Thorough and well illustrated.','Good problems and a helpful solutions manual.'] },
+  { id:'feyn', title:'The Feynman Lectures on Physics', type:'article', subject:'physics', level:'Advanced', source:'Caltech', url:'https://www.feynmanlectures.caltech.edu/', len:'3 volumes · online', date:'2013-09-13',
+    desc:"The complete three-volume lectures, free online, covering mechanics, electromagnetism and quantum mechanics in Feynman's own words.",
+    tags:['physics','quantum mechanics','electromagnetism','mechanics'], views:6600000, likes:140000, rating:4.9, ratings:2200, hy:690, hn:40,
+    comments:['A timeless classic, brilliant insight on every page.','Hard going without a strong math background.'] },
+  { id:'ems', title:'Electromagnetic Spectrum Chart', type:'image', subject:'physics', level:'Beginner', source:'Wikipedia', url:WIKI('Electromagnetic_spectrum'), len:'Chart', date:'2024-04-11',
+    desc:'Chart of radio, microwave, infrared, visible, ultraviolet, X-ray and gamma bands with wavelength and frequency scales.',
+    tags:['electromagnetic spectrum','light','waves','wavelength','frequency'], views:2200000, likes:22000, rating:4.6, ratings:520, hy:300, hn:15,
+    comments:['Clear and accurate, perfect for my class slides.'] },
+  { id:'qm', title:'Quantum mechanics', type:'article', subject:'physics', level:'Advanced', source:'Wikipedia', url:WIKI('Quantum_mechanics'), len:'Article · 45 min read', date:'2026-08-21',
+    desc:'Overview of wave functions, the uncertainty principle, superposition, entanglement and interpretations.',
+    tags:['quantum mechanics','physics','wave function','uncertainty principle','entanglement'], views:4000000, likes:19000, rating:4.1, ratings:380, hy:150, hn:70,
+    comments:['Good overview but confusing in places.','Excellent history section.'] },
+
+  { id:'bio2e', title:'Biology 2e', type:'pdf', subject:'biology', level:'Beginner', source:'OpenStax', url:'https://openstax.org/details/books/biology-2e', len:'Textbook · 1,500 pages', date:'2018-03-28',
+    desc:'Open textbook for introductory biology: cells, genetics, evolution, ecology and human physiology.',
+    tags:['biology','cells','genetics','evolution','ecology'], views:4800000, likes:55000, rating:4.7, ratings:1700, hy:640, hn:35,
+    comments:['Clear diagrams and free. Excellent.','Great for AP Biology revision.'] },
+  { id:'ccbio', title:'Crash Course Biology', type:'video', subject:'biology', level:'Beginner', source:'CrashCourse', url:CC, len:'40 episodes · 7 h', date:'2012-01-30',
+    desc:'Episodes on DNA structure and replication, cell division, photosynthesis, evolution and ecosystems.',
+    tags:['biology','dna','genetics','photosynthesis','evolution','cells'], views:9400000, likes:200000, rating:4.5, ratings:2300, hy:700, hn:110,
+    comments:['Engaging and easy to understand.','Fast, but I really like the animations.'] },
+  { id:'photo', title:'Photosynthesis', type:'tutorial', subject:'biology', level:'Beginner', source:'Khan Academy', url:'https://www.khanacademy.org/science/biology/photosynthesis-in-plants', len:'5 lessons · exercises', date:'2020-09-08',
+    desc:'Light-dependent reactions, the Calvin cycle and C4/CAM plants, with practice questions.',
+    tags:['photosynthesis','plants','calvin cycle','chloroplast','biology'], views:3300000, likes:44000, rating:4.6, ratings:1200, hy:520, hn:30,
+    comments:['Very clear explanation of the Calvin cycle.','Helpful practice questions.'] },
+  { id:'cell', title:'Animal Cell Structure Diagram', type:'image', subject:'biology', level:'Beginner', source:'Wikipedia', url:WIKI('Cell_(biology)'), len:'Diagram', date:'2023-06-19',
+    desc:'Labelled cross-section of a eukaryotic animal cell: nucleus, mitochondria, ER, Golgi apparatus and membrane.',
+    tags:['cells','cell structure','organelles','biology','mitochondria'], views:2900000, likes:26000, rating:4.4, ratings:610, hy:330, hn:28,
+    comments:['Useful for labelling practice.','Good, but the label font is small.'] },
+  { id:'gen', title:'Introduction to genetics', type:'article', subject:'biology', level:'Beginner', source:'Wikipedia', url:WIKI('Introduction_to_genetics'), len:'Article · 15 min read', date:'2025-12-02',
+    desc:'Plain-language introduction to genes, DNA, inheritance, mutation and how traits pass between generations.',
+    tags:['genetics','dna','genes','inheritance','heredity'], views:1600000, likes:12000, rating:4.3, ratings:300, hy:190, hn:20,
+    comments:['Easy to read, a good starting point.'] },
+
+  { id:'chem2e', title:'Chemistry 2e', type:'pdf', subject:'chemistry', level:'Beginner', source:'OpenStax', url:'https://openstax.org/details/books/chemistry-2e', len:'Textbook · 1,300 pages', date:'2019-02-14',
+    desc:'Introductory textbook on atomic structure, bonding, stoichiometry, thermochemistry and equilibrium.',
+    tags:['chemistry','atoms','bonding','stoichiometry','equilibrium'], views:3600000, likes:38000, rating:4.6, ratings:1100, hy:450, hn:33,
+    comments:['Clear and well organised.','Great end-of-chapter exercises.'] },
+  { id:'ptable', title:'Ptable: Interactive Periodic Table', type:'image', subject:'chemistry', level:'Beginner', source:'ptable.com', url:'https://ptable.com/', len:'Interactive chart', date:'2024-09-01',
+    desc:'Interactive periodic table with properties, electron configurations, isotopes and compounds for every element.',
+    tags:['periodic table','elements','chemistry','electron configuration'], views:8900000, likes:120000, rating:4.8, ratings:2700, hy:980, hn:25,
+    comments:['The best periodic table on the web. Amazing.','Super useful for homework.'] },
+  { id:'ccchem', title:'Crash Course Chemistry', type:'video', subject:'chemistry', level:'Beginner', source:'CrashCourse', url:CC, len:'46 episodes · 8 h', date:'2013-02-11',
+    desc:'Episodes on the nucleus, electrons, stoichiometry, gas laws, acids and bases, and organic chemistry.',
+    tags:['chemistry','atoms','stoichiometry','acids','gas laws'], views:7700000, likes:150000, rating:4.3, ratings:1900, hy:520, hn:180,
+    comments:['Entertaining, but too fast and some topics feel rushed.','Good overview for revision.','Confusing at times.'] },
+  { id:'orgo', title:'Organic Chemistry', type:'tutorial', subject:'chemistry', level:'Advanced', source:'Khan Academy', url:'https://www.khanacademy.org/science/organic-chemistry', len:'14 units', date:'2019-08-26',
+    desc:'Structure, bonding, resonance, stereochemistry, and substitution and elimination reactions.',
+    tags:['organic chemistry','chemistry','reactions','stereochemistry','resonance'], views:2400000, likes:33000, rating:4.5, ratings:870, hy:360, hn:40,
+    comments:['Helpful walk-throughs of reaction mechanisms.','Hard topic, explained well.'] },
+
+  { id:'ccwh', title:'Crash Course World History', type:'video', subject:'history', level:'Beginner', source:'CrashCourse', url:CC, len:'42 episodes · 8 h', date:'2012-01-26',
+    desc:'Survey from the agricultural revolution through empires, revolutions and globalisation.',
+    tags:['world history','history','empires','revolutions','globalization'], views:15000000, likes:330000, rating:4.6, ratings:3300, hy:900, hn:110,
+    comments:['Funny and informative, I love this series.','Good overview but simplifies a lot.'] },
+  { id:'ww2', title:'World War II', type:'article', subject:'history', level:'Intermediate', source:'Wikipedia', url:WIKI('World_War_II'), len:'Article · 90 min read', date:'2026-10-01',
+    desc:"Comprehensive account of causes, major theatres, the Holocaust, home fronts and the war's aftermath, 1939–1945.",
+    tags:['world war ii','ww2','history','20th century','holocaust'], views:6300000, likes:35000, rating:4.5, ratings:820, hy:400, hn:40,
+    comments:['Thorough and well sourced.','Very long but excellent.'] },
+  { id:'indrev', title:'Industrial Revolution Timeline', type:'image', subject:'history', level:'Beginner', source:'Wikipedia', url:WIKI('Industrial_Revolution'), len:'Timeline graphic', date:'2021-11-15',
+    desc:'Timeline of key inventions and events from 1760 to 1840: steam power, textiles, railways and factories.',
+    tags:['industrial revolution','history','timeline','steam engine','inventions'], views:880000, likes:7000, rating:4.1, ratings:190, hy:90, hn:20,
+    comments:['Useful summary for my essay.'] },
+  { id:'ushist', title:'U.S. History', type:'pdf', subject:'history', level:'Beginner', source:'OpenStax', url:'https://openstax.org/details/books/us-history', len:'Textbook · 1,000 pages', date:'2014-12-30',
+    desc:'Survey textbook from pre-Columbian America through the 21st century, with primary-source features.',
+    tags:['us history','american history','history','civil war'], views:2100000, likes:21000, rating:4.5, ratings:640, hy:260, hn:22,
+    comments:['Balanced and clear, great primary sources.'] },
+
+  { id:'econ', title:'Principles of Economics 3e', type:'pdf', subject:'economics', level:'Beginner', source:'OpenStax', url:'https://openstax.org/details/books/principles-economics-3e', len:'Textbook · 900 pages', date:'2022-12-14',
+    desc:'Micro and macro fundamentals: supply and demand, elasticity, market structures, GDP, inflation and policy.',
+    tags:['economics','supply and demand','microeconomics','macroeconomics','inflation','management'], views:2800000, likes:29000, rating:4.6, ratings:760, hy:330, hn:26,
+    comments:['Clear with real-world examples. Great.'] },
+  { id:'sd', title:'Supply and demand', type:'article', subject:'economics', level:'Beginner', source:'Wikipedia', url:WIKI('Supply_and_demand'), len:'Article · 20 min read', date:'2026-05-09',
+    desc:'The core price-determination model: demand and supply curves, equilibrium, shifts and elasticity.',
+    tags:['supply and demand','economics','equilibrium','elasticity','markets'], views:1800000, likes:9000, rating:4.2, ratings:260, hy:140, hn:25,
+    comments:['Good diagrams, a bit dry.'] },
+  { id:'macro', title:'Macroeconomics', type:'tutorial', subject:'economics', level:'Intermediate', source:'Khan Academy', url:'https://www.khanacademy.org/economics-finance-domain/macroeconomics', len:'8 units · exercises', date:'2021-03-22',
+    desc:'GDP, inflation, aggregate demand and supply, and monetary and fiscal policy, with practice exercises.',
+    tags:['macroeconomics','economics','gdp','inflation','monetary policy'], views:3000000, likes:41000, rating:4.6, ratings:990, hy:420, hn:35,
+    comments:['Very helpful for my AP exam.','Clear explanations of monetary policy.'] },
+  { id:'ccecon', title:'Crash Course Economics', type:'video', subject:'economics', level:'Beginner', source:'CrashCourse', url:CC, len:'35 episodes · 6 h', date:'2015-07-08',
+    desc:'Episodes on markets, inflation, banking, trade, recessions and economic systems.',
+    tags:['economics','inflation','banking','trade','markets'], views:5500000, likes:110000, rating:4.4, ratings:1400, hy:380, hn:70,
+    comments:['Entertaining and useful.','Some episodes feel a bit biased.'] },
+
+  { id:'owl', title:'Purdue OWL: Grammar', type:'article', subject:'language', level:'Beginner', source:'Purdue OWL', url:'https://owl.purdue.edu/owl/general_writing/grammar/index.html', len:'Guide · 30 pages', date:'2025-01-20',
+    desc:'Concise guides to English grammar, punctuation, sentence clarity and academic citation styles.',
+    tags:['english','grammar','writing','punctuation','citation'], views:7100000, likes:60000, rating:4.7, ratings:1500, hy:700, hn:40,
+    comments:['My go-to writing reference. Excellent.','Helpful citation guides.'] }
+];
+
+const SYN = {
+  'ml':['machine learning','neural network'], 'ai':['machine learning','neural network','deep learning'],
+  'machine learning':['neural network','deep learning','data science'], 'deep learning':['neural network','machine learning'],
+  'neural network':['deep learning','machine learning'], 'dna':['genetics','genes'], 'genetics':['dna','inheritance'],
+  'calculus':['derivatives','integrals'], 'derivative':['calculus'], 'integral':['calculus','integration'],
+  'programming':['python','coding'], 'coding':['programming','python'], 'code':['programming'],
+  'web':['html','css','web development'], 'website':['html','css','web development'], 'database':['sql','dbms'], 'db':['sql','database'],
+  'dbms':['database','sql'], 'oop':['classes','inheritance','java oop'], 'object oriented':['oop','classes','inheritance'],
+  'stats':['statistics','probability'], 'statistics':['probability','data analysis'], 'ww2':['world war ii'], 'wwii':['world war ii'],
+  'econ':['economics'], 'management':['economics'], 'plants':['photosynthesis'], 'chem':['chemistry'], 'trig':['trigonometry','unit circle'],
+  'algorithm':['data structures','big-o','sorting'], 'algorithms':['data structures','big-o','sorting'],
+  'matrix':['linear algebra','matrices'], 'matrices':['linear algebra'], 'vectors':['linear algebra'],
+  'light':['electromagnetic spectrum','optics'], 'cell':['cells','organelles'], 'evolution':['genetics','biology'],
+  'money':['economics','banking','inflation'], 'grammar':['english','writing'], 'writing':['grammar','english'],
+  'quantum':['quantum mechanics'], 'elements':['periodic table'], 'git':['version control'], 'notes':['pdf'],
+  'interview':['algorithms','data structures','big-o'], 'data science':['python','pandas','statistics'], 'science':['physics','chemistry','biology']
+};
+const TRENDING = ['python tutorial','java oop','dbms notes','machine learning','web development','calculus','photosynthesis','supply and demand'];
+const NAMES = ['Aarav','Mei','Rohit','Fatima','Diego','Priya','Noah','Zara','Kenji','Amara','Ishaan','Sofia','Omar','Ananya'];
+const AV_COLORS = ['#3c5ee3','#12a37a','#d9830b','#c2417a','#7b5be6','#1597b5','#8a5a2b','#4f9d2d'];
+
+/* ================= Text processing ================= */
+const STOP = new Set('the a an and or of to in on for with by is are it its this that as at be from your you how what about into i my me do does can'.split(' '));
+const norm = s => s.toLowerCase().replace(/[^a-z0-9']+/g, ' ').trim();
+function stem(w) {
+  if (w.length > 4 && w.endsWith('ies')) return w.slice(0, -3) + 'y';
+  if (w.length > 5 && w.endsWith('ing')) return w.slice(0, -3);
+  if (w.length > 4 && w.endsWith('ed')) return w.slice(0, -2);
+  if (w.length > 3 && w.endsWith('s') && !/(ss|us|is)$/.test(w)) return w.slice(0, -1);
+  return w;
+}
+function tokenize(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').split(' ').filter(t => t.length >= 2 && !STOP.has(t)).map(stem); }
+function lev1(a, b) {
+  if (a === b) return true;
+  const la = a.length, lb = b.length;
+  if (Math.abs(la - lb) > 1) return false;
+  let i = 0, j = 0, e = 0;
+  while (i < la && j < lb) {
+    if (a[i] === b[j]) { i++; j++; continue; }
+    if (++e > 1) return false;
+    if (la > lb) i++; else if (lb > la) j++; else { i++; j++; }
+  }
+  return e + (la - i) + (lb - j) <= 1;
+}
+
+/* Lexicon sentiment with negation and intensifiers, -1..1 */
+const LEX = {
+  great:2, excellent:3, clear:2, clearly:2, helpful:2, amazing:3, best:3, love:3, perfect:3, useful:2, brilliant:3, intuitive:2,
+  easy:1.5, thorough:2, recommend:2, fantastic:3, awesome:3, good:1.5, beautiful:2, beautifully:2, finally:1, understood:1.5,
+  saved:2, engaging:2, fun:1.5, informative:2, accurate:2, rigorous:1.5, classic:1.5, definitive:2, insight:2, worth:1.5, rewarding:2,
+  thank:2, thanks:2, enjoyed:2, nice:1.5, balanced:1.5, organised:1.5, organized:1.5, entertaining:1.5, well:1, like:1, timeless:2, authoritative:2,
+  confusing:-2, boring:-2, wrong:-2.5, outdated:-1.5, dated:-1, bad:-2, terrible:-3, useless:-3, misleading:-3, clickbait:-3, slow:-1,
+  errors:-2, error:-2, hard:-1, poor:-2, waste:-3, shallow:-2, incorrect:-2.5, mistakes:-2, rushed:-1.5, dry:-1, biased:-1.5,
+  abstract:-1, dense:-1, small:-0.5, simplifies:-0.5, worse:-2, worst:-3, hate:-3, broken:-2, unclear:-2, difficult:-1, heavy:-0.5
+};
+const NEGATORS = new Set(['not','no','never',"isn't","wasn't","don't","doesn't","didn't",'hardly',"can't","won't",'nothing','nor']);
+const INTENS = new Set(['very','really','so','extremely','super','highly','incredibly','too']);
+function sentiment(text) {
+  const toks = text.toLowerCase().split(/[^a-z']+/).filter(Boolean);
+  let score = 0;
+  toks.forEach((w, i) => {
+    const v = LEX[w]; if (!v) return;
+    let m = 1;
+    if (NEGATORS.has(toks[i - 1]) || NEGATORS.has(toks[i - 2])) m = -0.8;
+    if (INTENS.has(toks[i - 1])) m *= 1.5;
+    score += v * m;
+  });
+  return Math.tanh(score / 3);
+}
+const sentLabel = s => s > 0.15 ? ['pos', 'Positive'] : s < -0.15 ? ['neg', 'Negative'] : ['neu', 'Neutral'];
+
+/* ================= Index ================= */
+const DF = new Map();
+ITEMS.forEach((it, i) => {
+  const tf = new Map(); let dl = 0;
+  const add = (text, w) => tokenize(text).forEach(t => { tf.set(t, (tf.get(t) || 0) + w); dl += w; });
+  add(it.title, 3); add(it.tags.join(' '), 2); add(SUBJ[it.subject].name, 1.5); add(it.source, 1); add(it.desc, 1); add(TYPE[it.type].label, 1);
+  it._tf = tf; it._dl = dl; it._tokens = [...tf.keys()];
+  tf.forEach((_, t) => DF.set(t, (DF.get(t) || 0) + 1));
+  it.baseComments = it.comments.map((t, j) => {
+    const s = sentiment(t);
+    return { t, by: NAMES[(i * 3 + j) % NAMES.length], s, stars: Math.max(1, Math.min(5, Math.round(it.rating + s * 0.8))), up: 3 + ((i * 7 + j * 5) % 40), ago: 2 + ((i * 3 + j * 11) % 60) };
+  });
+  it.call = SUBJ[it.subject].dewey + '.' + String(i + 1).padStart(2, '0');
+});
+const N = ITEMS.length, K1 = 1.2, B = 0.75;
+const AVGDL = ITEMS.reduce((a, it) => a + it._dl, 0) / N;
+const G_LIKE = ITEMS.reduce((a, it) => a + it.likes, 0) / ITEMS.reduce((a, it) => a + it.views, 0);
+const G_RATING = ITEMS.reduce((a, it) => a + it.rating, 0) / N;
+const MAX_VIEWS = Math.max(...ITEMS.map(it => it.views));
+const LIKE_M = 20000;
+const ENG_REF = Math.max(...ITEMS.map(it => (it.likes + LIKE_M * G_LIKE) / (it.views + LIKE_M)));
+const byId = Object.fromEntries(ITEMS.map(it => [it.id, it]));
+document.getElementById('suggest').innerHTML = [...new Set(ITEMS.flatMap(it => it.tags))].sort().map(t => `<option value="${t}"></option>`).join('');
+
+/* ================= Per-viewer state ================= */
+const STORE_KEY = 'gyaansetu.v1';
+const SEED_THREADS = [
+  { id: 't1', title: 'What is the difference between a list and a tuple in Python?', body: 'I keep mixing them up. When should I use each one?', by: 'Ananya', subject: 'cs', votes: 14, ago: '3 h ago',
+    answers: [{ by: 'Rohit', t: 'Lists are mutable, so you can add or change items. Tuples are immutable, which makes them good for fixed records and as dictionary keys.', ago: '2 h ago' }] },
+  { id: 't2', title: 'Best way to revise DBMS normalisation before exams?', body: '1NF, 2NF, 3NF and BCNF all blur together for me. Any resources or tricks?', by: 'Ishaan', subject: 'cs', votes: 9, ago: '1 day ago',
+    answers: [{ by: 'Priya', t: 'Work through one messy table and normalise it step by step. The db-book slides on GyaanSetu have a good worked example.', ago: '20 h ago' }] },
+  { id: 't3', title: 'Why does the chain rule work?', body: 'I can apply it but I do not get the intuition behind multiplying derivatives.', by: 'Mei', subject: 'math', votes: 21, ago: '2 days ago', answers: [] },
+  { id: 't4', title: 'How do C4 plants avoid photorespiration?', body: 'Our textbook mentions bundle sheath cells but I am confused about the steps.', by: 'Zara', subject: 'biology', votes: 6, ago: '4 days ago', answers: [] }
+];
+let S = { user: null, liked: {}, ratings: {}, reviews: {}, feedback: {}, opens: {}, saved: {}, completed: {}, searches: [], goals: null, threads: null, tvotes: {}, rvotes: {}, points: 0 };
+try { const s = JSON.parse(localStorage.getItem(STORE_KEY)); if (s) S = Object.assign(S, s); } catch (e) {}
+if (!S.goals) S.goals = [
+  { id: 'g1', text: 'Finish Python basics: loops and functions', day: 'Mon', done: true },
+  { id: 'g2', text: 'Watch Essence of Calculus, chapters 1–3', day: 'Wed', done: false },
+  { id: 'g3', text: 'Practise 10 SQL JOIN questions', day: 'Fri', done: false }
+];
+if (!S.threads) S.threads = JSON.parse(JSON.stringify(SEED_THREADS));
+function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch (e) {} }
+function award(n) { S.points += n; }
+
+/* ================= Ranking ================= */
+const DEFAULT_W = { rel: 40, rating: 20, feedback: 15, eng: 15, pop: 10, personal: 5 };
+let W = { ...DEFAULT_W };
+const SIGNALS = [
+  ['rel', 'Relevance', '#3c4fe3'], ['rating', 'Rating', '#f4a31d'], ['feedback', 'Sentiment & feedback', '#14966a'],
+  ['eng', 'Likes per view', '#c2417a'], ['pop', 'Views', '#7a86a8'], ['personal', 'For you', '#1597b5']
+];
+
+function parseQuery(q) {
+  const raw = norm(q || '');
+  if (!raw) return null;
+  const toks = tokenize(raw);
+  if (!toks.length) return null;
+  const terms = new Map(toks.map(t => [t, 1]));
+  const padded = ' ' + raw.replace(/'/g, '') + ' ';
+  const expanded = [];
+  for (const [key, rel] of Object.entries(SYN)) {
+    if (!padded.includes(' ' + key + ' ')) continue;
+    rel.forEach(p => {
+      if (padded.includes(' ' + p + ' ')) return;
+      expanded.push(p);
+      tokenize(p).forEach(t => { if (!terms.has(t)) terms.set(t, 0.45); });
+    });
+  }
+  const words = raw.split(' ').filter(w => w.length >= 2 && /^[a-z0-9]+$/.test(w) && !STOP.has(w));
+  return { raw, toks, terms, expanded: [...new Set(expanded)], words };
+}
+function relevance(it, q) {
+  let s = 0; const matched = new Set();
+  for (const [t, qw] of q.terms) {
+    let f = it._tf.get(t) || 0, dfT = DF.get(t) || 0;
+    if (!f && t.length >= 3) {
+      let best = 0, bestTok = null;
+      for (const tok of it._tokens) {
+        let v = 0;
+        if (tok.startsWith(t)) v = it._tf.get(tok) * 0.7;
+        else if (t.length >= 5 && lev1(t, tok)) v = it._tf.get(tok) * 0.55;
+        if (v > best) { best = v; bestTok = tok; }
+      }
+      if (best) { f = best; dfT = DF.get(bestTok) || 1; }
+    }
+    if (!f) continue;
+    if (qw === 1) matched.add(t);
+    const idf = Math.log(1 + (N - dfT + 0.5) / (dfT + 0.5));
+    s += qw * idf * (f * (K1 + 1)) / (f + K1 * (1 - B + B * it._dl / AVGDL));
+  }
+  if (!s) return 0;
+  if (q.toks.length > 1 && (' ' + norm(it.title + ' ' + it.tags.join(' ')) + ' ').includes(' ' + q.raw + ' ')) s *= 1.3;
+  return s * (0.5 + 0.5 * matched.size / new Set(q.toks).size);
+}
+function live(it) {
+  const r = S.ratings[it.id], fb = S.feedback[it.id];
+  const mine = (S.reviews[it.id] || []);
+  return {
+    views: it.views + (S.opens[it.id] || 0),
+    likes: it.likes + (S.liked[it.id] ? 1 : 0),
+    rSum: it.rating * it.ratings + (r || 0), rCount: it.ratings + (r ? 1 : 0),
+    hy: it.hy + (fb === 'yes' ? 1 : 0), hn: it.hn + (fb === 'no' ? 1 : 0),
+    comments: it.baseComments.concat(mine)
+  };
+}
+function profile() {
+  const subj = {}, tags = {}; let n = 0;
+  ITEMS.forEach(it => {
+    const w = (S.liked[it.id] ? 1 : 0) + ((S.ratings[it.id] || 0) >= 4 ? 1 : 0) + (S.saved[it.id] ? 1 : 0) + (S.completed[it.id] ? 1 : 0);
+    if (!w) return;
+    n += w; subj[it.subject] = (subj[it.subject] || 0) + w;
+    it.tags.forEach(t => tags[t] = (tags[t] || 0) + w);
+  });
+  return n ? { subj, tags, n } : null;
+}
+function signals(it, L, prof) {
+  const likeS = (L.likes + LIKE_M * G_LIKE) / (L.views + LIKE_M);
+  const bay = (G_RATING * 25 + L.rSum) / (25 + L.rCount);
+  const sSum = L.comments.reduce((a, c) => a + c.s, 0);
+  const sentPart = (sSum / (L.comments.length + 1) + 1) / 2;
+  const helpful = (L.hy + 1) / (L.hy + L.hn + 2);
+  let personal = 0;
+  if (prof) {
+    const sm = (prof.subj[it.subject] || 0) / prof.n;
+    const tm = it.tags.reduce((a, t) => a + (prof.tags[t] ? 1 : 0), 0) / it.tags.length;
+    personal = Math.min(1, 0.5 * sm + 0.8 * tm);
+  }
+  return {
+    rating: Math.max(0, (bay - 1) / 4), feedback: 0.6 * sentPart + 0.4 * helpful,
+    eng: Math.min(1, likeS / ENG_REF), pop: Math.log10(L.views + 1) / Math.log10(MAX_VIEWS + 1), personal,
+    _bay: bay, _helpful: helpful, _sent: sSum / Math.max(1, L.comments.length),
+    _pos: L.comments.filter(c => c.s > 0.15).length / Math.max(1, L.comments.length)
+  };
+}
+function blend(sig, hasQuery, hasProfile) {
+  let tot = 0, sum = 0; const parts = {};
+  for (const [k] of SIGNALS) {
+    if (k === 'rel' && !hasQuery) continue;
+    if (k === 'personal' && !hasProfile) continue;
+    tot += W[k]; parts[k] = W[k] * sig[k]; sum += parts[k];
+  }
+  if (!tot) return { score: 0, parts };
+  for (const k in parts) parts[k] /= tot;
+  return { score: sum / tot, parts };
+}
+function scoreItem(it, q, relNorm) {
+  const prof = profile(), L = live(it), sig = signals(it, L, prof);
+  sig.rel = q ? (relNorm || 0) : 0;
+  return { it, L, sig, ...blend(sig, !!q, !!prof) };
+}
+const F = { types: new Set(), subject: '', level: '', rating: 0, pop: 0, sort: 'best' };
+function rank(query, opts = {}) {
+  const q = parseQuery(query);
+  const prof = profile();
+  let rows = ITEMS.map(it => ({ it, relRaw: q ? relevance(it, q) : 0 }));
+  if (q) {
+    const max = Math.max(0, ...rows.map(r => r.relRaw));
+    rows = rows.filter(r => r.relRaw > 0 && r.relRaw >= max * 0.12);
+    rows.forEach(r => r.rel = max ? r.relRaw / max : 0);
+  }
+  const matched = rows.slice();
+  if (!opts.noFilter) rows = rows.filter(({ it }) => {
+    const L = live(it);
+    if (F.types.size && !F.types.has(it.type)) return false;
+    if (F.subject && it.subject !== F.subject) return false;
+    if (F.level && it.level !== F.level) return false;
+    if (F.rating && L.rSum / L.rCount < F.rating) return false;
+    if (F.pop && L.views < F.pop) return false;
+    return true;
+  });
+  rows.forEach(r => {
+    r.L = live(r.it); r.sig = signals(r.it, r.L, prof); r.sig.rel = q ? r.rel : 0;
+    Object.assign(r, blend(r.sig, !!q, !!prof));
+  });
+  const by = {
+    best: (a, b) => b.score - a.score, rating: (a, b) => b.sig._bay - a.sig._bay, likes: (a, b) => b.L.likes - a.L.likes,
+    views: (a, b) => b.L.views - a.L.views, newest: (a, b) => b.it.date.localeCompare(a.it.date)
+  }[opts.sort || F.sort];
+  rows.sort(by);
+  return { q, rows, matched, prof };
+}
+const qualityLabel = s => s >= 0.85 ? ['Excellent', 'var(--good)'] : s >= 0.72 ? ['Very good', 'var(--good)'] : s >= 0.58 ? ['Good', 'var(--warn)'] : ['Fair', 'var(--bad)'];
+
+/* ================= Rendering helpers ================= */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1).replace(/\.0$/, '') + 'M' : n >= 1e3 ? (n / 1e3).toFixed(n >= 1e4 ? 0 : 1).replace(/\.0$/, '') + 'k' : String(n);
+const ic = (id, extra = '') => `<svg class="i" ${extra} aria-hidden="true"><use href="#${id}"/></svg>`;
+const sic = (paths, size = 24) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+const starStr = v => { const f = Math.round(v); return '★'.repeat(f) + '☆'.repeat(5 - f); };
+const initials = n => (n || '?').trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+const avColor = n => AV_COLORS[[...(n || '')].reduce((a, c) => a + c.charCodeAt(0), 0) % AV_COLORS.length];
+function highlighter(q) {
+  if (!q || !q.words.length) return s => esc(s);
+  const terms = [...new Set(q.words.flatMap(w => [w, stem(w)]))].filter(t => t.length >= 2).sort((a, b) => b.length - a.length);
+  const re = new RegExp('(?<![&#\\w])(' + terms.join('|') + ')[a-z]*', 'gi');
+  return s => esc(s).replace(re, m => `<mark>${m}</mark>`);
+}
+function rng(seed) { let h = 2166136261; for (const c of seed) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return () => { h ^= h << 13; h ^= h >>> 17; h ^= h << 5; return ((h >>> 0) % 1000) / 1000; }; }
+function thumb(it, wide) {
+  const W0 = wide ? 320 : 160, H0 = wide ? 180 : 100, cx = W0 / 2, cy = H0 / 2 - 2, k = wide ? 1.7 : 1;
+  const col = SUBJ[it.subject].color, r = rng(it.id);
+  let pat = '';
+  for (let j = 0; j < 7; j++) pat += `<circle cx="${(r() * W0).toFixed(1)}" cy="${(r() * H0).toFixed(1)}" r="${(10 + r() * (wide ? 80 : 42)).toFixed(1)}" fill="#fff" fill-opacity="${(0.05 + r() * 0.09).toFixed(2)}"/>`;
+  const S2 = n => (n * k).toFixed(1);
+  const g = {
+    video: `<circle cx="${cx}" cy="${cy}" r="${S2(17)}" fill="#fff" fill-opacity=".95"/><path d="M${cx - 5 * k} ${cy - 8 * k} L${cx + 9 * k} ${cy} L${cx - 5 * k} ${cy + 8 * k} Z" fill="${col}"/>`,
+    pdf: `<g transform="translate(${cx} ${cy}) scale(${k})"><path d="M-14 -19 h20 l8 8 v30 h-28 Z" fill="#fff" fill-opacity=".95"/><path d="M6 -19 v8 h8" fill="none" stroke="${col}" stroke-width="1.5"/>${[0, 1, 2, 3].map(i => `<rect x="-9" y="${-6 + i * 6}" width="${i === 3 ? 10 : 18}" height="2.2" rx="1" fill="${col}" fill-opacity=".7"/>`).join('')}</g>`,
+    article: `<g transform="translate(${cx} ${cy}) scale(${k})">${[0, 1, 2, 3].map(i => `<rect x="-22" y="${-14 + i * 9}" width="${i === 0 ? 44 : i === 3 ? 26 : 40}" height="${i === 0 ? 5 : 3.5}" rx="1.8" fill="#fff" fill-opacity="${i === 0 ? .95 : .8}"/>`).join('')}</g>`,
+    image: `<g transform="translate(${cx} ${cy}) scale(${k})"><rect x="-22" y="-16" width="44" height="32" rx="3" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="10" cy="-7" r="4" fill="#fff"/><path d="M-19 13 L-6 -2 L3 7 L9 2 L19 13 Z" fill="#fff" fill-opacity=".9"/></g>`,
+    tutorial: `<g transform="translate(${cx} ${cy}) scale(${k})">${[0, 1, 2].map(i => `<rect x="-20" y="${-13 + i * 10}" width="7" height="7" rx="1.5" fill="${i < 2 ? '#fff' : 'none'}" stroke="#fff" stroke-width="1.6"/><rect x="-9" y="${-11 + i * 10}" width="${28 - i * 5}" height="3.4" rx="1.7" fill="#fff" fill-opacity=".85"/>`).join('')}</g>`
+  }[it.type];
+  return `<svg viewBox="0 0 ${W0} ${H0}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(TYPE[it.type].label)} thumbnail for ${esc(it.title)}"><rect width="${W0}" height="${H0}" fill="${col}"/><rect width="${W0}" height="${H0}" fill="#0b1a4a" fill-opacity=".28"/>${pat}${g}<text x="${8 * k}" y="${H0 - 8 * k}" font-family="JetBrains Mono, monospace" font-size="${wide ? 12 : 8.5}" fill="#fff" fill-opacity=".9">${esc(it.call + ' · ' + TYPE[it.type].code)}</text></svg>`;
+}
+const sbar = parts => `<div class="sbar" aria-hidden="true">${SIGNALS.filter(([k]) => parts[k] != null).map(([k, , c]) => `<i style="width:${(parts[k] * 100).toFixed(1)}%;background:${c}"></i>`).join('')}</div>`;
+const typeTag = t => `<span class="tag ${t}">${TYPE[t].label}</span>`;
+function tileHTML(r) {
+  const { it, L } = r, avg = L.rSum / L.rCount;
+  return `<button class="tile" data-open="${it.id}"><div class="th">${thumb(it)}</div><div class="tb">
+    <div class="tt">${esc(it.title)}</div>
+    <div class="meta">${typeTag(it.type)}<span>${esc(it.source)}</span></div>
+    <div class="meta"><span class="stars">★</span><span class="mono">${avg.toFixed(1)}</span><span>(${fmt(L.rCount)})</span><span>·</span><span>${fmt(L.views)} views</span></div>
+  </div></button>`;
+}
+let tt;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(tt); tt = setTimeout(() => t.hidden = true, 2400); }
+const userName = () => S.user?.name || 'Guest';
+function greeting() { const h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
+
+/* Tiny safe markdown: ## headings, - / 1. lists, **bold**, `code` */
+function md(text) {
+  const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`([^`]+)`/g, '<code>$1</code>');
+  const out = []; let list = null;
+  const close = () => { if (list) { out.push(`</${list}>`); list = null; } };
+  for (const raw of text.split('\n')) {
+    const line = raw.trimEnd();
+    let m;
+    if (!line.trim()) { close(); continue; }
+    if ((m = line.match(/^#{1,4}\s+(.*)/))) { close(); out.push(`<h4>${inline(m[1])}</h4>`); }
+    else if ((m = line.match(/^\s*[-*•]\s+(.*)/))) { if (list !== 'ul') { close(); out.push('<ul>'); list = 'ul'; } out.push(`<li>${inline(m[1])}</li>`); }
+    else if ((m = line.match(/^\s*\d+[.)]\s+(.*)/))) { if (list !== 'ol') { close(); out.push('<ol>'); list = 'ol'; } out.push(`<li>${inline(m[1])}</li>`); }
+    else { close(); out.push(`<p>${inline(line)}</p>`); }
+  }
+  close();
+  return `<div class="md">${out.join('')}</div>`;
+}
+
+/* ================= AI (Claude via the page's sample capability) ================= */
+const AI = { fn: null, state: 'connecting', note: '' };
+const aiReady = (window.claude && window.claude.use ? window.claude.use('sample').catch(() => null) : Promise.resolve(null)).then(f => {
+  AI.fn = f; AI.state = f ? 'on' : 'off'; if (!f) AI.note = 'AI is available when this page is opened in Claude. Offline mode is active.';
+  refreshAIStatus(); return f;
+});
+function aiErr(e) {
+  switch (e && e.code) {
+    case 'not_granted': case 'sampling_disabled': case 'not_declared': case 'capability_disabled': case 'capability_removed':
+      AI.fn = null; AI.state = 'off'; AI.note = 'AI is not allowed for this page, so offline mode is used.'; refreshAIStatus(); return { off: true, msg: AI.note };
+    case 'cancelled': return { msg: 'Stopped.' };
+    case 'rate_limited': return { msg: 'Too many AI requests right now. Wait a minute and try again.' };
+    case 'session_expired': return { msg: 'Sign in to Claude again to use the AI assistant.' };
+    case 'refused': return { msg: 'The assistant declined this request. Try rephrasing it.' };
+    case 'prompt_too_large': return { msg: 'This material is too long for one request. Try a shorter file or paste a section.' };
+    case 'invalid_json': return { msg: 'The answer came back in an unexpected format. Try again.' };
+    case 'images_unavailable': case 'image_rejected': return { msg: 'This image could not be sent to the AI. Try a JPEG or PNG under 20 MB.' };
+    default: return { msg: 'The AI service had a problem. Try again.' };
+  }
+}
+function aiStatusHTML() {
+  const cls = AI.state === 'on' ? 'on' : AI.state === 'off' ? 'off' : '';
+  const label = AI.state === 'on' ? 'Claude AI connected' : AI.state === 'off' ? 'Offline mode' : 'Connecting to AI…';
+  return `<span class="aistatus ${cls}" id="aiStatus" title="${esc(AI.note)}"><i></i>${label}</span>`;
+}
+function refreshAIStatus() { const el = $('aiStatus'); if (el) el.outerHTML = aiStatusHTML(); }
+
+/* Offline helpers: extractive summary, cloze quiz, sentence retrieval */
+function sentences(text) { return (text.replace(/\s+/g, ' ').match(/[^.!?]+[.!?]+|[^.!?]+$/g) || []).map(s => s.trim()).filter(s => s.split(' ').length >= 5); }
+function keywords(text, n = 10) {
+  const tf = {};
+  text.toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').split(' ').filter(w => w.length > 3 && !STOP.has(w)).forEach(w => tf[w] = (tf[w] || 0) + 1);
+  return Object.entries(tf).sort((a, b) => b[1] - a[1]).slice(0, n).map(e => e[0]);
+}
+function extractive(text, n) {
+  const ss = sentences(text); const kw = keywords(text, 25); const kws = new Set(kw);
+  const scored = ss.map((s, i) => ({ s, i, v: s.toLowerCase().split(/[^a-z0-9]+/).filter(w => kws.has(w)).length / Math.sqrt(s.split(' ').length) + (i === 0 ? .3 : 0) }));
+  return scored.sort((a, b) => b.v - a.v).slice(0, n).sort((a, b) => a.i - b.i).map(x => x.s);
+}
+
+/* ================= Router ================= */
+const VIEWS = ['home', 'results', 'detail', 'assistant', 'dashboard', 'community', 'login'];
+const ST = { view: 'home', query: '', detailId: null, from: 'results', aiPath: null, thread: null, authTab: 'login' };
+function go(view, opts = {}) {
+  if (view === 'detail' && opts.id) { if (ST.view !== 'detail') ST.from = ST.view; ST.detailId = opts.id; S.opens[opts.id] = (S.opens[opts.id] || 0) + 1; save(); }
+  ST.view = view;
+  VIEWS.forEach(v => $('v-' + v).hidden = v !== view);
+  document.querySelectorAll('[data-go]').forEach(b => b.classList.toggle('on', b.dataset.go === view || (view === 'detail' && b.dataset.go === 'results')));
+  $('nav').classList.toggle('onhome', view === 'home');
+  $('hq').value = ST.query;
+  renderView();
+  renderUser();
+  if (!opts.keepScroll) window.scrollTo({ top: 0 });
+}
+function renderView() { ({ home: renderHome, results: renderResults, detail: renderDetail, assistant: renderAssistant, dashboard: renderDashboard, community: renderCommunity, login: renderLogin })[ST.view](); }
+function search(q) {
+  ST.query = (q || '').trim(); ST.aiPath = null;
+  if (ST.query) { S.searches = [{ q: ST.query, ts: Date.now() }, ...S.searches.filter(s => s.q.toLowerCase() !== ST.query.toLowerCase())].slice(0, 12); save(); }
+  go('results');
+}
+function renderUser() {
+  $('userSlot').innerHTML = S.user
+    ? `<button class="userchip" data-go="dashboard"><span class="avatar">${esc(initials(S.user.name))}</span><span>Hi, ${esc(S.user.name.split(' ')[0])}</span></button>`
+    : `<button class="authbtn" data-go="login">Login / Sign up</button><button class="userchip" data-go="login" aria-label="Login" style="display:none"></button>`;
+  if (!S.user && matchMedia('(max-width: 760px)').matches) $('userSlot').innerHTML = `<button class="userchip" data-go="login" aria-label="Login or sign up"><span class="avatar">${ic('i-user')}</span></button>`;
+}
+
+/* ================= Home ================= */
+function renderHome() {
+  const counts = {}; ITEMS.forEach(it => counts[it.subject] = (counts[it.subject] || 0) + 1);
+  const top = rank('', { noFilter: true, sort: 'best' }).rows.slice(0, 4);
+  const prof = profile();
+  const recs = prof ? rank('', { noFilter: true }).rows.filter(r => !S.saved[r.it.id] && !S.completed[r.it.id] && r.sig.personal > 0).sort((a, b) => (b.sig.personal + b.score) - (a.sig.personal + a.score)).slice(0, 4) : [];
+  $('v-home').innerHTML = `
+  <div class="hero"><div class="wrap heroin">
+    <div>
+      <h1>Discover the <em>Best</em> Educational Content with AI</h1>
+      <p class="tagline">Search • Explore • Learn • Grow</p>
+      <form class="bigsearch" id="bigSearch" role="search">
+        <input id="bq" type="search" list="suggest" autocomplete="off" placeholder="Search for any topic… (e.g. Python, Calculus, Photosynthesis)" aria-label="Search for any topic">
+        <button type="submit">${ic('i-search')}<span>Search</span></button>
+      </form>
+      <div class="quicktypes">
+        ${[['video', 'Videos'], ['pdf', 'Notes & PDFs'], ['article', 'Articles'], ['tutorial', 'Tutorials'], ['image', 'Images']].map(([t, l]) => `<button data-qtype="${t}" style="--c:${TYPE[t].color}">${ic(TYPE[t].icon)}${l}</button>`).join('')}
+      </div>
+    </div>
+    <div class="heroart" aria-hidden="true">${heroArt()}</div>
+  </div></div>
+  <div class="wrap">
+    <div class="homegrid">
+      <div class="card pad">
+        <div class="sectionhead"><h2>Popular Subjects</h2><button class="btn ghost sm" data-go="results">Explore all</button></div>
+        <div class="subjects">${Object.entries(SUBJ).map(([k, s]) => `<button class="subj" data-subject="${k}" style="--c:${s.color}"><span class="ic">${sic(s.icon)}</span>${s.name}<small>${counts[k] || 0} ${counts[k] === 1 ? 'resource' : 'resources'}</small></button>`).join('')}</div>
+      </div>
+      <div class="card pad">
+        <div class="sectionhead"><h2>Trending Searches</h2></div>
+        <ol class="trend">${TRENDING.slice(0, 6).map((t, i) => `<li><button data-q="${esc(t)}"><span class="n">${String(i + 1).padStart(2, '0')}</span>${esc(t)}<span class="ct">${rank(t, { noFilter: true }).rows.length} results</span></button></li>`).join('')}</ol>
+      </div>
+    </div>
+    ${recs.length ? `<div class="sectionhead"><h2>Recommended for you</h2><span class="small muted">Based on what you liked, saved and rated</span></div><div class="tiles" style="margin-bottom:24px">${recs.map(tileHTML).join('')}</div>` : ''}
+    <div class="sectionhead"><h2>Top-ranked resources</h2><span class="small muted">Ranked by ratings, sentiment, likes and views</span></div>
+    <div class="tiles">${top.map(tileHTML).join('')}</div>
+    <div class="sectionhead" style="margin-top:28px"><h2>More ways to learn</h2></div>
+    <div class="features">
+      <button class="feature" data-go="assistant" style="--c:#3c4fe3"><span class="ic">${ic('i-ai')}</span><span><b>AI Study Assistant</b><span>Upload notes or a PDF and get summaries, key points, quizzes and answers.</span></span></button>
+      <button class="feature" data-go="dashboard" style="--c:#12a37a"><span class="ic">${ic('i-calendar')}</span><span><b>Study Planner</b><span>Plan weekly goals and let AI suggest a plan from your interests.</span></span></button>
+      <button class="feature" data-go="community" style="--c:#d9830b"><span class="ic">${ic('i-community')}</span><span><b>Community Forum</b><span>Ask questions, answer others, and get AI-drafted answers.</span></span></button>
+      <button class="feature" data-go="dashboard" data-anchor="leaderboard" style="--c:#c2417a"><span class="ic">${ic('i-trophy')}</span><span><b>Leaderboard</b><span>Earn points for reviews, answers and finished resources.</span></span></button>
+    </div>
+    <footer class="foot"><span><b>GyaanSetu</b> · Bridging the gap between students and knowledge.</span><span>Prototype. Resources link to real open sources; engagement figures are sample data.</span></footer>
+  </div>`;
+  $('bigSearch').onsubmit = e => { e.preventDefault(); search($('bq').value); };
+}
+function heroArt() {
+  return `<svg viewBox="0 0 340 260"><defs><radialGradient id="glow"><stop offset="0" stop-color="#ffd76a" stop-opacity=".75"/><stop offset="1" stop-color="#ffd76a" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="268" cy="62" r="62" fill="url(#glow)"/>
+  <ellipse cx="165" cy="238" rx="140" ry="12" fill="#3346e0" opacity=".08"/>
+  <rect x="40" y="186" width="240" height="46" rx="7" fill="#2b47d6"/><rect x="48" y="194" width="224" height="10" rx="3" fill="#e9edff"/><rect x="48" y="210" width="224" height="3" rx="1.5" fill="#8fa2ff"/>
+  <rect x="62" y="142" width="210" height="44" rx="7" fill="#eef1ff"/><rect x="62" y="142" width="22" height="44" rx="6" fill="#5b74ff"/><rect x="92" y="152" width="170" height="6" rx="3" fill="#c9d2ff"/><rect x="92" y="166" width="120" height="6" rx="3" fill="#c9d2ff"/>
+  <rect x="50" y="104" width="220" height="38" rx="7" fill="#1a2c80"/><rect x="58" y="112" width="204" height="8" rx="3" fill="#ffffff" opacity=".9"/><rect x="230" y="104" width="12" height="38" fill="#ffc847"/>
+  <path d="M160 34 L262 70 L160 106 L58 70 Z" fill="#0b1233" stroke="#5b74ff" stroke-width="2"/>
+  <path d="M100 86 V112 C100 124 128 132 160 132 C192 132 220 124 220 112 V86 L160 106 Z" fill="#111d52"/>
+  <path d="M160 70 L236 80 V120" stroke="#ffc847" stroke-width="3" fill="none"/><circle cx="236" cy="124" r="6" fill="#ffc847"/>
+  <circle cx="268" cy="58" r="20" fill="#ffd76a"/><path d="M262 76 h12 v9 h-12z" fill="#cfd6f3"/><path d="M268 50 v10 M263 60 h10" stroke="#e0a400" stroke-width="2"/>
+  ${[[268, 24, 268, 14], [296, 36, 304, 30], [240, 36, 232, 30], [302, 60, 312, 60], [234, 60, 224, 60]].map(([a, b, c, d]) => `<path d="M${a} ${b} L${c} ${d}" stroke="#ffd76a" stroke-width="3" stroke-linecap="round"/>`).join('')}
+  </svg>`;
+}
+
+/* ================= Results ================= */
+function renderResults() {
+  const res = rank(ST.query);
+  const { q, rows, matched } = res;
+  const tc = {}, sc = {}; matched.forEach(({ it }) => { tc[it.type] = (tc[it.type] || 0) + 1; sc[it.subject] = (sc[it.subject] || 0) + 1; });
+  const hl = highlighter(q);
+  const ratingOpt = (v, l) => `<label class="opt"><input type="radio" name="fr" value="${v}" ${F.rating === v ? 'checked' : ''}><span class="stars">${'★'.repeat(Math.floor(v || 0))}</span>${l}</label>`;
+  const sortOpt = (v, l) => `<label class="opt"><input type="radio" name="fs" value="${v}" ${F.sort === v ? 'checked' : ''}>${l}</label>`;
+  const wide = matchMedia('(min-width: 901px)').matches;
+  $('v-results').innerHTML = `<div class="wrap resgrid">
+    <details class="card filters" id="filtersBox" ${wide ? 'open' : ''}>
+      <summary>Filters</summary>
+      <div class="fbody">
+        <div class="fgroup"><span class="lbl">Content Type</span>
+          <label class="opt"><input type="checkbox" data-ftype="all" ${F.types.size ? '' : 'checked'}>All<span class="ct">${matched.length}</span></label>
+          ${Object.entries(TYPE).map(([k, t]) => `<label class="opt"><input type="checkbox" data-ftype="${k}" ${F.types.has(k) ? 'checked' : ''}>${t.label}<span class="ct">${tc[k] || 0}</span></label>`).join('')}
+        </div>
+        <div class="fgroup"><label class="lbl" for="fSubject">Subject</label>
+          <select class="field" id="fSubject"><option value="">All Subjects</option>${Object.entries(SUBJ).map(([k, s]) => `<option value="${k}" ${F.subject === k ? 'selected' : ''}>${s.name} (${sc[k] || 0})</option>`).join('')}</select>
+        </div>
+        <div class="fgroup"><span class="lbl">Rating</span>${ratingOpt(0, 'Any rating')}${ratingOpt(4.5, '4.5 & above')}${ratingOpt(4, '4 & above')}${ratingOpt(3, '3 & above')}</div>
+        <div class="fgroup"><span class="lbl">Sort By</span>${sortOpt('best', 'Relevance (best match)')}${sortOpt('views', 'Most viewed')}${sortOpt('rating', 'Highest rated')}${sortOpt('likes', 'Most liked')}${sortOpt('newest', 'Newest')}</div>
+        <details>
+          <summary class="lbl" style="cursor:pointer;font-size:12px;font-weight:800">Advanced filters & ranking</summary>
+          <div class="fbody" style="padding:12px 0 0">
+            <div class="fgroup"><label class="lbl" for="fLevel">Level</label><select class="field" id="fLevel"><option value="">Any level</option>${['Beginner', 'Intermediate', 'Advanced'].map(l => `<option ${F.level === l ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+            <div class="fgroup"><label class="lbl" for="fPop">Popularity</label><select class="field" id="fPop">${[[0, 'Any number of views'], [100000, '100k+ views'], [1000000, '1M+ views'], [5000000, '5M+ views']].map(([v, l]) => `<option value="${v}" ${F.pop === v ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+            <div class="fgroup"><span class="lbl">Ranking weights</span><div class="weights">${SIGNALS.map(([k, l, c]) => `<div class="weight"><span class="sw" style="background:${c}"></span><label for="w-${k}">${l}</label><output id="o-${k}">${W[k]}</output><input type="range" id="w-${k}" min="0" max="50" value="${W[k]}" data-w="${k}"></div>`).join('')}</div></div>
+            <div class="formula">score = Σ wᵢ·sᵢ / Σ wᵢ<br>sᵢ scaled 0–1. Relevance applies when you search; "For you" after you like, save or rate.</div>
+            <button class="btn ghost sm" id="resetW" type="button" style="justify-self:start">Restore default weights</button>
+          </div>
+        </details>
+        <button class="btn sm" id="resetF" type="button">Reset filters</button>
+      </div>
+    </details>
+    <div>
+      <div class="reshead">
+        <div><h1>${q ? `Search Results for “${esc(ST.query)}”` : 'Explore all resources'}</h1><div class="small muted" aria-live="polite">Found ${rows.length} ${rows.length === 1 ? 'result' : 'results'}${res.prof ? ' · personalised' : ''}</div></div>
+        <div class="acts">${q && rows.length > 1 ? `<button class="btn primary sm" id="aiPathBtn">${ic('i-ai')}Build AI learning path</button>` : ''}</div>
+      </div>
+      ${q && q.expanded.length ? `<p class="expandnote">Also searching related concepts: ${q.expanded.map(e => `<b>${esc(e)}</b>`).join(', ')}</p>` : ''}
+      <div id="aiPathBox">${ST.aiPath ? aiPathHTML() : ''}</div>
+      ${rows.length ? `<ol class="results">${rows.map((r, i) => resultHTML(r, i, hl)).join('')}</ol>` :
+        `<div class="card empty"><h3>No resources match ${q ? '“' + esc(ST.query) + '”' : 'these filters'}.</h3><p class="muted">Try a broader topic or reset the filters. Popular: ${TRENDING.slice(0, 4).map(t => `<button class="btn ghost sm" data-q="${esc(t)}">${esc(t)}</button>`).join('')}</p><button class="btn" data-action="resetF">Reset filters</button></div>`}
+      <p class="note">Engagement figures (views, likes, ratings and seed reviews) are sample data for this prototype. Your likes, ratings, saves and reviews are stored in this browser.</p>
+    </div>
+  </div>`;
+  bindResults();
+}
+function resultHTML(r, i, hl) {
+  const { it, L, sig } = r, avg = L.rSum / L.rCount; const [ql, qc] = qualityLabel(r.score);
+  return `<li class="result">
+    <button class="th" data-open="${it.id}" aria-label="Open ${esc(it.title)}">${thumb(it)}</button>
+    <div class="rb">
+      <span class="rank">#${i + 1}</span>
+      <div class="rt"><button data-open="${it.id}">${hl(it.title)}</button></div>
+      <div class="src">${ic(TYPE[it.type].icon)}${esc(it.source)} · ${SUBJ[it.subject].name} · ${it.level}</div>
+      <p class="desc">${hl(it.desc)}</p>
+      <div class="st"><span><span class="stars">★</span> <span class="mono">${avg.toFixed(1)}</span> (${fmt(L.rCount)})</span><span><span class="mono">${fmt(L.views)}</span> views</span><span><span class="mono">${fmt(L.likes)}</span> likes</span><span class="pill ${sentLabel(sig._sent)[0]}">${Math.round(sig._pos * 100)}% positive</span></div>
+    </div>
+    <div class="side">
+      ${typeTag(it.type)}
+      <div class="qchip" title="Quality score"><b>${Math.round(r.score * 100)}<small>/100</small></b><span style="color:${qc}">${ql}</span></div>
+      ${sbar(r.parts)}
+      <button class="iconbtn" data-save="${it.id}" aria-pressed="${!!S.saved[it.id]}" aria-label="${S.saved[it.id] ? 'Remove from library' : 'Save to library'}">${ic('i-bookmark')}</button>
+    </div>
+  </li>`;
+}
+function bindResults() {
+  const v = $('v-results');
+  v.querySelectorAll('[data-ftype]').forEach(c => c.onchange = () => {
+    const t = c.dataset.ftype;
+    if (t === 'all') F.types.clear(); else if (c.checked) F.types.add(t); else F.types.delete(t);
+    renderResults();
+  });
+  $('fSubject').onchange = e => { F.subject = e.target.value; renderResults(); };
+  $('fLevel').onchange = e => { F.level = e.target.value; renderResults(); };
+  $('fPop').onchange = e => { F.pop = +e.target.value; renderResults(); };
+  v.querySelectorAll('[name=fr]').forEach(c => c.onchange = () => { F.rating = +c.value; renderResults(); });
+  v.querySelectorAll('[name=fs]').forEach(c => c.onchange = () => { F.sort = c.value; renderResults(); });
+  v.querySelectorAll('[data-w]').forEach(s => s.oninput = () => { W[s.dataset.w] = +s.value; $('o-' + s.dataset.w).textContent = s.value; clearTimeout(bindResults.t); bindResults.t = setTimeout(() => { const open = v.querySelector('.fbody details').open; renderResults(); v.querySelector('.fbody details').open = open; }, 120); });
+  $('resetW').onclick = () => { W = { ...DEFAULT_W }; renderResults(); v.querySelector('.fbody details').open = true; };
+  $('resetF').onclick = resetFilters;
+  const ap = $('aiPathBtn'); if (ap) ap.onclick = buildPath;
+}
+function resetFilters() { F.types.clear(); F.subject = ''; F.level = ''; F.rating = 0; F.pop = 0; F.sort = 'best'; renderResults(); }
+
+/* AI learning path */
+function aiPathHTML() {
+  const p = ST.aiPath;
+  if (p.loading) return `<div class="aipath"><h3>${ic('i-ai')}AI learning path</h3><span class="thinking"><span class="dots"><i></i><i></i><i></i></span>Reading the top results and ordering them for you…</span></div>`;
+  return `<div class="aipath"><h3>${ic('i-ai')}AI learning path for “${esc(p.q)}” <span class="small muted" style="font-weight:600">${p.offline ? '· offline ordering' : '· by Claude'}</span></h3>
+    ${p.intro ? `<p class="small">${esc(p.intro)}</p>` : ''}
+    <ol>${p.steps.map(s => `<li><button data-open="${s.id}">${esc(byId[s.id].title)}</button> <span class="tag ${byId[s.id].type}">${TYPE[byId[s.id].type].label}</span><p>${esc(s.why)}</p></li>`).join('')}</ol>
+    ${p.err ? `<p class="notice">${esc(p.err)}</p>` : ''}
+  </div>`;
+}
+async function buildPath() {
+  const res = rank(ST.query); const cands = res.rows.slice(0, 10);
+  ST.aiPath = { loading: true, q: ST.query }; $('aiPathBox').innerHTML = aiPathHTML();
+  const offline = (err) => {
+    const order = { Beginner: 0, Intermediate: 1, Advanced: 2 };
+    const steps = cands.slice(0, 5).sort((a, b) => order[a.it.level] - order[b.it.level] || b.score - a.score).slice(0, 4)
+      .map(r => ({ id: r.it.id, why: `${r.it.level} ${TYPE[r.it.type].label.toLowerCase()} with a quality score of ${Math.round(r.score * 100)}.` }));
+    return { q: ST.query, offline: true, intro: 'Ordered from beginner to advanced, best-scored first.', steps, err };
+  };
+  const f = await aiReady;
+  if (!AI.fn) { ST.aiPath = offline(f ? '' : AI.note); $('aiPathBox').innerHTML = aiPathHTML(); return; }
+  const list = cands.map(r => ({ id: r.it.id, title: r.it.title, type: r.it.type, level: r.it.level, source: r.it.source, quality: Math.round(r.score * 100), about: r.it.desc }));
+  try {
+    const out = await AI.fn.json(`You are GyaanSetu's study guide. A learner searched for "${ST.query}". From the candidate resources below, choose 3 to 5 and order them into a learning path, from where to start to where to finish. Prefer high quality scores, mix content types where it helps, and move from beginner to advanced.
+Reply with only JSON in this shape: {"intro": "one sentence on how to use the path", "steps": [{"id": "resource id from the list", "why": "one sentence on why this step comes here"}]}
+
+Candidates:
+${JSON.stringify(list)}`, { modelTier: 'quick' });
+    const steps = (out && Array.isArray(out.steps) ? out.steps : []).filter(s => s && byId[String(s.id)] && cands.some(c => c.it.id === String(s.id))).map(s => ({ id: String(s.id), why: String(s.why || '') }));
+    ST.aiPath = steps.length ? { q: ST.query, intro: String(out.intro || ''), steps } : offline('The AI answer did not match the results, so an offline ordering is shown.');
+  } catch (e) { const r = aiErr(e); ST.aiPath = offline(r.msg); }
+  if (ST.view === 'results') $('aiPathBox').innerHTML = aiPathHTML();
+}
+
+/* ================= Detail ================= */
+function renderDetail() {
+  const it = byId[ST.detailId]; if (!it) return go('results');
+  const q = parseQuery(ST.query);
+  let relNorm = 0;
+  if (q) { const rows = rank(ST.query, { noFilter: true }).rows; const r = rows.find(x => x.it.id === it.id); relNorm = r ? r.sig.rel : 0; }
+  const r = scoreItem(it, q, relNorm); const { L, sig } = r;
+  const avg = L.rSum / L.rCount, score = Math.round(r.score * 100); const [ql, qc] = qualityLabel(r.score);
+  const checks = [
+    [q ? relNorm >= 0.5 : true, q ? 'Relevant to your search' : `Matches ${SUBJ[it.subject].name}`],
+    [sig.eng >= 0.45, 'High user engagement'], [sig._pos >= 0.6, 'Positive feedback'],
+    [sig._bay >= 4.4, 'Highly rated'], [VERIFIED.has(it.source), 'Verified source']
+  ];
+  const dist = [5, 4, 3, 2, 1].map(k => Math.exp(-((k - avg) ** 2) / 0.9)); const dsum = dist.reduce((a, b) => a + b, 0);
+  const mine = S.ratings[it.id] || 0;
+  const reviews = L.comments.slice().sort((a, b) => (b.mine ? 1 : 0) - (a.mine ? 1 : 0) || b.up - a.up);
+  const related = rank(it.tags.slice(0, 3).join(' '), { noFilter: true }).rows.filter(x => x.it.id !== it.id).slice(0, 4);
+  const raw = { rel: q ? `matches “${esc(ST.query)}”` : '', rating: `${avg.toFixed(2)} ★ · ${L.rCount.toLocaleString()} ratings`, feedback: `${Math.round(sig._pos * 100)}% positive · ${Math.round(sig._helpful * 100)}% helpful`, eng: `${(L.likes / L.views * 100).toFixed(2)}% liked`, pop: `${fmt(L.views)} views`, personal: 'your interests' };
+  const C = 2 * Math.PI * 52;
+  $('v-detail').innerHTML = `<div class="wrap" style="padding-bottom:48px">
+    <button class="btn ghost back" data-back>${ic('i-back')}Back to ${ST.from === 'results' ? 'results' : ST.from}</button>
+    <div class="card dtop">
+      <div class="dmedia">${thumb(it, true)}</div>
+      <div class="dinfo">
+        <div class="src small muted" style="display:flex;gap:8px;align-items:center">${typeTag(it.type)}<span class="mono">${it.call}</span></div>
+        <h1>${esc(it.title)}</h1>
+        <div class="meta"><span>${ic(TYPE[it.type].icon)} ${esc(it.source)}</span><span>·</span><span>${SUBJ[it.subject].name}</span><span>·</span><span>${it.level}</span></div>
+        <div class="meta"><span class="stars">${starStr(avg)}</span><b class="mono" style="color:var(--ink)">${avg.toFixed(1)}</b><span>(${fmt(L.rCount)} reviews)</span><span>·</span><span>${fmt(L.views)} views</span><span>·</span><span>${fmt(L.likes)} likes</span></div>
+        <div class="dacts">
+          ${it.url ? `<a class="btn primary" href="${esc(it.url)}" target="_blank" rel="noopener">${ic(TYPE[it.type].icon)}${TYPE[it.type].cta}</a>` : `<span class="btn" aria-disabled="true">Sample item · no link</span>`}
+          <button class="btn" data-save="${it.id}" aria-pressed="${!!S.saved[it.id]}">${ic('i-bookmark')}${S.saved[it.id] ? 'Saved' : 'Save'}</button>
+          <button class="btn like" data-like="${it.id}" aria-pressed="${!!S.liked[it.id]}">${ic('i-heart')}${S.liked[it.id] ? 'Liked' : 'Like'}</button>
+          <button class="btn" data-complete="${it.id}" aria-pressed="${!!S.completed[it.id]}">${ic('i-done')}${S.completed[it.id] ? 'Completed' : 'Mark complete'}</button>
+          <button class="btn" data-askai="${it.id}">${ic('i-ai')}Ask AI about this</button>
+        </div>
+      </div>
+    </div>
+    <div class="dgrid">
+      <div class="card pad">
+        <h2>Content Details</h2>
+        <dl class="kv">
+          <dt>Type</dt><dd>${TYPE[it.type].label}</dd><dt>Subject</dt><dd>${SUBJ[it.subject].name}</dd><dt>Source</dt><dd>${esc(it.source)}${VERIFIED.has(it.source) ? ' <span class="pill pos" style="margin-left:6px">verified</span>' : ''}</dd>
+          <dt>Duration / size</dt><dd>${esc(it.len)}</dd><dt>Level</dt><dd>${it.level}</dd><dt>Updated</dt><dd>${new Date(it.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long' })}</dd>
+          <dt>Topics</dt><dd>${it.tags.map(t => `<button class="btn ghost sm" style="padding:0 6px 0 0" data-q="${esc(t)}">#${esc(t)}</button>`).join(' ')}</dd>
+        </dl>
+        <h2 style="margin-top:18px">Description</h2>
+        <p>${esc(it.desc)}</p>
+      </div>
+      <div class="card pad">
+        <h2>Quality Score</h2>
+        <div class="gaugewrap">
+          <svg class="gauge" viewBox="0 0 120 120" role="img" aria-label="Quality score ${score} out of 100">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--sunk)" stroke-width="10"/>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="${qc}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${(C * r.score).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/>
+            <text x="60" y="62" text-anchor="middle" font-size="30" font-weight="800" fill="var(--ink)">${score}</text>
+            <text x="60" y="80" text-anchor="middle" font-size="11" fill="var(--muted)">/100</text>
+          </svg>
+          <b style="color:${qc}">${ql}</b>
+        </div>
+        <ul class="checks">${checks.map(([ok, l]) => `<li class="${ok ? 'ok' : 'no'}">${ic(ok ? 'i-check' : 'i-x')}${l}</li>`).join('')}</ul>
+        <details style="margin-top:12px"><summary class="small" style="cursor:pointer;font-weight:800;color:var(--accent)">How this score is calculated</summary>
+          <div class="tablewrap"><table class="breakdown"><thead><tr><th>Signal</th><th class="num">sᵢ</th><th class="num">wᵢ</th><th class="num">Points</th></tr></thead>
+          <tbody>${SIGNALS.filter(([k]) => r.parts[k] != null).map(([k, l, c]) => `<tr><td><span style="color:${c}">●</span> ${l}<br><span class="small muted">${raw[k]}</span></td><td class="num">${sig[k].toFixed(2)}</td><td class="num">${W[k]}</td><td class="num">${(r.parts[k] * 100).toFixed(1)}</td></tr>`).join('')}</tbody>
+          <tfoot><tr><td colspan="3"><b>Total</b></td><td class="num"><b>${(r.score * 100).toFixed(1)}</b></td></tr></tfoot></table></div>
+        </details>
+      </div>
+      <div class="card pad" style="grid-column:1/-1">
+        <h2>User Ratings & Feedback</h2>
+        <div class="reviewtop">
+          <div class="bigrate"><b>${avg.toFixed(1)}</b><div class="stars">${starStr(avg)}</div><div class="small muted">${L.rCount.toLocaleString()} ratings · ${Math.round(sig._pos * 100)}% positive comments</div></div>
+          <div class="dist">${[5, 4, 3, 2, 1].map((k, i) => `<div><span>${k} ★</span><span class="bar"><i style="width:${(dist[i] / dsum * 100).toFixed(0)}%"></i></span><span class="mono muted">${Math.round(dist[i] / dsum * 100)}%</span></div>`).join('')}</div>
+        </div>
+        <form id="reviewForm" style="display:grid;gap:10px;margin-top:18px">
+          <div class="rowbetween"><b>Write a review</b><div class="rateinput" role="group" aria-label="Your rating">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-star="${n}" class="${n <= mine ? 'on' : ''}" aria-label="${n} star${n > 1 ? 's' : ''}" aria-pressed="${n === mine}">★</button>`).join('')}<span class="small muted" style="margin-left:6px">${mine ? 'Your rating: ' + mine : 'Tap to rate'}</span></div></div>
+          <label for="rtext" class="small muted">Tell other learners what worked and what didn't. Comment sentiment feeds into the ranking.</label>
+          <textarea class="field" id="rtext" maxlength="600" placeholder="e.g. Clear explanations, but the exercises need answers."></textarea>
+          <div class="rowbetween"><span id="rsent" class="small muted">Sentiment appears as you type.</span>
+            <span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="small muted">Helpful?</span><button type="button" class="btn sm" data-fb="yes" aria-pressed="${S.feedback[it.id] === 'yes'}">Yes</button><button type="button" class="btn sm" data-fb="no" aria-pressed="${S.feedback[it.id] === 'no'}">No</button><button class="btn primary sm" type="submit">Post review</button></span></div>
+        </form>
+        <ul class="reviews" style="margin-top:16px">${reviews.map((c, i) => { const [cl, lb] = sentLabel(c.s); const key = it.id + ':' + i; const voted = S.rvotes[it.id + ':' + c.t.slice(0, 20)]; return `<li class="review"><span class="avatar" style="--c:${avColor(c.by)}">${esc(initials(c.by))}</span><div>
+          <div class="rh"><b>${esc(c.by)}</b><span class="stars small">${starStr(c.stars || avg)}</span><span class="pill ${cl}">${lb}</span></div>
+          <p>${esc(c.t)}</p>
+          <div class="rf"><span>${c.mine ? 'just now' : c.ago + ' days ago'}</span><button data-rvote="${esc(it.id + ':' + c.t.slice(0, 20))}" aria-pressed="${!!voted}">${ic('i-thumb')} ${(c.up || 0) + (voted ? 1 : 0)}</button></div>
+        </div></li>`; }).join('')}</ul>
+      </div>
+    </div>
+    ${related.length ? `<div class="sectionhead" style="margin-top:24px"><h2>Related resources</h2></div><div class="tiles">${related.map(tileHTML).join('')}</div>` : ''}
+  </div>`;
+  bindDetail(it);
+}
+function bindDetail(it) {
+  const v = $('v-detail');
+  v.querySelectorAll('[data-star]').forEach(b => b.onclick = () => { const n = +b.dataset.star; if (S.ratings[it.id] === n) delete S.ratings[it.id]; else { if (!S.ratings[it.id]) award(2); S.ratings[it.id] = n; } commit(S.ratings[it.id] ? `Rated ${n} ★. Ranking updated.` : 'Rating removed.'); });
+  v.querySelectorAll('[data-fb]').forEach(b => b.onclick = () => { const val = b.dataset.fb; if (S.feedback[it.id] === val) delete S.feedback[it.id]; else S.feedback[it.id] = val; commit('Thanks for the feedback.'); });
+  const rt = $('rtext');
+  rt.oninput = () => { const t = rt.value.trim(); if (!t) { $('rsent').textContent = 'Sentiment appears as you type.'; return; } const s = sentiment(t); const [cl, lb] = sentLabel(s); $('rsent').innerHTML = `Detected sentiment: <span class="pill ${cl}">${lb}</span> <span class="mono">${s.toFixed(2)}</span>`; };
+  $('reviewForm').onsubmit = e => {
+    e.preventDefault(); const t = rt.value.trim();
+    if (!t) { $('rsent').textContent = 'Write a few words before posting.'; rt.focus(); return; }
+    (S.reviews[it.id] = S.reviews[it.id] || []).push({ t, by: S.user ? S.user.name : 'You', s: sentiment(t), stars: S.ratings[it.id] || null, up: 0, mine: true });
+    award(5); commit('Review posted. Ranking updated.');
+  };
+}
+function commit(msg) { save(); renderView(); renderUser(); if (msg) toast(msg); }
+
+/* ================= AI Study Assistant ================= */
+const SAMPLE_NOTES = `Python Basics – Study Notes
+
+Python is a high-level, interpreted programming language known for readable syntax. Code is organised with indentation instead of braces, so consistent spacing matters.
+
+Variables are created by assignment and do not need a declared type. Common data types are int, float, str and bool. Collections include lists (ordered and mutable), tuples (ordered and immutable), sets (unordered with unique items) and dictionaries (key-value pairs).
+
+Control flow uses if, elif and else for decisions. Loops include for loops, which iterate over a sequence such as a list or range, and while loops, which repeat while a condition is true. The break statement exits a loop early and continue skips to the next iteration.
+
+Functions are defined with the def keyword. They can take parameters, return values with return, and have default arguments. Functions help you reuse code and keep programs organised.
+
+Modules let you split code into files and reuse it with import. The standard library includes modules such as math, random, datetime and os.
+
+Errors are handled with try and except blocks so that a program can recover from problems such as invalid input or missing files. Files are opened with the open function, ideally inside a with statement so they close automatically.`;
+const ASSIST = { name: 'Python_Basics_Notes.txt', size: SAMPLE_NOTES.length, kind: 'TXT', text: SAMPLE_NOTES, image: null, resId: null, tab: 'summary', out: {}, chat: [], busy: false, ctl: null, quiz: null };
+function materialPrompt() { return `Study material title: ${ASSIST.name}\n\n<material>\n${ASSIST.text.slice(0, 60000)}\n</material>`; }
+function renderAssistant() {
+  const res = ASSIST.resId ? byId[ASSIST.resId] : null;
+  $('v-assistant').innerHTML = `<div class="wrap appgrid">
+    ${sideNav('assistant')}
+    <div style="min-width:0">
+      <div class="pagehead"><div><h1>AI Study Assistant</h1><p>Ask anything about your study material. Get instant summaries, key points, quizzes and answers.</p></div>${aiStatusHTML()}</div>
+      <div class="card material">
+        <span class="fic" style="background:${ASSIST.image ? 'var(--t-image)' : ASSIST.kind === 'PDF' ? 'var(--t-pdf)' : res ? TYPE[res.type].color : 'var(--t-article)'}">${esc(ASSIST.kind)}</span>
+        <div class="grow"><div class="fname">${esc(ASSIST.name)}</div><div class="small muted">${ASSIST.image ? 'Image · ' + fmt(ASSIST.size) + 'B' : res ? 'GyaanSetu resource · ' + esc(res.source) : ASSIST.kind + ' · ' + fmt(ASSIST.size) + ' characters'}${ASSIST.resId === null && ASSIST.name === 'Python_Basics_Notes.txt' ? ' · sample notes' : ''}</div></div>
+        <div class="mact">
+          <label class="btn primary sm" for="upl" style="cursor:pointer">${ic('i-upload')}Upload new file</label>
+          <input type="file" id="upl" accept=".pdf,.txt,.md,.csv,.json,image/png,image/jpeg,image/webp,image/gif" hidden>
+          <button class="btn sm" id="pasteToggle">Paste text</button>
+        </div>
+        <div style="flex-basis:100%">
+          <div class="srcpick"><select class="field" id="resPick" aria-label="Study a GyaanSetu resource"><option value="">Or study a GyaanSetu resource…</option>${ITEMS.map(x => `<option value="${x.id}" ${ASSIST.resId === x.id ? 'selected' : ''}>${esc(x.title)} (${TYPE[x.type].label})</option>`).join('')}</select><button class="btn sm" id="useSample">Use sample notes</button></div>
+          <div class="pastebox" id="pasteBox" hidden><textarea class="field" id="pasteText" placeholder="Paste lecture notes, a textbook section or an article…"></textarea><button class="btn sm primary" id="usePaste" style="justify-self:start">Use this text</button></div>
+          <div id="uplMsg" class="small muted" style="margin-top:6px"></div>
+        </div>
+      </div>
+      <div class="tabs" role="tablist">
+        ${[['summary', 'Summary'], ['points', 'Key Points'], ['qa', 'Q&A'], ['quiz', 'Quiz']].map(([k, l]) => `<button role="tab" data-tab="${k}" class="${ASSIST.tab === k ? 'on' : ''}" aria-selected="${ASSIST.tab === k}">${l}</button>`).join('')}
+      </div>
+      <div class="card" id="aiPanel">${panelHTML()}</div>
+    </div>
+  </div>`;
+  bindAssistant();
+}
+function panelHTML() {
+  const t = ASSIST.tab;
+  if (t === 'qa') {
+    return `<div class="aiout"><div class="chat" id="chat">${ASSIST.chat.length ? ASSIST.chat.map(m => `<div class="msg ${m.role === 'user' ? 'me' : 'ai'}">${m.role === 'user' ? esc(m.content) : md(m.content)}</div>`).join('') :
+      `<p class="muted">Ask a question about <b>${esc(ASSIST.name)}</b>.</p><div class="suggests">${qaSuggest().map(s => `<button data-suggest="${esc(s)}">${esc(s)}</button>`).join('')}</div>`}
+      ${ASSIST.busy ? `<div class="msg ai" id="liveMsg"><span class="thinking"><span class="dots"><i></i><i></i><i></i></span>Thinking…</span></div>` : ''}</div>
+      ${ASSIST.qaNote ? `<p class="notice">${esc(ASSIST.qaNote)}</p>` : ''}</div>
+      <form class="askbar" id="askForm"><input class="field" id="askIn" autocomplete="off" placeholder="Ask a question about this content…" aria-label="Ask a question"><button class="btn primary" ${ASSIST.busy ? 'disabled' : ''} aria-label="Send">${ic('i-send')}</button>${ASSIST.busy ? `<button type="button" class="btn" id="stopBtn">${ic('i-stop')}Stop</button>` : ''}</form>`;
+  }
+  const o = ASSIST.out[t];
+  const label = { summary: 'Summarise this material', points: 'Extract key points', quiz: 'Generate a quiz' }[t];
+  let body;
+  if (ASSIST.busy) body = `<div id="liveOut">${o && o.text ? md(o.text) : `<span class="thinking"><span class="dots"><i></i><i></i><i></i></span>Thinking…</span>`}</div><button class="btn sm" id="stopBtn" style="justify-self:start">${ic('i-stop')}Stop</button>`;
+  else if (!o) body = `<p class="muted">${t === 'quiz' ? 'Test yourself with multiple-choice questions built from your material.' : 'Get a clear, study-ready breakdown of your material.'}</p><button class="btn primary" id="runBtn" style="justify-self:start">${ic('i-ai')}${label}</button>`;
+  else if (t === 'quiz') body = quizHTML(o) + `<button class="btn sm" id="runBtn" style="justify-self:start">${ic('i-spark')}New quiz</button>`;
+  else body = `<div class="rowbetween"><h3 style="font-size:16px">${t === 'summary' ? 'Summary' : 'Key Points'}</h3><span class="small muted">${o.offline ? 'Offline extract' : 'Written by Claude'}</span></div>${md(o.text)}<button class="btn sm" id="runBtn" style="justify-self:start">${ic('i-spark')}Regenerate</button>`;
+  return `<div class="aiout">${body}${o && o.err ? `<p class="notice">${esc(o.err)}</p>` : ''}</div>`;
+}
+function quizHTML(o) {
+  return `<div class="rowbetween"><h3 style="font-size:16px">Quiz · ${o.items.length} questions</h3><span class="small muted">${o.offline ? 'Offline fill-in-the-blank' : 'Written by Claude'} · score ${o.items.filter(x => x.picked === x.answer).length}/${o.items.filter(x => x.picked != null).length}</span></div>
+  <div class="quiz">${o.items.map((x, i) => `<div class="qitem"><div class="qq">${i + 1}. ${esc(x.q)}</div><div class="qopts">${x.options.map((op, j) => `<button data-qi="${i}" data-qj="${j}" ${x.picked != null ? 'disabled' : ''} class="${x.picked != null ? (j === x.answer ? 'right' : j === x.picked ? 'wrong' : '') : ''}">${String.fromCharCode(65 + j)}. ${esc(op)}</button>`).join('')}</div>${x.picked != null ? `<div class="qwhy">${x.picked === x.answer ? 'Correct.' : 'Not quite.'} ${esc(x.why || '')}</div>` : ''}</div>`).join('')}</div>`;
+}
+function qaSuggest() {
+  const kw = keywords(ASSIST.text, 4);
+  return ['What are the most important ideas here?', kw[0] ? `Explain "${kw[0]}" simply` : 'Explain this simply', 'Give me a real-world example'];
+}
+function bindAssistant() {
+  document.querySelectorAll('#v-assistant [data-tab]').forEach(b => b.onclick = () => { ASSIST.tab = b.dataset.tab; renderAssistant(); });
+  $('upl').onchange = e => { const f = e.target.files[0]; if (f) loadFile(f); };
+  $('pasteToggle').onclick = () => { $('pasteBox').hidden = !$('pasteBox').hidden; if (!$('pasteBox').hidden) $('pasteText').focus(); };
+  $('usePaste').onclick = () => { const t = $('pasteText').value.trim(); if (t.length < 40) { $('uplMsg').textContent = 'Paste at least a few sentences.'; return; } setMaterial({ name: 'Pasted notes', kind: 'TXT', text: t, size: t.length }); };
+  $('useSample').onclick = () => setMaterial({ name: 'Python_Basics_Notes.txt', kind: 'TXT', text: SAMPLE_NOTES, size: SAMPLE_NOTES.length });
+  $('resPick').onchange = e => { if (e.target.value) useResource(e.target.value); };
+  const run = $('runBtn'); if (run) run.onclick = () => runTask(ASSIST.tab);
+  const stop = $('stopBtn'); if (stop) stop.onclick = () => ASSIST.ctl && ASSIST.ctl.abort();
+  const af = $('askForm'); if (af) { af.onsubmit = e => { e.preventDefault(); ask($('askIn').value); }; if (!ASSIST.busy) setTimeout(() => $('askIn') && ASSIST.tab === 'qa' && $('askIn').focus({ preventScroll: true }), 0); }
+  document.querySelectorAll('#v-assistant [data-suggest]').forEach(b => b.onclick = () => ask(b.dataset.suggest));
+  document.querySelectorAll('#v-assistant [data-qi]').forEach(b => b.onclick = () => { const x = ASSIST.out.quiz.items[+b.dataset.qi]; x.picked = +b.dataset.qj; if (x.picked === x.answer) { award(1); save(); } $('aiPanel').innerHTML = panelHTML(); bindAssistant(); });
+}
+function setMaterial(m) {
+  Object.assign(ASSIST, { name: m.name, kind: m.kind, text: m.text || '', size: m.size, image: m.image || null, resId: m.resId || null, out: {}, chat: [], quiz: null, qaNote: '' });
+  renderAssistant(); toast('Study material loaded.');
+}
+function useResource(id) {
+  const it = byId[id];
+  const text = `${it.title}\nSource: ${it.source}\nType: ${TYPE[it.type].label} · Level: ${it.level} · Subject: ${SUBJ[it.subject].name}\n\n${it.desc}\n\nTopics covered: ${it.tags.join(', ')}.\n\nWhat learners say: ${it.baseComments.map(c => c.t).join(' ')}`;
+  setMaterial({ name: it.title, kind: TYPE[it.type].code, text, size: text.length, resId: id });
+}
+async function loadFile(f) {
+  const msg = $('uplMsg'); msg.textContent = 'Reading ' + f.name + '…';
+  try {
+    if (f.type.startsWith('image/')) {
+      const f2 = await aiReady; const lim = f2 ? await f2.limits().catch(() => null) : null;
+      if (!lim || !lim.images) { msg.textContent = 'Image study needs the AI connection, which is not available here. Upload a text or PDF file instead.'; return; }
+      setMaterial({ name: f.name, kind: 'IMG', text: '', size: f.size, image: f }); return;
+    }
+    if (f.size > 25 * 1024 * 1024) { msg.textContent = 'This file is larger than 25 MB. Try a smaller file.'; return; }
+    let text;
+    if (f.type === 'application/pdf' || /\.pdf$/i.test(f.name)) text = await pdfText(f, p => msg.textContent = `Reading PDF… page ${p}`);
+    else text = await f.text();
+    text = text.replace(/\u0000/g, '').trim();
+    if (text.length < 40) { msg.textContent = 'No readable text found in this file. Scanned PDFs need OCR first; try a text-based PDF or paste the text.'; return; }
+    setMaterial({ name: f.name, kind: /\.pdf$/i.test(f.name) ? 'PDF' : 'TXT', text, size: text.length });
+  } catch (e) { msg.textContent = 'This file could not be read. Try a different PDF or a .txt file.'; }
+}
+let pdfLib;
+function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+async function pdfText(file, onPage) {
+  if (!pdfLib) {
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js');
+    pdfLib = window.pdfjsLib;
+  }
+  const doc = await pdfLib.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
+  const out = [];
+  for (let p = 1; p <= Math.min(doc.numPages, 80); p++) {
+    onPage(p); const page = await doc.getPage(p); const c = await page.getTextContent();
+    out.push(c.items.map(i => i.str).join(' '));
+  }
+  return out.join('\n\n');
+}
+async function runTask(t) {
+  if (ASSIST.busy) return;
+  ASSIST.busy = true; ASSIST.out[t] = { text: '' }; $('aiPanel').innerHTML = panelHTML(); bindAssistant();
+  const f = await aiReady;
+  const done = o => { ASSIST.busy = false; ASSIST.ctl = null; ASSIST.out[t] = o; if (ST.view === 'assistant' && ASSIST.tab === t) { $('aiPanel').innerHTML = panelHTML(); bindAssistant(); } };
+  if (!AI.fn) return done(offlineTask(t, f ? '' : AI.note));
+  ASSIST.ctl = new AbortController();
+  const opts = { signal: ASSIST.ctl.signal, cache: false };
+  if (ASSIST.image) opts.images = [ASSIST.image];
+  const mat = ASSIST.image ? 'The attached image is the study material (for example a diagram, notes photo or textbook page). Read it carefully.' : materialPrompt();
+  try {
+    if (t === 'quiz') {
+      const items = await AI.fn.json(`You are GyaanSetu's study assistant. Write 5 multiple-choice questions that test understanding of the study material, mixing recall and application. Each has 4 options and exactly one correct answer.
+Reply with only a JSON array: [{"q": "question", "options": ["A", "B", "C", "D"], "answer": 0, "why": "one-sentence explanation"}] where answer is the 0-based index of the correct option.
+
+${mat}`, opts);
+      const clean = (Array.isArray(items) ? items : []).filter(x => x && x.q && Array.isArray(x.options) && x.options.length >= 2).slice(0, 8)
+        .map(x => ({ q: String(x.q), options: x.options.slice(0, 4).map(String), answer: Math.max(0, Math.min(3, Number(x.answer) || 0)), why: String(x.why || ''), picked: null }));
+      if (!clean.length) throw { code: 'invalid_json' };
+      award(2); save(); return done({ items: clean });
+    }
+    const prompt = t === 'summary'
+      ? `You are GyaanSetu's study assistant. Summarise the study material for a student revising it.
+Format in plain markdown: a 2-3 sentence overview paragraph, then "## Key Concepts" with 4-6 bullet points (bold the term at the start of each), then "## Remember" with one line to memorise. No preamble.
+
+${mat}`
+      : `You are GyaanSetu's study assistant. Extract the most important key points from the study material.
+Format in plain markdown: "## Key Points" with 6-8 bullets, each "**Term**: short explanation", then "## Likely exam questions" with 3 bullets, then "## Common mistakes" with 2 bullets. No preamble.
+
+${mat}`;
+    const { text, truncated } = await AI.fn(prompt, { ...opts, onText: ({ text }) => { const el = $('liveOut'); if (el) el.innerHTML = md(text); ASSIST.out[t].text = text; } });
+    award(1); save();
+    done({ text, err: truncated ? 'The answer was cut short. Try a shorter section of the material.' : '' });
+  } catch (e) {
+    const r = aiErr(e);
+    if (e && e.code === 'cancelled') return done(ASSIST.out[t].text ? { text: ASSIST.out[t].text, err: 'Stopped.' } : undefined);
+    if (r.off || e.code === 'upstream_error' || e.code === 'rate_limited') return done(offlineTask(t, r.msg));
+    done(e && e.text ? { text: e.text, err: r.msg } : { text: '', err: r.msg, failed: true });
+  }
+}
+function offlineTask(t, note) {
+  const text = ASSIST.text || '';
+  if (!text) return { text: '', err: (note ? note + ' ' : '') + 'Image material needs the AI connection.' };
+  const n = note ? note : '';
+  if (t === 'summary') { const s = extractive(text, 4); return { offline: true, text: `${s.join(' ')}\n\n## Key terms\n${keywords(text, 6).map(k => `- **${k}**`).join('\n')}`, err: n }; }
+  if (t === 'points') return { offline: true, text: `## Key Points\n${extractive(text, 7).map(s => '- ' + s).join('\n')}`, err: n };
+  const kws = keywords(text, 14); const ss = sentences(text); const items = [];
+  for (const kw of kws) {
+    const s = ss.find(x => new RegExp('\\b' + kw + '\\b', 'i').test(x) && !items.some(i => i.src === x)); if (!s) continue;
+    const others = kws.filter(k => k !== kw).sort(() => Math.random() - .5).slice(0, 3);
+    const options = [kw, ...others].sort(() => Math.random() - .5);
+    items.push({ src: s, q: 'Fill in the blank: ' + s.replace(new RegExp('\\b' + kw + '\\b', 'i'), '_____'), options, answer: options.indexOf(kw), why: `The original sentence: “${s}”`, picked: null });
+    if (items.length === 5) break;
+  }
+  return { offline: true, items, err: n };
+}
+async function ask(qText) {
+  const qv = (qText || '').trim(); if (!qv || ASSIST.busy) return;
+  ASSIST.chat.push({ role: 'user', content: qv }); ASSIST.busy = true; ASSIST.qaNote = '';
+  $('aiPanel').innerHTML = panelHTML(); bindAssistant();
+  const f = await aiReady;
+  const finish = (content, note) => { ASSIST.busy = false; ASSIST.ctl = null; if (content) ASSIST.chat.push({ role: 'assistant', content }); ASSIST.qaNote = note || ''; if (ST.view === 'assistant') { $('aiPanel').innerHTML = panelHTML(); bindAssistant(); const c = $('chat'); if (c) c.lastElementChild?.scrollIntoView({ block: 'nearest' }); } };
+  const offlineAnswer = () => {
+    const qt = new Set(tokenize(qv)); const ss = sentences(ASSIST.text || '');
+    const best = ss.map(s => ({ s, v: tokenize(s).filter(t => qt.has(t)).length })).filter(x => x.v).sort((a, b) => b.v - a.v).slice(0, 2);
+    return best.length ? `From your material:\n${best.map(b => '- ' + b.s).join('\n')}` : 'I could not find this in your material. Try different words, or connect the AI for a full answer.';
+  };
+  if (!AI.fn) return finish(offlineAnswer(), f ? '' : AI.note);
+  ASSIST.ctl = new AbortController();
+  const rules = `You are GyaanSetu's AI study assistant helping a student with their study material. Answer the student's questions using the material below. If the material does not cover a question, say so briefly, then give a short general answer starting with "Beyond your material:". Keep answers under 160 words, use simple language, and use markdown bullets or **bold** where it helps.
+
+${ASSIST.image ? 'The study material is the attached image.' : materialPrompt()}`;
+  const turns = ASSIST.chat.slice(-10);
+  const opts = { signal: ASSIST.ctl.signal, cache: false, onText: ({ text }) => { const el = $('liveMsg'); if (el) el.innerHTML = md(text); } };
+  if (ASSIST.image) opts.images = [ASSIST.image];
+  try {
+    const { text } = await AI.fn([{ role: 'user', content: rules }, ...turns], opts);
+    award(1); save(); finish(text);
+  } catch (e) {
+    const r = aiErr(e);
+    if (e && e.code === 'cancelled') return finish(e.text || '', 'Stopped.');
+    if (r.off) return finish(offlineAnswer(), r.msg);
+    finish(e && e.text ? e.text : '', r.msg);
+  }
+}
+
+/* ================= Side nav (assistant / dashboard / community) ================= */
+function sideNav(on) {
+  return `<nav class="card sidenav" aria-label="Workspace">${[['home', 'i-home', 'Home'], ['results', 'i-search', 'Search'], ['dashboard', 'i-library', 'My Library', 'library'], ['assistant', 'i-ai', 'AI Assistant'], ['dashboard', 'i-dash', 'Dashboard'], ['community', 'i-community', 'Community']]
+    .map(([v, i, l, a]) => `<button data-go="${v}" ${a ? `data-anchor="${a}"` : ''} class="${v === on && !a ? 'on' : ''}">${ic(i)}${l}</button>`).join('')}</nav>`;
+}
+
+/* ================= Dashboard ================= */
+const LEADERS = [['Ananya', 412], ['Rohit', 365], ['Mei', 298], ['Ishaan', 240], ['Priya', 188], ['Diego', 126]];
+function renderDashboard() {
+  const saved = Object.keys(S.saved).filter(id => byId[id]).sort((a, b) => S.saved[b] - S.saved[a]);
+  const completed = Object.keys(S.completed).filter(id => byId[id]);
+  const subjects = new Set([...saved, ...completed, ...Object.keys(S.liked), ...Object.keys(S.ratings)].filter(id => byId[id]).map(id => byId[id].subject));
+  const prof = profile();
+  const recRows = rank('', { noFilter: true }).rows.filter(r => !S.saved[r.it.id] && !S.completed[r.it.id]).sort((a, b) => (prof ? b.sig.personal - a.sig.personal : 0) || b.score - a.score).slice(0, 3);
+  const goalsDone = S.goals.filter(g => g.done).length;
+  const me = [S.user ? S.user.name : 'You', S.points];
+  const board = [...LEADERS, me].sort((a, b) => b[1] - a[1]);
+  const ago = ts => { const m = Math.round((Date.now() - ts) / 60000); return m < 1 ? 'just now' : m < 60 ? m + ' min ago' : m < 1440 ? Math.round(m / 60) + ' h ago' : Math.round(m / 1440) + ' d ago'; };
+  $('v-dashboard').innerHTML = `<div class="wrap appgrid">
+    ${sideNav('dashboard')}
+    <div style="min-width:0">
+      <div class="pagehead"><div><h1>${greeting()}, ${esc(userName().split(' ')[0])}!</h1><p>Keep learning, keep growing.${S.user ? '' : ' <button class="btn ghost sm" data-go="login">Sign in</button> to personalise your dashboard.'}</p></div></div>
+      <div class="stats">
+        <div class="card stat" style="--c:var(--good)"><span class="ic">${ic('i-bookmark')}</span><div><b>${saved.length}</b><span>Saved resources</span></div></div>
+        <div class="card stat" style="--c:var(--accent)"><span class="ic">${ic('i-done')}</span><div><b>${completed.length}</b><span>Completed</span></div></div>
+        <div class="card stat" style="--c:var(--t-image)"><span class="ic">${ic('i-spark')}</span><div><b>${subjects.size}</b><span>Subjects explored</span></div></div>
+        <div class="card stat" style="--c:var(--warn)"><span class="ic">${ic('i-trophy')}</span><div><b>${S.points}</b><span>Learning points</span></div></div>
+      </div>
+      <div class="dashgrid">
+        <div class="card pad">
+          <div class="sectionhead"><h2>Recent Searches</h2>${S.searches.length ? `<button class="btn ghost sm" id="clearSearches">Clear</button>` : ''}</div>
+          ${S.searches.length ? `<ul class="list">${S.searches.slice(0, 6).map(s => `<li>${ic('i-search')}<span class="grow"><button class="link" data-q="${esc(s.q)}">${esc(s.q)}</button></span><span class="small muted">${ago(s.ts)}</span></li>`).join('')}</ul>` : `<p class="muted">Your searches will appear here. <button class="btn ghost sm" data-go="home">Start searching</button></p>`}
+        </div>
+        <div class="card pad">
+          <div class="sectionhead"><h2>Recommended for You</h2><button class="btn ghost sm" data-go="results">View all</button></div>
+          <ul class="list">${recRows.map(r => `<li><span class="tag ${r.it.type}">${TYPE[r.it.type].label}</span><span class="grow"><button class="link" data-open="${r.it.id}">${esc(r.it.title)}</button></span><span class="small mono">${(r.L.rSum / r.L.rCount).toFixed(1)}★</span></li>`).join('')}</ul>
+          <p class="small muted" style="margin-top:8px">${prof ? 'Based on what you liked, saved, rated and completed.' : 'Like, save or rate resources to personalise these.'}</p>
+        </div>
+        <div class="card pad wide" id="library">
+          <div class="sectionhead"><h2>My Library</h2><span class="small muted">${saved.length} saved · ${completed.length} completed</span></div>
+          ${saved.length ? `<div class="tiles">${saved.map(id => tileHTML(scoreItem(byId[id], null))).join('')}</div>` : `<p class="muted">Save resources with the bookmark button and they will appear here.</p>`}
+        </div>
+        <div class="card pad" id="planner">
+          <div class="sectionhead"><h2>Study Planner</h2><button class="btn sm" id="aiPlan">${ic('i-ai')}Plan my week with AI</button></div>
+          <div class="progress" aria-label="${goalsDone} of ${S.goals.length} goals done"><i style="width:${S.goals.length ? goalsDone / S.goals.length * 100 : 0}%"></i></div>
+          <p class="small muted" style="margin:6px 0 4px">${goalsDone} of ${S.goals.length} goals done this week</p>
+          <ul class="list">${S.goals.map(g => `<li class="goal ${g.done ? 'done' : ''}"><input type="checkbox" id="g-${g.id}" data-goal="${g.id}" ${g.done ? 'checked' : ''}><span class="day">${esc(g.day)}</span><label class="grow" for="g-${g.id}">${esc(g.text)}</label><button class="iconbtn" data-delgoal="${g.id}" aria-label="Delete goal">${ic('i-x')}</button></li>`).join('')}</ul>
+          <form class="addgoal" id="goalForm"><input class="field" id="goalText" placeholder="Add a study goal…" aria-label="New goal"><select class="field" id="goalDay" aria-label="Day">${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => `<option>${d}</option>`).join('')}</select><button class="btn primary">Add</button></form>
+          <p class="small muted" id="planMsg" style="margin-top:6px"></p>
+        </div>
+        <div class="card pad" id="leaderboard">
+          <div class="sectionhead"><h2>Leaderboard</h2><span class="small muted">This week</span></div>
+          <ol class="list lb">${board.map((b, i) => `<li class="${b === me ? 'me' : ''}"><span class="pos">${i + 1}</span><span class="avatar" style="background:${avColor(b[0])};color:#fff;width:28px;height:28px;font-size:11px">${esc(initials(b[0]))}</span><span class="grow">${esc(b[0])}${b === me ? ' (you)' : ''}</span><span class="pts">${b[1]} pts</span></li>`).join('')}</ol>
+          <p class="small muted" style="margin-top:8px">Earn points: review +5, forum answer +5, complete +3, rate +2, AI study +1.</p>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  const cs = $('clearSearches'); if (cs) cs.onclick = () => { S.searches = []; commit('Search history cleared.'); };
+  document.querySelectorAll('[data-goal]').forEach(c => c.onchange = () => { const g = S.goals.find(x => x.id === c.dataset.goal); g.done = c.checked; if (g.done) award(1); commit(g.done ? 'Goal done. Nice work!' : ''); });
+  document.querySelectorAll('[data-delgoal]').forEach(b => b.onclick = () => { S.goals = S.goals.filter(x => x.id !== b.dataset.delgoal); commit('Goal removed.'); });
+  $('goalForm').onsubmit = e => { e.preventDefault(); const t = $('goalText').value.trim(); if (!t) { $('goalText').focus(); return; } S.goals.push({ id: 'g' + Date.now(), text: t, day: $('goalDay').value, done: false }); commit('Goal added.'); };
+  $('aiPlan').onclick = aiPlan;
+}
+async function aiPlan() {
+  const btn = $('aiPlan'), msg = $('planMsg'); btn.disabled = true; msg.innerHTML = `<span class="thinking"><span class="dots"><i></i><i></i><i></i></span>Planning your week…</span>`;
+  const prof = profile();
+  const interests = [...new Set([...S.searches.slice(0, 5).map(s => s.q), ...(prof ? Object.keys(prof.subj).map(k => SUBJ[k].name) : [])])];
+  const cands = (interests.length ? rank(interests.join(' '), { noFilter: true }).rows : rank('', { noFilter: true }).rows).slice(0, 8);
+  const offline = () => cands.slice(0, 5).map((r, i) => ({ id: 'g' + Date.now() + i, text: `${TYPE[r.it.type].cta}: ${r.it.title}`, day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'][i], done: false }));
+  const f = await aiReady; let goals, note = '';
+  if (!AI.fn) { goals = offline(); note = f ? 'Planned offline from your top-ranked resources.' : AI.note; }
+  else {
+    try {
+      const out = await AI.fn.json(`You are GyaanSetu's study planner. Make a realistic 5-day study plan (Mon-Fri, about 45 minutes a day) for a student interested in: ${interests.length ? interests.join(', ') : 'general computer science and maths'}.
+Use these resources where they fit, naming them by title: ${cands.map(r => `"${r.it.title}" (${TYPE[r.it.type].label}, ${r.it.level})`).join('; ')}.
+Reply with only a JSON array of 5 objects: [{"day": "Mon", "text": "one concrete task under 90 characters"}].`, { modelTier: 'quick', cache: false });
+      goals = (Array.isArray(out) ? out : []).filter(g => g && g.text).slice(0, 7).map((g, i) => ({ id: 'g' + Date.now() + i, text: String(g.text).slice(0, 120), day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].includes(g.day) ? g.day : 'Mon', done: false }));
+      if (!goals.length) throw { code: 'invalid_json' };
+      note = 'Plan written by Claude.';
+    } catch (e) { const r = aiErr(e); goals = offline(); note = r.msg + ' Showing an offline plan.'; }
+  }
+  S.goals = [...S.goals.filter(g => !g.done), ...goals]; save();
+  if (ST.view === 'dashboard') { renderDashboard(); $('planMsg').textContent = note; $('planner').scrollIntoView({ block: 'nearest' }); }
+}
+
+/* ================= Community ================= */
+function renderCommunity() {
+  const th = ST.thread ? S.threads.find(t => t.id === ST.thread) : null;
+  $('v-community').innerHTML = `<div class="wrap appgrid">
+    ${sideNav('community')}
+    <div style="min-width:0">
+      <div class="pagehead"><div><h1>Community Forum</h1><p>Ask questions and learn from other students. Stuck? Let AI draft an answer.</p></div>${th ? `<button class="btn" id="backThreads">${ic('i-back')}All discussions</button>` : ''}</div>
+      ${th ? threadHTML(th) : `
+      <form class="card pad" id="askThread" style="display:grid;gap:10px;margin-bottom:16px">
+        <b>Ask a question</b>
+        <input class="field" id="tTitle" maxlength="140" placeholder="What do you want to know?" aria-label="Question title">
+        <textarea class="field" id="tBody" maxlength="1000" placeholder="Add details: what you tried, where you are stuck…" aria-label="Question details"></textarea>
+        <div class="rowbetween"><select class="field" id="tSubj" style="width:auto" aria-label="Subject">${Object.entries(SUBJ).map(([k, s]) => `<option value="${k}">${s.name}</option>`).join('')}</select><button class="btn primary">Post question</button></div>
+      </form>
+      <div class="threads">${S.threads.map(t => `<article class="card thread">
+        <div class="votes"><button data-tvote="${t.id}" aria-pressed="${!!S.tvotes[t.id]}" aria-label="Upvote">${ic('i-up')}</button><b>${t.votes + (S.tvotes[t.id] ? 1 : 0)}</b></div>
+        <div style="min-width:0"><h3><button data-thread="${t.id}">${esc(t.title)}</button></h3><p class="small muted" style="margin-top:4px">${esc(t.body)}</p>
+        <div class="tm"><span class="tag" style="--c:${SUBJ[t.subject].color}">${SUBJ[t.subject].name}</span><span>${esc(t.by)}</span><span>${esc(t.ago)}</span><span>${t.answers.length} ${t.answers.length === 1 ? 'answer' : 'answers'}</span></div></div>
+      </article>`).join('')}</div>
+      <p class="note">Seed discussions are sample content for the prototype. New posts are saved in this browser.</p>`}
+    </div>
+  </div>`;
+  const b = $('backThreads'); if (b) b.onclick = () => { ST.thread = null; renderCommunity(); };
+  const f = $('askThread'); if (f) f.onsubmit = e => {
+    e.preventDefault(); const t = $('tTitle').value.trim();
+    if (t.length < 8) { $('tTitle').focus(); toast('Write a question of at least a few words.'); return; }
+    S.threads.unshift({ id: 't' + Date.now(), title: t, body: $('tBody').value.trim(), by: S.user ? S.user.name : 'You', subject: $('tSubj').value, votes: 0, ago: 'just now', answers: [] });
+    award(5); commit('Question posted.');
+  };
+  document.querySelectorAll('[data-tvote]').forEach(x => x.onclick = () => { const id = x.dataset.tvote; S.tvotes[id] = !S.tvotes[id]; commit(); });
+  document.querySelectorAll('[data-thread]').forEach(x => x.onclick = () => { ST.thread = x.dataset.thread; renderCommunity(); window.scrollTo({ top: 0 }); });
+  if (th) bindThread(th);
+}
+function threadHTML(t) {
+  const rel = rank(t.title, { noFilter: true }).rows.slice(0, 3);
+  return `<article class="card pad">
+    <div class="tm" style="margin:0 0 8px"><span class="tag" style="--c:${SUBJ[t.subject].color}">${SUBJ[t.subject].name}</span><span>${esc(t.by)}</span><span>${esc(t.ago)}</span></div>
+    <h2 style="font-size:20px;margin:0">${esc(t.title)}</h2>
+    ${t.body ? `<p style="margin-top:8px">${esc(t.body)}</p>` : ''}
+    <div class="answers">${t.answers.length ? t.answers.map(a => `<div class="answer ${a.ai ? 'ai' : ''}"><div class="ah"><span class="avatar" style="width:24px;height:24px;font-size:10px;background:${a.ai ? 'var(--accent)' : avColor(a.by)};color:#fff">${a.ai ? 'AI' : esc(initials(a.by))}</span><b>${esc(a.by)}</b><span>${esc(a.ago)}</span>${a.ai ? '<span class="pill neu">AI-drafted</span>' : ''}</div>${md(a.t)}</div>`).join('') : '<p class="muted">No answers yet. Be the first to help.</p>'}</div>
+    <form id="ansForm" style="display:grid;gap:10px;margin-top:16px">
+      <label for="ansText"><b>Your answer</b></label>
+      <textarea class="field" id="ansText" maxlength="1500" placeholder="Explain it the way you would to a friend…"></textarea>
+      <div class="rowbetween"><button type="button" class="btn" id="aiAnswer">${ic('i-ai')}Draft an answer with AI</button><button class="btn primary">Post answer</button></div>
+      <p class="small muted" id="ansMsg"></p>
+    </form>
+    ${rel.length ? `<div style="margin-top:18px"><div class="eyebrow" style="margin-bottom:8px">Resources that may help</div><ul class="list">${rel.map(r => `<li><span class="tag ${r.it.type}">${TYPE[r.it.type].label}</span><span class="grow"><button class="link" data-open="${r.it.id}">${esc(r.it.title)}</button></span><span class="small mono">${Math.round(r.score * 100)}</span></li>`).join('')}</ul></div>` : ''}
+  </article>`;
+}
+function bindThread(t) {
+  $('ansForm').onsubmit = e => {
+    e.preventDefault(); const v = $('ansText').value.trim();
+    if (v.length < 10) { $('ansMsg').textContent = 'Write a slightly longer answer.'; return; }
+    t.answers.push({ by: S.user ? S.user.name : 'You', t: v, ago: 'just now' }); award(5); commit('Answer posted. +5 points');
+  };
+  $('aiAnswer').onclick = async () => {
+    const btn = $('aiAnswer'), msg = $('ansMsg'); btn.disabled = true; msg.innerHTML = `<span class="thinking"><span class="dots"><i></i><i></i><i></i></span>Drafting…</span>`;
+    const f = await aiReady;
+    const rel = rank(t.title + ' ' + t.body, { noFilter: true }).rows.slice(0, 4).map(r => `"${r.it.title}" (${TYPE[r.it.type].label})`).join('; ');
+    if (!AI.fn) { msg.textContent = f ? '' : AI.note; btn.disabled = false; return; }
+    try {
+      const { text } = await AI.fn(`A student asked this on GyaanSetu's study forum. Write a clear, friendly answer under 150 words in plain markdown. If useful, end with one line suggesting one or two of these GyaanSetu resources by title: ${rel}.
+
+Subject: ${SUBJ[t.subject].name}
+Question: ${t.title}
+Details: ${t.body || '(none)'}`, { cache: false, onText: ({ text }) => { $('ansText').value = text; } });
+      $('ansText').value = text;
+      msg.textContent = 'Draft ready. Edit it, then post, or post it as an AI answer.';
+      const postAi = document.createElement('button'); postAi.type = 'button'; postAi.className = 'btn sm'; postAi.textContent = 'Post as AI answer';
+      postAi.onclick = () => { t.answers.push({ by: 'GyaanSetu AI', t: $('ansText').value.trim() || text, ago: 'just now', ai: true }); commit('AI answer posted.'); };
+      msg.append(' ', postAi);
+    } catch (e) { msg.textContent = aiErr(e).msg; }
+    btn.disabled = false;
+  };
+}
+
+/* ================= Login / Sign up (demo) ================= */
+function renderLogin() {
+  const signup = ST.authTab === 'signup';
+  $('v-login').innerHTML = `<div class="auth">
+    <div class="authside">
+      <div class="brand" style="pointer-events:none"><svg viewBox="0 0 32 32" aria-hidden="true" style="width:38px;height:38px"><path d="M16 5 2 11.5 16 18l11-5.1V20h2.4v-8.5z" fill="currentColor"/><path d="M7 15.6V21c0 2.2 4 4 9 4s9-1.8 9-4v-5.4L16 20z" fill="currentColor" opacity=".85"/></svg><b style="font-size:26px">GyaanSetu</b></div>
+      <h2>Learn <span style="color:var(--accent)">Smarter</span>,<br>Not Harder</h2>
+      <ul><li>${ic('i-library')}Access quality resources</li><li>${ic('i-ai')}Get AI-powered suggestions</li><li>${ic('i-dash')}Track your progress</li></ul>
+      <div class="art" aria-hidden="true">${loginArt()}</div>
+    </div>
+    <div class="authform">
+      ${S.user ? `<div class="authcard card pad"><h2>Signed in as ${esc(S.user.name)}</h2><p class="muted">${esc(S.user.email || '')}</p><div class="rowbetween"><button class="btn primary" data-go="dashboard">Go to dashboard</button><button class="btn" id="logout">Sign out</button></div></div>` : `
+      <form class="authcard" id="authForm" novalidate>
+        <div class="authtabs" role="tablist"><button type="button" role="tab" data-auth="login" class="${!signup ? 'on' : ''}" aria-selected="${!signup}">Login</button><button type="button" role="tab" data-auth="signup" class="${signup ? 'on' : ''}" aria-selected="${signup}">Sign Up</button></div>
+        ${signup ? `<div class="fld"><label for="aName">Full name</label><input class="field" id="aName" autocomplete="name" placeholder="Enter your name"></div>` : ''}
+        <div class="fld"><label for="aEmail">Email or phone</label><input class="field" id="aEmail" autocomplete="username" placeholder="Enter your email or phone"></div>
+        <div class="fld"><label for="aPass">Password</label><input class="field" id="aPass" type="password" autocomplete="${signup ? 'new-password' : 'current-password'}" placeholder="Enter your password"></div>
+        <div class="rowbetween"><label class="opt"><input type="checkbox" id="aRemember" checked>Remember me</label>${signup ? '' : '<button type="button" class="btn ghost sm" id="forgot">Forgot password?</button>'}</div>
+        <p class="small" id="aErr" style="color:var(--bad)" role="alert"></p>
+        <button class="btn primary" style="padding:12px">${signup ? 'Create account' : 'Login'}</button>
+        <div class="or">OR</div>
+        <button type="button" class="btn" data-guest>${ic('i-user')}Continue as guest</button>
+        <p class="small muted" style="text-align:center">${signup ? 'Already have an account?' : "Don't have an account?"} <button type="button" class="btn ghost sm" data-auth="${signup ? 'login' : 'signup'}">${signup ? 'Login' : 'Sign up'}</button></p>
+        <p class="notice">Demo sign-in for the prototype. Your password is never stored or sent anywhere; only your display name is saved in this browser.</p>
+      </form>`}
+    </div>
+  </div>`;
+  document.querySelectorAll('[data-auth]').forEach(b => b.onclick = () => { ST.authTab = b.dataset.auth; renderLogin(); });
+  const lo = $('logout'); if (lo) lo.onclick = () => { S.user = null; commit('Signed out.'); };
+  const fp = $('forgot'); if (fp) fp.onclick = () => { $('aErr').textContent = 'Password reset is not part of this demo. Any password works.'; };
+  const g = document.querySelector('[data-guest]'); if (g) g.onclick = () => { S.user = { name: 'Guest Learner', email: '' }; save(); toast('Welcome! You are browsing as a guest.'); go('dashboard'); };
+  const form = $('authForm'); if (form) form.onsubmit = e => {
+    e.preventDefault();
+    const email = $('aEmail').value.trim(), pass = $('aPass').value, nameEl = $('aName');
+    if (nameEl && nameEl.value.trim().length < 2) { $('aErr').textContent = 'Enter your name.'; nameEl.focus(); return; }
+    if (!/^\S+@\S+\.\S+$/.test(email) && !/^\+?\d{8,15}$/.test(email.replace(/[\s-]/g, ''))) { $('aErr').textContent = 'Enter a valid email address or phone number.'; $('aEmail').focus(); return; }
+    if (pass.length < 6) { $('aErr').textContent = 'Password must be at least 6 characters.'; $('aPass').focus(); return; }
+    const guess = email.includes('@') ? email.split('@')[0].replace(/[._\d]+/g, ' ').trim() : 'Learner';
+    const name = nameEl ? nameEl.value.trim() : guess.replace(/\b\w/g, c => c.toUpperCase()) || 'Learner';
+    S.user = { name, email }; $('aPass').value = ''; save();
+    toast(signup ? `Account created. Welcome, ${name.split(' ')[0]}!` : `Welcome back, ${name.split(' ')[0]}!`);
+    go('dashboard');
+  };
+}
+function loginArt() {
+  return `<svg viewBox="0 0 340 230"><ellipse cx="170" cy="216" rx="140" ry="10" fill="#3346e0" opacity=".08"/>
+  <rect x="70" y="170" width="200" height="40" rx="7" fill="#2b47d6"/><rect x="78" y="178" width="184" height="8" rx="3" fill="#e9edff"/>
+  <rect x="90" y="134" width="170" height="36" rx="7" fill="#eef1ff"/><rect x="90" y="134" width="18" height="36" rx="5" fill="#5b74ff"/>
+  <circle cx="170" cy="62" r="20" fill="#f3c7a6"/><path d="M150 58c0-16 10-22 20-22s22 6 20 24c-6-8-14-10-20-10s-14 2-20 8z" fill="#1a1f3d"/>
+  <path d="M136 134c4-34 18-48 34-48s30 14 34 48z" fill="#3c4fe3"/>
+  <rect x="128" y="110" width="84" height="26" rx="3" fill="#cfd6f3"/><rect x="134" y="114" width="72" height="18" rx="2" fill="#0b1233"/><circle cx="170" cy="123" r="3" fill="#8090ff"/>
+  <path d="M286 170c0-30 10-50 14-60M300 110c-12 2-20 10-22 20M300 130c10-2 18-10 20-20M296 150c-10 0-18-6-20-14" stroke="#45cf98" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <rect x="278" y="168" width="30" height="42" rx="5" fill="#17286a"/>
+  <circle cx="60" cy="70" r="5" fill="#ffd76a"/><circle cx="290" cy="50" r="3" fill="#ffd76a"/><circle cx="40" cy="140" r="3" fill="#8090ff"/>
+  </svg>`;
+}
+
+/* ================= Global events ================= */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-go],[data-open],[data-q],[data-subject],[data-qtype],[data-save],[data-like],[data-complete],[data-askai],[data-back],[data-rvote],[data-action]');
+  if (!t) return;
+  const d = t.dataset;
+  if (d.go) { if (d.go === 'community') ST.thread = null; go(d.go); if (d.anchor) setTimeout(() => { const el = $(d.anchor); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 30); return; }
+  if (d.open) { go('detail', { id: d.open }); return; }
+  if (d.q) { search(d.q); return; }
+  if (d.subject) { F.types.clear(); F.subject = d.subject; ST.query = ''; ST.aiPath = null; go('results'); return; }
+  if (d.qtype) { F.types = new Set([d.qtype]); F.subject = ''; const bq = $('bq'); search(bq ? bq.value : ''); return; }
+  if (d.save) { const id = d.save; if (S.saved[id]) { delete S.saved[id]; commit('Removed from your library.'); } else { S.saved[id] = Date.now(); commit('Saved to your library.'); } return; }
+  if (d.like) { const id = d.like; if (S.liked[id]) delete S.liked[id]; else S.liked[id] = true; commit(S.liked[id] ? 'Liked. Ranking updated.' : 'Like removed.'); return; }
+  if (d.complete) { const id = d.complete; if (S.completed[id]) delete S.completed[id]; else { S.completed[id] = Date.now(); award(3); } commit(S.completed[id] ? 'Marked complete. +3 points' : 'Marked as not complete.'); return; }
+  if (d.askai) { useResource(d.askai); ASSIST.tab = 'summary'; go('assistant'); return; }
+  if (d.back) { go(ST.from || 'results'); return; }
+  if (d.rvote) { S.rvotes[d.rvote] = !S.rvotes[d.rvote]; commit(); return; }
+  if (d.action === 'resetF') { resetFilters(); return; }
+});
+$('hSearch').addEventListener('submit', e => { e.preventDefault(); search($('hq').value); $('hq').blur(); });
+let hqT;
+$('hq').addEventListener('input', () => { if (ST.view !== 'results') return; clearTimeout(hqT); hqT = setTimeout(() => { ST.query = $('hq').value.trim(); ST.aiPath = null; renderResults(); }, 180); });
+matchMedia('(max-width: 760px)').addEventListener('change', renderUser);
+
+const START = { home: 'home', search: 'results', explore: 'results', assistant: 'assistant', dashboard: 'dashboard', community: 'community', login: 'login' }[(location.hash || '').slice(1)] || 'home';
+go(START);
+</script>
+
+</body>
+</html>

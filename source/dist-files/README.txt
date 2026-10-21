@@ -18,13 +18,21 @@ QUICK START (only Java is needed - no Maven, no database, no internet)
   If port 8080 is busy, the next free port (8081, 8082, ...) is used automatically.
   Stop the server with Ctrl+C or by closing the window.
 
+DEMO WEBSITE (no server, no install)
+
+  Double-click  demo-website/index.html  to open GyaanSetu in any browser.
+  It runs entirely in the browser; likes, reviews and posts are saved in that browser only.
+  Upload this one file to GitHub Pages or Netlify for a free public link.
+
 WHAT IS IN THIS FOLDER
 
   app/gyaansetu.jar      the application (Java Servlets + JDBC on embedded Tomcat)
   app/lib/               libraries it needs (Tomcat, H2, MySQL driver, PDFBox, Gson, Anthropic SDK)
-  app/web/               the frontend (index.html, css/styles.css, js/app.js)
+  app/web/               the frontend (index.html, css/styles.css, js/app.js) - edit and refresh, no rebuild
+  runtime/               Java 21 for Windows (Windows package only), used automatically
+  demo-website/          single-file browser version of the site
   source/                full source code: backend + frontend + tests (Maven project)
-  docs/                  reference guide: run steps, demo script, file map, ranking maths, judge Q&A
+  docs/                  CUSTOMIZE.md (how to change things) and the reference guide (demo script, file map, judge Q&A)
   Dockerfile             run in Docker or deploy to a cloud host
 
 OPTIONAL SETTINGS (set before starting)
@@ -47,8 +55,9 @@ DOCKER
   docker build -t gyaansetu .
   docker run -p 8080:8080 -v gyaansetu-data:/data gyaansetu
 
-REBUILD FROM SOURCE (needs Maven 3.8+)
+CUSTOMIZE AND REBUILD (needs a Java JDK 17+ and Maven 3.8+)
 
-  cd source
-  mvn package            (runs 18 tests and builds target/gyaansetu.war for standalone Tomcat)
-  ./build-dist.sh        (rebuilds this whole folder)
+  See docs/CUSTOMIZE.md. In short:
+    Windows      : edit files in source\, then run source\build-app.bat (tests, then updates app\)
+    Mac / Linux  : cd source && ./build-dist.sh
+  Frontend-only changes: edit app/web/ and refresh the browser - no rebuild needed.

@@ -10,9 +10,10 @@ cp -r target/lib "$D/app/lib"
 cp -r src/main/webapp "$D/app/web" && rm -rf "$D/app/web/WEB-INF" "$D/app/web/META-INF"
 cp dist-files/README.txt dist-files/START-WINDOWS.bat dist-files/start-mac-linux.sh "dist-files/Start GyaanSetu (Mac).command" dist-files/Dockerfile "$D/"
 chmod +x "$D/start-mac-linux.sh" "$D/Start GyaanSetu (Mac).command"
-cp docs/GyaanSetu-Reference-Guide.md "$D/docs/"
+cp docs/GyaanSetu-Reference-Guide.md docs/CUSTOMIZE.md "$D/docs/"
+mkdir -p "$D/demo-website" && cp demo-website/index.html "$D/demo-website/index.html"
 tar --exclude=./target --exclude='./*.png' -cf - . | (cd "$D/source" && tar -xf -)
-sed -i 's/$/\r/' "$D/START-WINDOWS.bat" "$D/README.txt"
+sed -i 's/$/\r/' "$D/START-WINDOWS.bat" "$D/README.txt" "$D/source/build-app.bat" "$D/source/run.bat" "$D/source/dist-files/START-WINDOWS.bat"
 cp dist-files/render.yaml "$D/" && printf 'runtime/\ngyaansetu-log.txt\nsource/target/\n' > "$D/.gitignore"
 (cd target/dist && rm -f ../GyaanSetu.zip && zip -qr -X ../GyaanSetu.zip GyaanSetu)
 echo "Built target/GyaanSetu.zip"
