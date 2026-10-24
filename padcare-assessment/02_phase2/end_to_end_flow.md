@@ -113,6 +113,7 @@ This turns "the third bad-odour complaint" (C-02) into a visible, rule-driven ev
 - **Recurrence:** the 3rd or later case at the site for the same category within 90 days (2.4).
 - **Scope:** the same issue at **3 or more sites** of one customer.
 - **Duration:** missed collection overdue by **≥ 3 days** past its scheduled date `[A-08]` (threshold to be validated per site type).
+- **Billing cap † (F-12):** billing complaints never exceed **Service-Impacting** (there is no hygiene exposure). A billing recurrence or a multi-site billing issue instead **escalates**: Finance escalation contact + KAM informed.
 
 **Who decides.**
 - The system **proposes** a level from CS's answers to the impact questions: Is there a hygiene exposure now? How many sites/users are affected? Is the service commitment broken? *(Billing:)* Is the amount wrong, or can the customer not process the invoice? † Recurrence and duration are filled in automatically from history and the schedule `[A-02]`.

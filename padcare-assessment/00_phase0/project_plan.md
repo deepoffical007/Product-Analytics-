@@ -11,8 +11,8 @@ Each phase ends with a review gate: the candidate reads the output, confirms or 
 | 2 | End-to-end process, diagram, SLAs | end_to_end_flow, complaint_lifecycle.mmd, sla_matrix | 1 | T1-01…T1-06, T1-D1, C-01, C-04, C-05, C-08 | Done |
 | 3 | Task 1 reasoning + Challenges Map | task1_reasoning, challenges_map | 2 | T1-D2, T1-D3, G-03, C-01…C-08 | Done |
 | 4 | Task 2 walkthroughs + self-critique | task2_walkthroughs, design_review | 2, 3 | T2-01…T2-D2 | Done |
-| 5 | Task 3 intake spec | intake_form_spec, validation_rules, exception_handling | 1, 2, 4 | T3-01…T3-05, T3-D1 | **Done — awaiting review** |
-| 6 | Functional test cases (billing) | test_cases, requirements_traceability | 5 | T3-06, T3-D2 | Not started |
+| 5 | Task 3 intake spec | intake_form_spec, validation_rules, exception_handling | 1, 2, 4 | T3-01…T3-05, T3-D1 | Done |
+| 6 | Functional test cases (billing) | test_cases, requirements_traceability | 5 | T3-06, T3-D2 | **Done — awaiting review** |
 | 7 | Data model + analytics | data_model, analytics_spec | 5 | C-06 | Not started |
 | 8 | Consistency audit | consistency_audit, final_requirements_traceability | 1–7 | G-10, E-01…E-06 | Not started |
 | 9 | Final document | .docx + .pdf | 8 | G-01…G-11 | Not started |

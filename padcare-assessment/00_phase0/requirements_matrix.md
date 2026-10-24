@@ -80,9 +80,9 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 | T3-03 | Exception: status check | Short points | Link-to-existing flow; no new complaint | Matches S-04 | Done |
 | T3-04 | Exception: repeat complaint | Short points | Suggest related; user decides link/recurrence/duplicate | Matches C-02 | Done |
 | T3-05 | Exception: request raised for wrong site or customer | Short points | Customer–site validation; hard error vs warning | Matches S-02 (site moved) | Done |
-| T3-06 | Test cases: 5–6 for one Task 2 complaint, with steps and expected result | Table | Use S-02 (billing) | 5–6 rows; positive + negative | Not started |
+| T3-06 | Test cases: 5–6 for one Task 2 complaint, with steps and expected result | Table | Use S-02 (billing) | 5–6 rows; positive + negative | Done |
 | T3-D1 | Deliverable: fields table then conditions + exceptions in short points | Spec section | As above | Format check | Done |
-| T3-D2 | Deliverable: test cases as a table | Table | As above | Format check | Not started |
+| T3-D2 | Deliverable: test cases as a table | Table | As above | Format check | Done |
 | T3-D3 | Deliverable: Reasoning note — which field or validation was hardest to decide, and why | 3–6 line note | Candidate's genuine answer (see Q-05) | Names one specific field/validation | Done |
 
 ## E. Evaluation criteria (used as audit lenses in Phase 8)
