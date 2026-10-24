@@ -13,8 +13,8 @@ This is separate from the CEMS app in the repo root.
 | 5 Task 3 intake spec | `05_phase5/` | Done |
 | 6 Functional tests | `06_phase6/` | Done |
 | 7 Data model & analytics | `07_phase7/` | Done |
-| 8 Consistency audit | `08_phase8/` | Done, awaiting review |
-| 9 Final document | `09_final/` | Not started |
+| 8 Consistency audit | `08_phase8/` | Done |
+| 9 Final document | `09_final/` | Done, awaiting review — `PadCare_Complaint_Management_Assessment.docx` / `.pdf` |
 | 10 Interview prep | `10_interview/` | Not started |
 
 The decision log, assumptions register, and requirements matrix are living files in `00_phase0/`. Later phases update them in place.

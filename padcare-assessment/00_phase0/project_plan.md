@@ -14,8 +14,8 @@ Each phase ends with a review gate: the candidate reads the output, confirms or 
 | 5 | Task 3 intake spec | intake_form_spec, validation_rules, exception_handling | 1, 2, 4 | T3-01…T3-05, T3-D1 | Done |
 | 6 | Functional test cases (billing) | test_cases, requirements_traceability | 5 | T3-06, T3-D2 | Done |
 | 7 | Data model + analytics | data_model, analytics_spec | 5 | C-06 | Done |
-| 8 | Consistency audit | consistency_audit, final_requirements_traceability | 1–7 | G-10, E-01…E-06 | **Done — awaiting review** |
-| 9 | Final document | .docx + .pdf | 8 | G-01…G-11 | Not started |
+| 8 | Consistency audit | consistency_audit, final_requirements_traceability | 1–7 | G-10, E-01…E-06 | Done |
+| 9 | Final document | .docx + .pdf | 8 | G-01…G-11 | **Done — awaiting review** (draft notes + name placeholders) |
 | 10 | Interview prep | overview, walkthrough script, Q&A | 9 | G-12 | Not started |
 
 ## Notes carried forward

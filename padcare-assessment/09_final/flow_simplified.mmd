@@ -1,0 +1,20 @@
+flowchart TD
+    A["Issue arrives on any channel<br/>WhatsApp · email · call · check-in · KAM · SE on site"] --> B["<b>ST1 INTAKE</b> — whoever receives it, ~2 min<br/>1.1 who logs · 1.2 log · 1.3 validate customer + site<br/>Status New · owner = account CS owner"]
+    B --> C{"Asking about an issue<br/>already raised?"}
+    C -- "Yes, parent found" --> C1["Follow-up on parent case<br/>'customer chased' · NO new case"]
+    C -- "Yes, none found" --> C2["Create the lost case<br/>flag: not logged at receipt"]
+    C -- "No" --> D
+    C2 --> D["<b>ST2 TRIAGE</b> — CS<br/>2.1 history panel · 2.2 classify: Account-level? → Billing? → Failure? → New request?<br/>2.3 duplicate / split · 2.4 repeat check · 2.5 impact severity · 2.6 acknowledge"]
+    D --> E["<b>ST3 ROUTE</b> — 3.1 route by type · 3.2 handoff with checklist<br/>Operational → SE (Ops City Manager if Hygiene-Critical) · Billing → Finance<br/>Request → Ops City Manager · Account-level → KAM<br/>sender stays accountable until receiver accepts"]
+    E -- "not accepted in time" --> E1["4.3 Escalate: manager records a decision"]
+    E1 --> E
+    E --> F["<b>ST4 RESOLVE</b> — resolution owner<br/>4.1 act · 3.3 linked tasks for other teams · 4.2 On Hold only for the customer"]
+    F --> G["4.4 Evidence recorded by type → <b>Awaiting Confirmation</b> (CS)"]
+    G --> H{"<b>ST5 VERIFY</b> 5.1–5.2<br/>Customer response?"}
+    H -- "Confirms / SPOC signed on site" --> I["Closed – Confirmed"]
+    H -- "Rejects" --> F
+    H -- "No reply after 2 reminders" --> J["Closed – No Response"]
+    I --> K{"Issue returns?"}
+    J --> K
+    K -- "5.4 Within 14 days: reopen" --> F
+    K -- "Later" --> L["New case linked<br/>'Recurrence of'"]
