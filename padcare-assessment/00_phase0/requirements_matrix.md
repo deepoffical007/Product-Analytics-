@@ -15,7 +15,7 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 | G-06 | "Quality over volume… Diagrams beat paragraphs. Reasoning beats output." | Concise doc | Tables and diagram over prose; working files stay out of final doc | Page count target 8–12 (working target, not a brief requirement) | Not started |
 | G-07 | "State your assumptions. Whenever the brief is silent… write it down and proceed." | Labelled assumptions inline + register | Tag `[A-xx]` inline wherever an assumption is used | Every `[A-xx]` tag resolves in register | In progress |
 | G-08 | Avoid "ITSM frameworks, P1/P2/P3 tiers, standard CRM screens" | Design vocabulary | PadCare-specific severity names and rules (see D-04) | Search final doc for P1/P2/P3 / ITIL jargon | Not started |
-| G-09 | Avoid "Designing only the happy path" | Exception paths | Exception states in lifecycle; exceptions section in Task 3 | Each lifecycle state has ≥1 exit for failure; Task 3 covers 3 named exceptions | Not started |
+| G-09 | Avoid "Designing only the happy path" | Exception paths | Exception states in lifecycle; exceptions section in Task 3 | Each lifecycle state has ≥1 exit for failure; Task 3 covers 3 named exceptions | In progress |
 | G-10 | Internal consistency: "Task 2's walk-throughs and Task 3's spec actually work inside the design from Task 1. Nothing dangles." | Consistent doc | Phase 8 cross-phase audit | `consistency_audit.md` with zero open issues | Not started |
 | G-11 | If incomplete: "What I finished and what I didn't" note at top | Conditional note | Add only if any task is incomplete at submission | Check before export | Not started |
 | G-12 | Candidate must defend choices in a 30–45 min walkthrough | Interview prep | Phase 10 prep pack; candidate makes the judgement calls | Candidate can explain each decision in `decision_log.md` unaided | Not started |
@@ -24,14 +24,14 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 
 | Req ID | Assessment requirement | Required output | Planned implementation | Validation method | Status |
 |---|---|---|---|---|---|
-| C-01 | Complaints lost between channels (WhatsApp to one CS person invisible to team; lost on leave) | Mechanism for central capture and shared visibility | Single register; mandatory logging by whoever receives it; team queue, not personal inbox | S1–S5 each enter via a named channel and land in the register | Not started |
-| C-02 | Repeat vs new unknown (3rd "bad odour" from same site in two months) | Repeat detection | Related-record search at intake (customer + site + category + window); repeat count shown | Test case: repeat suggestion fires | Not started |
+| C-01 | Complaints lost between channels (WhatsApp to one CS person invisible to team; lost on leave) | Mechanism for central capture and shared visibility | Single register; mandatory logging by whoever receives it; team queue, not personal inbox | S1–S5 each enter via a named channel and land in the register | In progress |
+| C-02 | Repeat vs new unknown (3rd "bad odour" from same site in two months) | Repeat detection | Related-record search at intake (customer + site + category + window); repeat count shown | Test case: repeat suggestion fires | In progress |
 | C-03 | Service requests, status checks, account concerns all called "complaints" | Classification model | Separate record types with separate flows/closure rules | S1–S5 map to distinct types without ambiguity | In progress |
-| C-04 | No clear handoff (billing: CS → Finance → CS; sits in nobody's inbox) | Ownership and handoff rules | One accountable owner; tracked handoff with acknowledgement + escalation | S2 walkthrough shows every handoff with owner and timer | Not started |
-| C-05 | "Resolved" ≠ resolved; no customer-confirmed closure | Closure model | Resolution evidence + Awaiting Customer Confirmation state; reopen path | Test case: cannot close without evidence/confirmation | Not started |
+| C-04 | No clear handoff (billing: CS → Finance → CS; sits in nobody's inbox) | Ownership and handoff rules | One accountable owner; tracked handoff with acknowledgement + escalation | S2 walkthrough shows every handoff with owner and timer | In progress |
+| C-05 | "Resolved" ≠ resolved; no customer-confirmed closure | Closure model | Resolution evidence + Awaiting Customer Confirmation state; reopen path | Test case: cannot close without evidence/confirmation | In progress |
 | C-06 | Can't see patterns (e.g., 40% missed services in one city) | Structured data | Structured category/sub-category, city, site, timestamps; metric definitions | The "40% in one city" question is answerable from fields | Not started |
-| C-07 | Customer has no visibility; "any update?" follow-ups | Customer update mechanism | Proactive updates at defined status changes, by CS (v1); portal deferred | S4 is handled by linking, and the design reduces S4-type volume | Not started |
-| C-08 | Severity by who shouts loudest, not impact | Severity model | Impact-based rules; reporter seniority not an input | Same issue from CXO vs facility manager → same severity | Not started |
+| C-07 | Customer has no visibility; "any update?" follow-ups | Customer update mechanism | Proactive updates at defined status changes, by CS (v1); portal deferred | S4 is handled by linking, and the design reduces S4-type volume | In progress |
+| C-08 | Severity by who shouts loudest, not impact | Severity model | Impact-based rules; reporter seniority not an input | Same issue from CXO vs facility manager → same severity | In progress |
 
 ## S. The five sample complaints (all must be handled)
 
@@ -47,13 +47,13 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 
 | Req ID | Assessment requirement | Required output | Planned implementation | Validation method | Status |
 |---|---|---|---|---|---|
-| T1-01 | Intake: how it enters across channels; who logs it; what's captured | Intake stage in flow + narrative | Channel → logger table (6 channels); minimum capture set | All 6 channels have a named logger | Not started |
-| T1-02 | Classification & triage: what types exist; how severity is decided, and by whom | Classification + severity rules | Type decision table; impact-based severity matrix; named decider | S1–S5 classified; decider named | In progress |
-| T1-03 | Routing & assignment: owner at each stage; when it moves CS → SE → Ops Manager → KAM → Finance | Routing rules | Routing table by type; escalation triggers | Every state has exactly one owner role | Not started |
-| T1-04 | Resolution: what "resolved" looks like per type (call, site visit, credit note) | Resolution evidence by type | Evidence table per record type | Each type has verifiable evidence | Not started |
-| T1-05 | Closure & verification: how to confirm customer is actually satisfied (Challenge #5) | Closure rules | Customer confirmation step; non-response rule; reopen rule | Lifecycle has confirm/reject/no-response exits | Not started |
-| T1-06 | SLAs: reasonable timelines per stage, with explanation | SLA table + rationale | `sla_matrix.md`; response vs resolution separated; all labelled proposals | Every stage has a target + reason | Not started |
-| T1-D1 | Deliverable: flow diagram (clarity over aesthetics) | Diagram | Mermaid → rendered PNG embedded in doc | Readable at A4 width; decision points visible | Not started |
+| T1-01 | Intake: how it enters across channels; who logs it; what's captured | Intake stage in flow + narrative | Channel → logger table (6 channels); minimum capture set | All 6 channels have a named logger | Done |
+| T1-02 | Classification & triage: what types exist; how severity is decided, and by whom | Classification + severity rules | Type decision table; impact-based severity matrix; named decider | S1–S5 classified; decider named | Done |
+| T1-03 | Routing & assignment: owner at each stage; when it moves CS → SE → Ops Manager → KAM → Finance | Routing rules | Routing table by type; escalation triggers | Every state has exactly one owner role | Done |
+| T1-04 | Resolution: what "resolved" looks like per type (call, site visit, credit note) | Resolution evidence by type | Evidence table per record type | Each type has verifiable evidence | Done |
+| T1-05 | Closure & verification: how to confirm customer is actually satisfied (Challenge #5) | Closure rules | Customer confirmation step; non-response rule; reopen rule | Lifecycle has confirm/reject/no-response exits | Done |
+| T1-06 | SLAs: reasonable timelines per stage, with explanation | SLA table + rationale | `sla_matrix.md`; response vs resolution separated; all labelled proposals | Every stage has a target + reason | Done |
+| T1-D1 | Deliverable: flow diagram (clarity over aesthetics) | Diagram | Mermaid → rendered PNG embedded in doc | Readable at A4 width; decision points visible | Done |
 | T1-D2 | Deliverable: short narrative of key decisions, esp. classification, routing, SLAs | Narrative | ~1 page, decision-led | Covers the three named topics | Not started |
 | T1-D3 | Deliverable: Reasoning note — which of the 8 challenges the flow addresses, and how | 3–6 line note | Written after Challenges Map | Mentions all 8 or explains any gap | Not started |
 

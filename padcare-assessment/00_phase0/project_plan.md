@@ -7,8 +7,8 @@ Each phase ends with a review gate: the candidate reads the output, confirms or 
 | Phase | Objective | Deliverables | Depends on | Covers Req IDs | Status |
 |---|---|---|---|---|---|
 | 0 | Extract requirements, set up logs | requirements_matrix, assumptions_register, decision_log, project_plan | — | all (mapping) | Done |
-| 1 | Problem framing, scope, record types | problem_definition, classification_matrix | 0 | C-03, S-01…S-05, T1-02 | **Done — awaiting review** |
-| 2 | End-to-end process, diagram, SLAs | end_to_end_flow, complaint_lifecycle.mmd, sla_matrix | 1 | T1-01…T1-06, T1-D1, C-01, C-04, C-05, C-08 | Not started |
+| 1 | Problem framing, scope, record types | problem_definition, classification_matrix | 0 | C-03, S-01…S-05, T1-02 | Done |
+| 2 | End-to-end process, diagram, SLAs | end_to_end_flow, complaint_lifecycle.mmd, sla_matrix | 1 | T1-01…T1-06, T1-D1, C-01, C-04, C-05, C-08 | **Done — awaiting review** |
 | 3 | Task 1 reasoning + Challenges Map | task1_reasoning, challenges_map | 2 | T1-D2, T1-D3, G-03, C-01…C-08 | Not started |
 | 4 | Task 2 walkthroughs + self-critique | task2_walkthroughs, design_review | 2, 3 | T2-01…T2-D2 | Not started |
 | 5 | Task 3 intake spec | intake_form_spec, validation_rules, exception_handling | 1, 2, 4 | T3-01…T3-05, T3-D1 | Not started |
@@ -17,6 +17,9 @@ Each phase ends with a review gate: the candidate reads the output, confirms or 
 | 8 | Consistency audit | consistency_audit, final_requirements_traceability | 1–7 | G-10, E-01…E-06 | Not started |
 | 9 | Final document | .docx + .pdf | 8 | G-01…G-11 | Not started |
 | 10 | Interview prep | overview, walkthrough script, Q&A | 9 | G-12 | Not started |
+
+## Notes carried forward
+- Phase 9: the detailed flow diagram is too dense for an A4 page. Draw a **simplified top-level diagram** for the document (ST1–ST5 with the main decisions), and link or append the detailed one.
 
 ## Key risks to the submission
 
