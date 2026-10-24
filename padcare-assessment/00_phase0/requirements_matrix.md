@@ -29,7 +29,7 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 | C-03 | Service requests, status checks, account concerns all called "complaints" | Classification model | Separate record types with separate flows/closure rules | S1–S5 map to distinct types without ambiguity | In progress |
 | C-04 | No clear handoff (billing: CS → Finance → CS; sits in nobody's inbox) | Ownership and handoff rules | One accountable owner; tracked handoff with acknowledgement + escalation | S2 walkthrough shows every handoff with owner and timer | In progress |
 | C-05 | "Resolved" ≠ resolved; no customer-confirmed closure | Closure model | Resolution evidence + Awaiting Customer Confirmation state; reopen path | Test case: cannot close without evidence/confirmation | In progress |
-| C-06 | Can't see patterns (e.g., 40% missed services in one city) | Structured data | Structured category/sub-category, city, site, timestamps; metric definitions | The "40% in one city" question is answerable from fields | Not started |
+| C-06 | Can't see patterns (e.g., 40% missed services in one city) | Structured data | Structured category/sub-category, city, site, timestamps; metric definitions | The "40% in one city" question is answerable from fields | In progress |
 | C-07 | Customer has no visibility; "any update?" follow-ups | Customer update mechanism | Proactive updates at defined status changes, by CS (v1); portal deferred | S4 is handled by linking, and the design reduces S4-type volume | In progress |
 | C-08 | Severity by who shouts loudest, not impact | Severity model | Impact-based rules; reporter seniority not an input | Same issue from CXO vs facility manager → same severity | In progress |
 
