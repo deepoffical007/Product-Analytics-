@@ -23,7 +23,7 @@ The overflow needs relief this week; the extra unit may take weeks and approval.
 ### Severity and priority
 
 **4. Severity comes from impact rules, with three named levels and three escalators. The reporter's identity is never an input.** (C-8)
-The levels test what is happening at the site (hygiene exposure now? service or billing commitment broken?), not who is asking. Recurrence, multi-site scope and overdue days raise the level automatically, so a polite report of the third odour complaint at a large account outranks a loud cosmetic one.
+The levels test what is happening at the site (hygiene exposure now? service or billing commitment broken?), not who is asking. For operational complaints, recurrence, multi-site scope and overdue days raise the level automatically (billing escalates instead), so a polite report of the third odour complaint at a large account outranks a loud cosmetic one.
 *Rejected:* P1–P4 tiers set by judgement, which is how "loudest wins" happens today. *Validate:* the thresholds.
 
 **5. Priority is a computed queue order, not a second label.** (C-8)

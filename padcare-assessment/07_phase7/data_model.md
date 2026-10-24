@@ -34,7 +34,7 @@ The master prompt's other entities map as follows:
 | Type-specific | location_on_site, scheduled_visit_id, invoice_no, invoice_month, disputed_amount, expected_outcome, customer_can_process (bool), correct_address, effective_date, quantity, requested_by_date, committed_date, current_problem_reported (bool), commercial_approval_needed (bool), sites_affected (array), customer_asks_for |
 | Severity / priority | hygiene_exposure_now, sites_affected_count, recurrence_count, system_severity, final_severity, override_reason, expedite (bool), expedite_reason |
 | Ownership | **resolution_owner_id**, **pending_owner_id** (during `Assigned`), **communication_owner_id**, escalation_level |
-| Lifecycle | status, triaged_at, resolved_at, closed_at, closure_reason, reopen_count, rejection_count, followup_count, customer_chased (bool) |
+| Lifecycle | status, triaged_at, resolved_at, closed_at, closure_reason (Confirmed · Confirmed on site · Plan Agreed · No Response · Cancelled – Duplicate · Cancelled – Invalid), closure_sub_reason, reopen_count, rejection_count, followup_count, customer_chased (bool) |
 | Resolution | evidence_type, evidence_refs (invoice/credit-note numbers, visit_id), root_cause_note, next_visit_confirmed_date |
 | Confirmation | confirmation_outcome (Confirmed · Confirmed on site · Rejected · No response), confirmed_by_contact_id, confirmed_at |
 

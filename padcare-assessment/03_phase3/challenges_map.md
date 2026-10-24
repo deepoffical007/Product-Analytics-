@@ -9,11 +9,11 @@ Step references (e.g., 2.5, R6) point to `02_phase2/end_to_end_flow.md` and `sla
 | 1 | Complaints lost between channels | **Whoever receives an issue logs it**, from any of the 6 channels, in a 2-minute Log step. The case is **owned by the account's CS owner from the moment it is logged**, or by the city CS queue if that person is on leave. A status enquiry about an issue with no case exposes the loss (flag *Not logged at receipt*) | 1.1, 1.2, 2.2 · R1 | ◐ |
 | 2 | Repeat vs new unknown | **Related-record panel shown before classification** (open cases + same site/category in 90 days). The **3rd case in 90 days is marked "Recurrence"**, raises severity one level, and needs a root-cause note to resolve | 2.1, 2.4, 2.5, 4.1 | ● |
 | 3 | Requests, status checks, account concerns all called "complaints" | **4 case types** with their own owner, path and closure evidence, chosen by **5 ordered questions**. **A status check is not a case**; it is attached to its parent. Mixed messages are **split into linked cases** (S-03) | 2.2, 2.3 · Phase 1 matrix | ● |
-| 4 | No clear handoff between teams | **Formal handoff:** reason + required-info checklist + due time. **The sender stays accountable until the receiver accepts or returns it**; non-acceptance escalates. Work by another team that doesn't need ownership to move is a **linked task** with an owner and due date. CS remains the **communication owner** throughout | 3.1–3.3, 4.3 · R4 | ● |
+| 4 | No clear handoff between teams | **Formal handoff:** reason + required-info checklist + due time. **The sender stays accountable until the receiver accepts or returns it**; non-acceptance escalates. Work by another team that doesn't need ownership to move is a **linked task** with an owner and due date. CS remains the **communication owner** throughout | 3.1–3.4, 4.3 · R4 | ● |
 | 5 | "Resolved" ≠ resolved | **Resolution evidence required by type** (visit proof, invoice/credit note no., install record, action plan) before **Awaiting Confirmation**. Closure needs the customer's confirmation or a defined no-response rule. Rejection reopens the case; a recurrence within 14 days reopens it | 4.1, 5.1–5.4 · V1–V3 | ● |
 | 6 | Can't see patterns | **Structured fields** (city, site, customer, type, sub-category, severity, channel) and an **event log** for every status, owner and customer update. This enables, e.g., "% of missed-service complaints by city last quarter" | ST6 · Phase 7 metrics | ● |
 | 7 | Customer has no visibility | **CS sends updates at fixed points** (acknowledgement with case ref, ETA, any ETA change, resolution) plus a **"maximum silence" timer** per severity. Status enquiries are counted per case, so chasing is measured | 2.6, 5.1 · R3, R5, R6 | ◐ |
-| 8 | Severity by who shouts loudest | **Severity proposed by the system from impact answers** (hygiene exposure now? sites affected? commitment broken?) plus automatic escalators (recurrence, 3+ sites, overdue days). **Seniority, tone and revenue are not inputs.** Overrides need a reason; Expedite use is reported | 2.5 | ● |
+| 8 | Severity by who shouts loudest | **Severity proposed by the system from impact answers** (hygiene exposure now? sites affected? commitment broken?) plus automatic escalators for operational complaints (recurrence, 3+ sites, overdue days). **Seniority, tone and revenue are not inputs.** Overrides need a reason; Expedite use is reported | 2.5 | ● |
 
 ### Limitations stated honestly (◐ rows and residual risks)
 
@@ -41,7 +41,7 @@ Step references (e.g., 2.5, R6) point to `02_phase2/end_to_end_flow.md` and `sla
 | 2.4 Recurrence | | ● | | | | ● | | ● |
 | 2.5 Severity + priority | | ● | | | | ● | | ● |
 | 2.6 Acknowledge | | | | | | | ● | |
-| 3.1–3.3 Routing + handoff protocol | | | | ● | | ● | | |
+| 3.1–3.4 Routing, handoff protocol, linked tasks | | | | ● | | ● | | |
 | 4.1 Evidence by type | | ● (root cause for recurrences) | | | ● | | | |
 | 4.2 On Hold – Customer only | | | | ● | | | | |
 | 4.3 Escalation | | ● | | ● | | | | ● (escalation by rules, not influence) |

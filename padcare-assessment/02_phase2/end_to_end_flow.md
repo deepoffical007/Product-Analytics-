@@ -12,7 +12,7 @@ All rules here are **proposals** for validation with PadCare `[A-07]`.
 |---|---|---|---|---|
 | **ST1 Intake** | 1.1 Receive · 1.2 Log · 1.3 Validate customer and site | Whoever receives the issue | `New` | C-01 |
 | **ST2 Triage** | 2.1 Related-record search · 2.2 Classify · 2.3 Duplicate / split check · 2.4 Recurrence check · 2.5 Severity · 2.6 Acknowledge the customer | CS (communication owner) | `New` → `Assigned` | C-02, C-03, C-08, C-07 |
-| **ST3 Route and assign** | 3.1 Route by type · 3.2 Handoff · 3.3 Accept or return | CS → receiving owner | `Assigned` → `In Progress` | C-04 |
+| **ST3 Route and assign** | 3.1 Route by type · 3.2 Handoff protocol (incl. accept / return) · 3.3 Linked tasks · 3.4 Statuses during routing | CS → receiving owner | `Assigned` → `In Progress` | C-04 |
 | **ST4 Resolve** | 4.1 Investigate and act · 4.2 Further handoffs · 4.3 Escalate on timers or events · 4.4 Record resolution evidence | Resolution owner | `In Progress` (`On Hold – Customer` allowed) | C-04, C-05 |
 | **ST5 Verify and close** | 5.1 Share the resolution, request confirmation · 5.2 Confirm / reject / no response · 5.3 Close · 5.4 Reopen or recurrence | CS | `Awaiting Confirmation` → `Closed` | C-05, C-07 |
 | **ST6 Learn** (continuous) | Every step writes a timestamped event | System | — | C-06 |
@@ -37,7 +37,7 @@ All rules here are **proposals** for validation with PadCare `[A-07]`.
 ### 1.2 Log — minimum fields (fast step)
 
 The Log step is meant to take about 2 minutes. Everything else is completed at Triage `[D-15]`.
-Mandatory at Log: customer account, site, reporter (name, contact, role), channel, date/time received (defaults to now and can be backdated), customer's words (verbatim), and the logger's best-guess type.
+Mandatory at Log: customer account, site (optional for account-level concerns), reporter (name, contact, role), channel, date/time received (defaults to now and can be backdated), customer's words (verbatim), and the logger's best-guess type.
 *Full field specification: Phase 5.*
 
 If CS already replied informally before logging (e.g., "checking" on WhatsApp), the logger records **"customer already acknowledged at [time]"**. This is kept as a customer update, but only an acknowledgement that includes a case reference counts towards R3 † (F-10).
@@ -88,14 +88,16 @@ Then set the sub-category.
   - If **no parent exists**, the underlying case is created with the customer-stated report date and the flag **"Not logged at receipt"**. This counts against C-01.
 
 ### 2.3 Duplicate and split check
-- **Duplicate** (same incident already open): the new record closes as `Closed – Cancelled (Duplicate)` and is linked to the parent. The new reporter is added as a contact on the parent.
+- **Duplicate** (same incident already open): the new record closes as `Closed – Cancelled – Duplicate` and is linked to the parent. The new reporter is added as a contact on the parent.
 - **Split** (a second independent need with a different owner or closure condition, e.g., S-03): a linked case is created.
 
 ### 2.4 Recurrence check
-If the same site has **≥ 2 earlier cases in the same category within 90 days**, the case is marked **Recurrence (n-th)**:
-- the recurrence count is shown to everyone handling it;
-- the severity escalator applies (2.5);
-- a mandatory root-cause note is required at resolution.
+† (audit AU-04) Two levels, so "repeat" means one thing:
+- **Repeat (from the 2nd case):** any earlier case at the same site with the same sub-category within 90 days is suggested as a *Recurrence of* link, and the **repeat count** is shown. This feeds metric M3.
+- **Recurrence flag (from the 3rd case,** i.e. ≥ 2 earlier**):** the case is marked **Recurrence (n-th)**:
+  - the count is shown to everyone handling it;
+  - the severity escalator applies (2.5) for operational complaints; billing escalates instead (F-12);
+  - a mandatory root-cause note is required at resolution.
 
 This turns "the third bad-odour complaint" (C-02) into a visible, rule-driven event.
 
@@ -109,7 +111,7 @@ This turns "the third bad-odour complaint" (C-02) into a visible, rule-driven ev
 | **Service-Impacting** | PadCare failed an agreed service, **without** a current hygiene exposure; **or** an invoice the customer cannot act on: wrong amount, or wrong entity/site/address that stops them processing it † (F-1) | Late visit with units not yet full, unit not cleaned properly, SE conduct, S-02 |
 | **Low-Impact** | No service, hygiene or financial consequence | Cosmetic issues; an invoice error that does **not** stop the customer processing it (e.g., a typo in the contact name); a commercial query with no service failure |
 
-**Escalators.** Each raises the level by one, capped at Hygiene-Critical:
+**Escalators** (operational complaints only † AU-03). Each raises the level by one, capped at Hygiene-Critical:
 - **Recurrence:** the 3rd or later case at the site for the same category within 90 days (2.4).
 - **Scope:** the same issue at **3 or more sites** of one customer.
 - **Duration:** missed collection overdue by **≥ 3 days** past its scheduled date `[A-08]` (threshold to be validated per site type).
@@ -226,7 +228,7 @@ When resolution evidence is recorded, the case goes to `Awaiting Confirmation` a
 | Confirms | `Closed – Confirmed` |
 | Rejects ("still overflowing") | Back to `In Progress` with the **last resolution owner**. Rejection count +1; reason recorded. The SLA continues from the original receipt time, not reset. A 2nd rejection escalates (4.3) |
 | No response | Reminders at 2 and 4 business days; `Closed – No Response` at 5 business days. This closure is **excluded from the "customer-confirmed" rate** (C-05 metric) |
-| **Reporter or SPOC signed off on site** in the SE app (operational) † (F-5) | Counts as confirmation → `Closed – Confirmed (on site)`. CS sends a closure note, not a question. A sign-off by anyone else (e.g., security staff) still needs the CS request |
+| **Reporter or SPOC signed off on site** in the SE app (operational) † (F-5) | Counts as confirmation → `Closed – Confirmed on site`. CS sends a closure note, not a question. A sign-off by anyone else (e.g., security staff) still needs the CS request |
 | Customer unreachable but the SE confirms on the next visit (operational only) | May be recorded as confirmation with the SE as the confirmer. Shown separately in reporting |
 
 ### 5.3 Closure rules
@@ -297,7 +299,7 @@ stateDiagram-v2
 | `In Progress` | Owner is working on it | Current resolution owner | Owner; CS (for hold/closure paths) |
 | `On Hold – Customer` | Waiting on the customer only; clock paused | CS | CS; system (time-out) |
 | `Awaiting Confirmation` | Evidence recorded; customer asked to confirm | CS | CS; system (time-out) |
-| `Closed` | With a reason: Confirmed · No Response · Cancelled (Duplicate / Invalid) · Plan Agreed (account concern) | — | CS / KAM (reopen) |
+| `Closed` | Displayed as `Closed – <reason>`. **Closure reason** (canonical list †): Confirmed · Confirmed on site · Plan Agreed (account-level) · No Response · Cancelled – Duplicate · Cancelled – Invalid (sub-reason: not a PadCare issue / logged in error / test) | — | CS / KAM / Ops City Manager (reopen) |
 
 **Invalid transitions** (system-blocked):
 - Any status → `Closed – Confirmed` without resolution evidence.

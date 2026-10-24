@@ -52,7 +52,7 @@
 
 | Scenario | Typical path | Response | Resolution | Confirmation | End to end (illustrative, not PadCare's actual performance) |
 |---|---|---|---|---|---|
-| S-01 missed collection, Hygiene-Critical | Log → triage → SE → evidence → confirm | Ack ≤ 2 h; ETA ≤ 4 h | Visit ≤ 24 h | ≤ 5 business days | ~1 day to fix; closed within ~1 week at most |
+| S-01 missed collection, Hygiene-Critical | Log → triage → Ops City Manager + SE visit task → evidence → confirm | Ack ≤ 2 h; ETA ≤ 4 h | Visit ≤ 24 h | ≤ 5 business days | ~1 day to fix; closed within ~1 week at most |
 | S-02 billing, Service-Impacting | Log → triage → Finance → CS → confirm | Ack same day; ETA ≤ 1 business day | ≤ 5 business days | ≤ 5 business days | ~5 business days to fix; ≤ ~2 weeks to closure |
 
 ## Response vs resolution — why they are separate

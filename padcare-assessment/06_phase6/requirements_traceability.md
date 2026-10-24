@@ -8,7 +8,7 @@
 | TC-02 | T3-01, T3-02, C-4 (complete handoff), S-02 | VR-13, VR-15, VR-31 | 2.5, 3.2 | F-7 |
 | TC-03 | T3-05 (wrong site/customer), C-2/C-6 (data quality), S-02 | VR-02, VR-03 | 1.3, 3.3 (tasks) | F-3, F-11 |
 | TC-04 | T3-04 (repeat complaint), C-2, D-14 | VR-11, VR-12 | 2.1, 2.3, 2.4, 2.5 | **F-12** |
-| TC-05 | C-4, T1-03 | VR-27, VR-31 | 3.2, 3.4, 4.3 · R4 | F-2 |
+| TC-05 | C-4, T1-03 | VR-27, VR-31 | 3.2, 4.3 · R4 | F-2 |
 | TC-06 | C-5, T1-05, T3-03 (status check does not close the parent), S-04 pattern | VR-09, VR-27, VR-33 | 4.4, 5.1–5.3, E-1 | F-3, D-16 |
 | TC-07 | C-5 (non-response) | — (timer) | 5.2 · V2 | D-24 |
 | TC-08 | C-5 (rejection) | — | 5.2, 4.3 | — |

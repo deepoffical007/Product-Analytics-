@@ -25,14 +25,14 @@
 |---|---|---|---|---|---|
 | D1 10:05 | 1.1 | — | — | WhatsApp received by the CS owner | Clocks start (received at) |
 | D1 10:40 | 1.2–1.3 | CS (account owner) | `New` | Logged in about 2 min; customer and site valid | R1 (1 h for Hygiene-Critical, HC): 35 min ✓ |
-| D1 10:45 | 2.1 | CS | `New` | Related-record panel: no open cases. **One earlier missed collection at this site 50 days ago** (count = 2 in 90 days, not yet a recurrence). Schedule shows this month's visit (due on the 6th) as *Rescheduled* with no new date `[A-02]` | — |
+| D1 10:45 | 2.1 | CS | `New` | Related-record panel: no open cases. **One earlier missed collection at this site 50 days ago** (repeat count 2: suggested *Recurrence of* link; the Recurrence flag starts at the 3rd). Schedule shows this month's visit (due on the 6th) as *Rescheduled* with no new date `[A-02]` | — |
 | D1 10:50 | 2.2–2.3 | CS | `New` | Q1 no (new issue) → Q2 no → Q3 no → **Q4 yes: PadCare missed a committed service → Operational complaint / Missed collection**. No duplicate. "Plan the visit" is the fix itself, not a second need → no split | — |
 | D1 11:05 | 2.5 | CS | `New` | Impact questions. *Hygiene exposure now?* CS asks the SPOC: bins full on two floors → **yes**. *Overdue?* 7 days past schedule (escalator ≥ 3 days). **Severity = Hygiene-Critical.** The customer's word "hygiene" triggered the question, but the **answer came from facts** (C-8) | R2 (1 h from log): 25 min ✓ |
 | D1 11:15 | 2.6 | CS | `New` | Acknowledgement on WhatsApp: case ref, "missed collection, marked urgent; visit time by 2 pm"; logged as a customer update | R3 (2 h): 1 h 10 ✓ |
 | D1 11:20 | 3.1–3.2 | **CS** (until acceptance) | `Assigned` → SE-1 | Routed to SE-1, the site's scheduled SE. Checklist: site, floors, access contact, severity, problem | R4 deadline 12:20 |
 | D1 12:20 | 4.3 | CS | `Assigned` | **SE-1 has not accepted**: on route, phone not checked. Auto-escalation to the **Ops City Manager** ⚠ F-4 | R4 breached → decision due in 1 h |
 | D1 12:45 | 4.3 | CS | `Assigned` → SE-2 | Ops City Manager records the decision: *reassign to SE-2* (nearby route) | Decision in 25 min ✓ |
-| D1 12:55 | 3.3 | **SE-2** | `In Progress` | SE-2 accepts on mobile `[A-05]`; ownership transfers | — |
+| D1 12:55 | 3.2 | **SE-2** | `In Progress` | SE-2 accepts on mobile `[A-05]`; ownership transfers | — |
 | D1 13:05 | R5 | SE-2 (CS communicates) | `In Progress` | CS sends the ETA: "visit today 16:30" | R5 (4 h): 3 h ✓ |
 | D1 16:30–16:50 | 4.1 | SE-2 | `In Progress` | Collection done on all floors; photo; **SPOC signs off in the SE app** `[A-21]` | — |
 | D1 16:55 | 4.4 | SE-2 → **CS** | `Awaiting Confirmation` | Evidence recorded: visit record + photo + sign-off. Ownership returns to CS. ⚠ F-6: nothing checks that **next month's** visit is back on the schedule | X1 (24 h): 6 h 50 ✓ |
@@ -87,11 +87,11 @@ CS was the communication owner throughout.
 | D1 14:50 | 2.5 | CS | `New` | Impact: no hygiene exposure; invoice is wrong. ⚠ F-1: the Low-Impact definition ("document error with no effect on amount") and the Service-Impacting definition ("billed incorrectly") **both fit**. CS chooses **Service-Impacting** because the invoice is unusable | R2 (4 business h from log) ✓ |
 | D1 15:00 | 2.6 | CS | `New` | Acknowledgement email: case ref; Finance will correct; next update by tomorrow | R3 (same day) ✓ |
 | D1 15:10 | 3.2 | **CS** (until acceptance) | `Assigned` → Finance | Handoff checklist: invoice no. (Sept), disputed item = billing address, expectation = reissued invoice, customer email attached | R4 (4 business h) |
-| D1 16:30 | 3.3 | CS | `Assigned` | **Finance returns it:** "new address and effective date missing" ⚠ F-7. As designed, the case is back with CS in `Assigned`. **CS cannot put it On Hold from `Assigned`** — the state diagram only allows On Hold from `In Progress` ⚠ F-2. Workaround: CS moves it to `In Progress`, then On Hold | — |
+| D1 16:30 | 3.2 | CS | `Assigned` | **Finance returns it:** "new address and effective date missing" ⚠ F-7. As designed, the case is back with CS in `Assigned`. **CS cannot put it On Hold from `Assigned`** — the state diagram only allows On Hold from `In Progress` ⚠ F-2. Workaround: CS moves it to `In Progress`, then On Hold | — |
 | D1 16:45 | 4.2 | CS | `On Hold – Customer` | CS emails the SPOC for the new address and move date. Clock paused | — |
 | D2 10:15 | 4.2 | CS | `In Progress` | Customer replies: new address, effective **15 July**. Clock resumes (paused 2 h 30 business time) | — |
 | D2 10:30 | 3.2 | CS | `Assigned` → Finance | Re-handoff with complete information | R4 deadline 14:30 |
-| D2 11:30 | 3.3 | **Finance** | `In Progress` | Finance accepts | R4: 1 h ✓ |
+| D2 11:30 | 3.2 | **Finance** | `In Progress` | Finance accepts | R4: 1 h ✓ |
 | D2 12:00 | R5 | Finance (CS communicates) | `In Progress` | CS update: "corrected invoice by Monday" | R5 (1 business day + hold) ✓ |
 | D2 15:00 | 4.1 | Finance | `In Progress` | Finance finds that the **July and August** invoices also carry the old address; the customer only mentioned September ⚠ F-8. Root cause: the **site master record was never updated** `[D-18]` | — |
 | D2 15:15 | 4.4 | Finance | `In Progress` | Finance needs the site record corrected by its owner (assumed the Hyderabad Ops City Manager `[A-18]`). **The only tool is a handoff, which would move ownership away from Finance.** Finance emails the Ops City Manager instead — today's informal behaviour ⚠ F-3 | — |

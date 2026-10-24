@@ -7,7 +7,7 @@
 | Term | Definition |
 |---|---|
 | **Complaint** | Case with type ∈ {Operational complaint, Billing complaint}. Service requests and account-level concerns are reported **separately**; status enquiries are not cases (they are follow-ups) |
-| **Valid case** | closure_reason ∉ {Cancelled – Duplicate, Cancelled – Invalid, Logged in error, Test} |
+| **Valid case** | closure_reason ∉ {Cancelled – Duplicate, Cancelled – Invalid} |
 | **Period attribution** | Volume metrics by **received_at**; resolution and closure metrics by **closed_at**; reopen by the closure cohort |
 | **Business time** | Per `SlaPolicy`, net of `hold_started → hold_ended` intervals |
 | **City** | The site's city; account-level concerns use the customer's primary_city, or "Multi-city" |

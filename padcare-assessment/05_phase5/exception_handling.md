@@ -14,7 +14,7 @@ The first three are the exceptions the brief names explicitly for Task 3. The re
 
 ## E-2. Repeat complaint (C-2)
 - **Same incident, still open** (VR-11 → "Same — add as follow-up"): becomes a follow-up, as in E-1.
-- **Same incident, second reporter** (e.g., End User emails while the SPOC WhatsApps): "Same — duplicate report" → saved as `Closed – Cancelled (Duplicate)`, linked to the parent; the second reporter is added as a parent contact. One case, two people informed.
+- **Same incident, second reporter** (e.g., End User emails while the SPOC WhatsApps): "Same — duplicate report" → saved as `Closed – Cancelled – Duplicate`, linked to the parent; the second reporter is added as a parent contact. One case, two people informed.
 - **New incident of the same kind after an earlier one was resolved:** a new case. The system suggests *Recurrence of* when the earlier case is within 90 days.
   - At the 3rd case → Recurrence flag, severity +1 level, Ops City Manager root-cause review, KAM informed (VR-12).
 - **Same site, different sub-category:** shown in the panel as context only; no forced link.
@@ -58,7 +58,7 @@ The first three are the exceptions the brief names explicitly for Task 3. The re
 - **At `Awaiting Confirmation`:** reminders at business days 2 and 4 → `Closed – No Response` at day 5 (V2).
   - Excluded from the confirmed-closure rate.
   - If the reporter or SPOC signed off on site, the case is already confirmed (F-5).
-- **At `On Hold – Customer`:** reminders at days 2 and 4 → closed at day 7 with the reason "No response to information request" (V4).
+- **At `On Hold – Customer`:** reminders at days 2 and 4 → closed at day 7, closure reason **No Response** (sub-reason: information request) (V4).
 - **Hygiene-Critical** cases closing as No Response trigger an SE check on the next scheduled visit (record a task).
 
 ## E-9. Reopening after closure
@@ -70,9 +70,8 @@ The first three are the exceptions the brief names explicitly for Task 3. The re
 - **Duplicate or invalid found to be valid** → reopen with a reason (any CS).
 
 ## E-10. Cancelled or invalid records
-- **Reasons:**
-  - Duplicate (link required);
-  - Not a PadCare issue (e.g., the customer's own cleaning staff);
-  - Logged in error;
-  - Test record.
+- **Closure reasons:** *Cancelled – Duplicate* (link required), or *Cancelled – Invalid* with a sub-reason:
+  - not a PadCare issue (e.g., the customer's own cleaning staff);
+  - logged in error;
+  - test record.
 - **Who can cancel:** CS, KAM, or the Ops City Manager. Cancelled records **stay in the register** and in the volume-by-channel counts, but are excluded from the complaint metrics.

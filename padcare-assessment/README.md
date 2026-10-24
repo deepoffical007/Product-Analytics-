@@ -12,8 +12,8 @@ This is separate from the CEMS app in the repo root.
 | 4 Task 2 walkthroughs | `04_phase4/` | Done |
 | 5 Task 3 intake spec | `05_phase5/` | Done |
 | 6 Functional tests | `06_phase6/` | Done |
-| 7 Data model & analytics | `07_phase7/` | Done, awaiting review |
-| 8 Consistency audit | `08_phase8/` | Not started |
+| 7 Data model & analytics | `07_phase7/` | Done |
+| 8 Consistency audit | `08_phase8/` | Done, awaiting review |
 | 9 Final document | `09_final/` | Not started |
 | 10 Interview prep | `10_interview/` | Not started |
 
