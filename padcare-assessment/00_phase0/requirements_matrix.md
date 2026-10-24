@@ -9,7 +9,7 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 |---|---|---|---|---|---|
 | G-01 | "One Word/PDF document covering all three tasks, with embedded or linked diagrams" | Single .docx + .pdf | Phase 9 assembles all phase outputs; diagram embedded as image | Open PDF; check all 3 tasks + diagram present | Not started |
 | G-02 | "At the top… an Assumptions section listing every meaningful assumption" | Assumptions section, first pages | Curated from `assumptions_register.md` (only *meaningful* ones, grouped) | Every assumption referenced in Tasks 1–3 appears in the section | Not started |
-| G-03 | "At the top… a Challenges Map… mapping each of the 8 Current Challenges to the part of your design that addresses it" | Table, 8 rows, near top | `challenges_map.md` (Phase 3), condensed for doc | 8/8 rows; each cites a specific stage/field, not a generic phrase | Not started |
+| G-03 | "At the top… a Challenges Map… mapping each of the 8 Current Challenges to the part of your design that addresses it" | Table, 8 rows, near top | `challenges_map.md` (Phase 3), condensed for doc | 8/8 rows; each cites a specific stage/field, not a generic phrase | Done |
 | G-04 | "What we expect at the end of every task: a short 'Reasoning' note (3–6 lines)" | 3 reasoning notes | One per task, written last, explaining *why* + trade-off | Line count 3–6; contains a trade-off or limitation | Not started |
 | G-05 | Design anchored in the 8 challenges and 5 complaints; "Generic answers will read as generic" | Whole document | Every major decision cites a challenge (C-x) or scenario (S-x) | Phase 8 audit: no decision without a C/S anchor | Not started |
 | G-06 | "Quality over volume… Diagrams beat paragraphs. Reasoning beats output." | Concise doc | Tables and diagram over prose; working files stay out of final doc | Page count target 8–12 (working target, not a brief requirement) | Not started |
@@ -54,8 +54,8 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 | T1-05 | Closure & verification: how to confirm customer is actually satisfied (Challenge #5) | Closure rules | Customer confirmation step; non-response rule; reopen rule | Lifecycle has confirm/reject/no-response exits | Done |
 | T1-06 | SLAs: reasonable timelines per stage, with explanation | SLA table + rationale | `sla_matrix.md`; response vs resolution separated; all labelled proposals | Every stage has a target + reason | Done |
 | T1-D1 | Deliverable: flow diagram (clarity over aesthetics) | Diagram | Mermaid → rendered PNG embedded in doc | Readable at A4 width; decision points visible | Done |
-| T1-D2 | Deliverable: short narrative of key decisions, esp. classification, routing, SLAs | Narrative | ~1 page, decision-led | Covers the three named topics | Not started |
-| T1-D3 | Deliverable: Reasoning note — which of the 8 challenges the flow addresses, and how | 3–6 line note | Written after Challenges Map | Mentions all 8 or explains any gap | Not started |
+| T1-D2 | Deliverable: short narrative of key decisions, esp. classification, routing, SLAs | Narrative | ~1 page, decision-led | Covers the three named topics | Done |
+| T1-D3 | Deliverable: Reasoning note — which of the 8 challenges the flow addresses, and how | 3–6 line note | Written after Challenges Map | Mentions all 8 or explains any gap | Done |
 
 ## T2. Task 2 — Walk two complaints through the design
 

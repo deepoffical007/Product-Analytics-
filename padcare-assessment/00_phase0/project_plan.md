@@ -8,8 +8,8 @@ Each phase ends with a review gate: the candidate reads the output, confirms or 
 |---|---|---|---|---|---|
 | 0 | Extract requirements, set up logs | requirements_matrix, assumptions_register, decision_log, project_plan | — | all (mapping) | Done |
 | 1 | Problem framing, scope, record types | problem_definition, classification_matrix | 0 | C-03, S-01…S-05, T1-02 | Done |
-| 2 | End-to-end process, diagram, SLAs | end_to_end_flow, complaint_lifecycle.mmd, sla_matrix | 1 | T1-01…T1-06, T1-D1, C-01, C-04, C-05, C-08 | **Done — awaiting review** |
-| 3 | Task 1 reasoning + Challenges Map | task1_reasoning, challenges_map | 2 | T1-D2, T1-D3, G-03, C-01…C-08 | Not started |
+| 2 | End-to-end process, diagram, SLAs | end_to_end_flow, complaint_lifecycle.mmd, sla_matrix | 1 | T1-01…T1-06, T1-D1, C-01, C-04, C-05, C-08 | Done |
+| 3 | Task 1 reasoning + Challenges Map | task1_reasoning, challenges_map | 2 | T1-D2, T1-D3, G-03, C-01…C-08 | **Done — awaiting review** |
 | 4 | Task 2 walkthroughs + self-critique | task2_walkthroughs, design_review | 2, 3 | T2-01…T2-D2 | Not started |
 | 5 | Task 3 intake spec | intake_form_spec, validation_rules, exception_handling | 1, 2, 4 | T3-01…T3-05, T3-D1 | Not started |
 | 6 | Functional test cases (billing) | test_cases, requirements_traceability | 5 | T3-06, T3-D2 | Not started |
@@ -40,4 +40,5 @@ Only questions that would materially change the design. Defaults apply if unansw
 | Q-02 | Do you know anything real about PadCareOne (customer/site master, service schedules, SE mobile app, invoices)? | Treat as assumptions A-01, A-02, A-03, A-05 |
 | Q-03 | Deadline / hours available? | Full plan, phase by phase |
 | Q-04 | Use "Case" as the umbrella term? | **Recommended in Phase 1:** yes (D-06/D-10) — confirm |
+| Q-06 | Rewrite the Task 1 Reasoning note (03_phase3/task1_reasoning.md §C) in your own words | Draft stays, flagged |
 | Q-05 | Task 3 reasoning asks what was *hardest for you* — please note your honest reaction as we go | Draft one, flag for your rewrite |
