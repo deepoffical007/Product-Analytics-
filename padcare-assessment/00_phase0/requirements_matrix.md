@@ -26,7 +26,7 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 |---|---|---|---|---|---|
 | C-01 | Complaints lost between channels (WhatsApp to one CS person invisible to team; lost on leave) | Mechanism for central capture and shared visibility | Single register; mandatory logging by whoever receives it; team queue, not personal inbox | S1–S5 each enter via a named channel and land in the register | Not started |
 | C-02 | Repeat vs new unknown (3rd "bad odour" from same site in two months) | Repeat detection | Related-record search at intake (customer + site + category + window); repeat count shown | Test case: repeat suggestion fires | Not started |
-| C-03 | Service requests, status checks, account concerns all called "complaints" | Classification model | Separate record types with separate flows/closure rules | S1–S5 map to distinct types without ambiguity | Not started |
+| C-03 | Service requests, status checks, account concerns all called "complaints" | Classification model | Separate record types with separate flows/closure rules | S1–S5 map to distinct types without ambiguity | In progress |
 | C-04 | No clear handoff (billing: CS → Finance → CS; sits in nobody's inbox) | Ownership and handoff rules | One accountable owner; tracked handoff with acknowledgement + escalation | S2 walkthrough shows every handoff with owner and timer | Not started |
 | C-05 | "Resolved" ≠ resolved; no customer-confirmed closure | Closure model | Resolution evidence + Awaiting Customer Confirmation state; reopen path | Test case: cannot close without evidence/confirmation | Not started |
 | C-06 | Can't see patterns (e.g., 40% missed services in one city) | Structured data | Structured category/sub-category, city, site, timestamps; metric definitions | The "40% in one city" question is answerable from fields | Not started |
@@ -37,18 +37,18 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 
 | Req ID | Complaint (verbatim) | Assessment's own label | Planned implementation | Validation method | Status |
 |---|---|---|---|---|---|
-| S-01 | "Collection was not collected this month. Please plan the visit ASAP, as it's a hygiene issue." | Operational | Operational complaint; hygiene-impact severity rule | Classification table + optional Task 2 walkthrough | Not started |
-| S-02 | "Your invoice for September shows charges for the Hyderabad site, but we shifted to a new location in July. Please correct the address." | Billing | Billing complaint; CS → Finance → CS handoff; possibly also site master data correction | **Mandatory** Task 2 candidate; test cases | Not started |
-| S-03 | "We need an additional disposal unit installed on our 4th floor — the existing one is overflowing daily." | "A service request in disguise" | Split: service request (new unit) + linked operational complaint (overflow) — to be stress-tested in Phase 1 | Classification table shows split rule | Not started |
-| S-04 | "Just checking — has my complaint from last week about the missed service been resolved? No one has updated me." | Status check | Status enquiry linked to existing record; does not create new complaint; flags missed-update failure | Exception case in Task 3 | Not started |
-| S-05 | "Service quality has dropped across multiple sites in our portfolio. We need a meeting to discuss." | Account-level concern | Account-level record owned by KAM; multi-site; closure = agreed action plan | Classification table + optional Task 2 walkthrough | Not started |
+| S-01 | "Collection was not collected this month. Please plan the visit ASAP, as it's a hygiene issue." | Operational | Operational complaint; hygiene-impact severity rule | Classification table + optional Task 2 walkthrough | In progress |
+| S-02 | "Your invoice for September shows charges for the Hyderabad site, but we shifted to a new location in July. Please correct the address." | Billing | Billing complaint; CS → Finance → CS handoff; possibly also site master data correction | **Mandatory** Task 2 candidate; test cases | In progress |
+| S-03 | "We need an additional disposal unit installed on our 4th floor — the existing one is overflowing daily." | "A service request in disguise" | Split: service request (new unit) + linked operational complaint (overflow) — to be stress-tested in Phase 1 | Classification table shows split rule | In progress |
+| S-04 | "Just checking — has my complaint from last week about the missed service been resolved? No one has updated me." | Status check | Status enquiry linked to existing record; does not create new complaint; flags missed-update failure | Exception case in Task 3 | In progress |
+| S-05 | "Service quality has dropped across multiple sites in our portfolio. We need a meeting to discuss." | Account-level concern | Account-level record owned by KAM; multi-site; closure = agreed action plan | Classification table + optional Task 2 walkthrough | In progress |
 
 ## T1. Task 1 — End-to-end complaint flow
 
 | Req ID | Assessment requirement | Required output | Planned implementation | Validation method | Status |
 |---|---|---|---|---|---|
 | T1-01 | Intake: how it enters across channels; who logs it; what's captured | Intake stage in flow + narrative | Channel → logger table (6 channels); minimum capture set | All 6 channels have a named logger | Not started |
-| T1-02 | Classification & triage: what types exist; how severity is decided, and by whom | Classification + severity rules | Type decision table; impact-based severity matrix; named decider | S1–S5 classified; decider named | Not started |
+| T1-02 | Classification & triage: what types exist; how severity is decided, and by whom | Classification + severity rules | Type decision table; impact-based severity matrix; named decider | S1–S5 classified; decider named | In progress |
 | T1-03 | Routing & assignment: owner at each stage; when it moves CS → SE → Ops Manager → KAM → Finance | Routing rules | Routing table by type; escalation triggers | Every state has exactly one owner role | Not started |
 | T1-04 | Resolution: what "resolved" looks like per type (call, site visit, credit note) | Resolution evidence by type | Evidence table per record type | Each type has verifiable evidence | Not started |
 | T1-05 | Closure & verification: how to confirm customer is actually satisfied (Challenge #5) | Closure rules | Customer confirmation step; non-response rule; reopen rule | Lifecycle has confirm/reject/no-response exits | Not started |
@@ -61,7 +61,7 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 
 | Req ID | Assessment requirement | Required output | Planned implementation | Validation method | Status |
 |---|---|---|---|---|---|
-| T2-01 | Pick two of five; at least one must be #2 (billing) or #5 (account-level) | Two walkthroughs | Default: S-01 + S-02 (pending candidate choice — see Q-01) | Selection includes S-02 or S-05 | Not started |
+| T2-01 | Pick two of five; at least one must be #2 (billing) or #5 (account-level) | Two walkthroughs | S-01 + S-02 (confirmed, D-07) | Selection includes S-02 or S-05 | Not started |
 | T2-02 | Narrate: how/where it enters; info captured at intake, and by whom | Section per walkthrough | Stage-referenced timeline | Uses Task 1 stage names verbatim | Not started |
 | T2-03 | Narrate: classification — category, severity, priority — and why | Section | Applies Task 1 rules explicitly | Same result as classification table | Not started |
 | T2-04 | Narrate: owner at each stage; handoffs | Section | Owner column in timeline | No ownerless gap | Not started |

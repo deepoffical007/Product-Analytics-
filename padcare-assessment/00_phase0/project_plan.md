@@ -6,8 +6,8 @@ Each phase ends with a review gate: the candidate reads the output, confirms or 
 
 | Phase | Objective | Deliverables | Depends on | Covers Req IDs | Status |
 |---|---|---|---|---|---|
-| 0 | Extract requirements, set up logs | requirements_matrix, assumptions_register, decision_log, project_plan | — | all (mapping) | **Done — awaiting review** |
-| 1 | Problem framing, scope, record types | problem_definition, classification_matrix | 0 | C-03, S-01…S-05, T1-02 | Not started |
+| 0 | Extract requirements, set up logs | requirements_matrix, assumptions_register, decision_log, project_plan | — | all (mapping) | Done |
+| 1 | Problem framing, scope, record types | problem_definition, classification_matrix | 0 | C-03, S-01…S-05, T1-02 | **Done — awaiting review** |
 | 2 | End-to-end process, diagram, SLAs | end_to_end_flow, complaint_lifecycle.mmd, sla_matrix | 1 | T1-01…T1-06, T1-D1, C-01, C-04, C-05, C-08 | Not started |
 | 3 | Task 1 reasoning + Challenges Map | task1_reasoning, challenges_map | 2 | T1-D2, T1-D3, G-03, C-01…C-08 | Not started |
 | 4 | Task 2 walkthroughs + self-critique | task2_walkthroughs, design_review | 2, 3 | T2-01…T2-D2 | Not started |
@@ -33,8 +33,8 @@ Only questions that would materially change the design. Defaults apply if unansw
 
 | ID | Question | Default if no answer |
 |---|---|---|
-| Q-01 | Which two complaints for Task 2? | S-01 (missed collection) + S-02 (billing) |
+| Q-01 | Which two complaints for Task 2? | **Answered:** defaults (S-01 + S-02) |
 | Q-02 | Do you know anything real about PadCareOne (customer/site master, service schedules, SE mobile app, invoices)? | Treat as assumptions A-01, A-02, A-03, A-05 |
 | Q-03 | Deadline / hours available? | Full plan, phase by phase |
-| Q-04 | Use "Case" as the umbrella term, or keep "complaint" for everything with a type field? | Decide in Phase 1 with a recommendation |
+| Q-04 | Use "Case" as the umbrella term? | **Recommended in Phase 1:** yes (D-06/D-10) — confirm |
 | Q-05 | Task 3 reasoning asks what was *hardest for you* — please note your honest reaction as we go | Draft one, flag for your rewrite |

@@ -35,6 +35,10 @@ Columns: **Gap** (what the brief doesn't say) · **Assumption** · **Why needed*
 | A-12 | Working hours / calendar for SLA clocks | SLAs measured in business hours (e.g., 9:00–18:00, Mon–Sat) except hygiene-critical issues, which run on calendar hours. | SLA arithmetic in Task 2. | Ops / CS | L |
 | A-13 | Volume of complaints | Unknown. Not used to size anything; design must not depend on it. | Avoids inventing figures. | CS | L |
 | A-14 | Is a site relocation (S-02) already reflected in master data? | Unknown — S-02 implies it may **not** be. Design treats "site moved but master not updated" as a real exception. | S-02 likely has a root cause in master data, not only in the invoice. | Finance / Ops | M |
+| A-15 | Is there a CS Lead / CS manager role? | Not relied on — the brief does not list one. Escalations use only the roles in the brief. | Keeps routing within known roles. | CS | M — would be a natural owner for cover and unowned queues |
+| A-16 | Does an additional unit change charges/contract? | Possibly; the service request flow includes an optional commercial approval by the KAM (or CS where there is no KAM). | S-03 fulfilment path. | Sales / Finance | M |
+| A-17 | Complaints from before go-live | Not migrated. When a customer chases one, it is created then, flagged "not logged at receipt". | S-04 may refer to an issue that exists nowhere. | CS | L |
+| A-18 | Who owns site master data (addresses, relocations)? | Unknown; the design routes corrections to a named "master data owner" role to be confirmed (likely Ops or Finance). | S-02 closure requires the site record to be fixed. | Product Lead | M |
 
 ## Open questions for the candidate (not PadCare)
 Tracked in `project_plan.md` → "Questions for you".
