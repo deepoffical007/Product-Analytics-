@@ -10,8 +10,8 @@ Each phase ends with a review gate: the candidate reads the output, confirms or 
 | 1 | Problem framing, scope, record types | problem_definition, classification_matrix | 0 | C-03, S-01…S-05, T1-02 | Done |
 | 2 | End-to-end process, diagram, SLAs | end_to_end_flow, complaint_lifecycle.mmd, sla_matrix | 1 | T1-01…T1-06, T1-D1, C-01, C-04, C-05, C-08 | Done |
 | 3 | Task 1 reasoning + Challenges Map | task1_reasoning, challenges_map | 2 | T1-D2, T1-D3, G-03, C-01…C-08 | Done |
-| 4 | Task 2 walkthroughs + self-critique | task2_walkthroughs, design_review | 2, 3 | T2-01…T2-D2 | **Done — awaiting review** |
-| 5 | Task 3 intake spec | intake_form_spec, validation_rules, exception_handling | 1, 2, 4 | T3-01…T3-05, T3-D1 | Not started |
+| 4 | Task 2 walkthroughs + self-critique | task2_walkthroughs, design_review | 2, 3 | T2-01…T2-D2 | Done |
+| 5 | Task 3 intake spec | intake_form_spec, validation_rules, exception_handling | 1, 2, 4 | T3-01…T3-05, T3-D1 | **Done — awaiting review** |
 | 6 | Functional test cases (billing) | test_cases, requirements_traceability | 5 | T3-06, T3-D2 | Not started |
 | 7 | Data model + analytics | data_model, analytics_spec | 5 | C-06 | Not started |
 | 8 | Consistency audit | consistency_audit, final_requirements_traceability | 1–7 | G-10, E-01…E-06 | Not started |
@@ -21,7 +21,8 @@ Each phase ends with a review gate: the candidate reads the output, confirms or 
 ## Notes carried forward
 - Phase 9: the detailed flow diagram is too dense for an A4 page. Draw a **simplified top-level diagram** for the document (ST1–ST5 with the main decisions), and link or append the detailed one.
 
-- Phase 5: apply F-7 (wrong site/address → new address + effective date mandatory before the Finance handoff).
+- Phase 5: F-7 applied (VR-15).
+- Phase 9: the final doc uses the brief's 3-column fields table (Field / Type · Source / Notes & validation) — condense the 52 fields to the ~25 most important and point to the conditions table for the rest.
 - Phase 9: the final document's walkthroughs keep the ⚠ markers; Task 1 changes are marked †.
 
 ## Key risks to the submission
@@ -45,4 +46,4 @@ Only questions that would materially change the design. Defaults apply if unansw
 | Q-04 | Use "Case" as the umbrella term? | **Recommended in Phase 1:** yes (D-06/D-10) — confirm |
 | Q-06 | Rewrite the Task 1 Reasoning note (03_phase3/task1_reasoning.md §C) in your own words | Draft stays, flagged |
 | Q-07 | Rewrite the Task 2 Reasoning note (04_phase4/task2_walkthroughs.md, end) in your own words; trim to ≤ 6 lines | Draft stays, flagged |
-| Q-05 | Task 3 reasoning asks what was *hardest for you* — please note your honest reaction as we go | Draft one, flag for your rewrite |
+| Q-05 | Task 3 reasoning: what was hardest *for you*? Draft = customer–site validation (block vs warn) | Draft stays; replace if your honest answer differs |

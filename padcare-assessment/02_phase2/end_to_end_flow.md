@@ -56,7 +56,7 @@ On save:
 | Customer and site found, and the site belongs to the customer | Continue | — |
 | Site not found / the customer says the site moved (S-02) | Log with an **"Unverified site"** flag. CS resolves it at Triage: pick the correct site, or request a master-data correction `[A-18]` | Warning (does not block logging) |
 | Site belongs to a different customer | Block; choose the right customer or site | Hard error |
-| Customer not found | Block; must not be logged against a guess. Escalate to CS to check whether it is a new or unmapped customer | Hard error |
+| Customer not found | Log against an **"Unmatched customer"** placeholder with the name as stated; **Triage cannot complete until matched** † (Phase 5 review: blocking here would lose the issue, C-1) | Warning at Log; hard error at Triage |
 
 **Why the site flag is only a warning:** blocking at Log would mean the issue never gets recorded (C-01). Data quality is fixed one step later, at Triage.
 
