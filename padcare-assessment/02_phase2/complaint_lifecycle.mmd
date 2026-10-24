@@ -27,7 +27,7 @@ flowchart TD
 
     subgraph ST3["ST3 ROUTE & ASSIGN — handoff protocol"]
         K --> L{"Case type"}
-        L -- "Operational" --> L1["SE / Ops City Manager"]
+        L -- "Operational" --> L1["Hygiene-Critical: Ops City Manager + SE visit task<br/>else: scheduled SE"]
         L -- "Billing" --> L2["Finance"]
         L -- "Service request" --> L3["Ops City Manager · KAM approval if charges change"]
         L -- "Account-level" --> L4["KAM · else Ops City Manager"]
@@ -36,7 +36,7 @@ flowchart TD
         L3 --> M
         L4 --> M
         M{"Status: Assigned<br/>Receiver accepts within R4?<br/>Sender accountable until then"}
-        M -- "Returned: info missing" --> M2["Back to sender · sender completes info and re-routes"]
+        M -- "Returned: info missing" --> M2["Returned: In Progress with sender · completes info / On Hold – Customer · re-routes"]
         M2 --> L
         M -- "No response" --> M1["Escalate to receiver's escalation contact"]
         M1 --> M
@@ -45,20 +45,20 @@ flowchart TD
 
     subgraph ST4["ST4 RESOLVE — resolution owner"]
         N --> O["4.1 Investigate + act: visit · invoice correction · installation · meeting"]
-        O --> Q{"Needs another team?"}
+        O --> Q{"Needs another team?<br/>(decision → handoff · piece of work → linked task)"}
         Q -- "Yes: new handoff" --> L
         Q -- "Waiting on customer only" --> OH["On Hold – Customer · clock paused"]
         OH --> O
         O --> P{"SLA at risk / breached?"}
         P -- "Breached" --> P1["Escalation contact records a decision:<br/>reassign / take over / new date"]
         P1 --> O
-        Q -- "No" --> S["4.4 Record resolution evidence by type<br/>visit + proof · invoice / credit note no. + master fixed · install record · action plan"]
+        Q -- "No" --> S["4.4 Record resolution evidence by type · mandatory tasks done<br/>visit + proof · invoice / credit note no. + master fixed · install record · action plan"]
     end
 
     subgraph ST5["ST5 VERIFY & CLOSE — CS"]
         S --> T["Status: Awaiting Confirmation<br/>CS shares what was done and asks: resolved?"]
         T --> U{"Customer response"}
-        U -- "Confirms" --> V["Closed – Confirmed"]
+        U -- "Confirms (or SPOC signed off on site)" --> V["Closed – Confirmed"]
         U -- "Rejects" --> W["Back to In Progress · rejection +1<br/>2nd rejection → escalate"]
         W --> O
         U -- "No reply after 2 reminders (5 business days)" --> X["Closed – No Response"]

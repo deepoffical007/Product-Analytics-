@@ -1,5 +1,7 @@
 # Phase 2 — End-to-End Process Design
 
+Revision: v1.1 — walkthrough fixes F-1…F-8, F-10 applied (marked †; see `04_phase4/design_review.md`).
+
 Diagram: `complaint_lifecycle.mmd` (rendered: `complaint_lifecycle.png`). SLA targets: `sla_matrix.md`.
 Case types and the classification order come from `01_phase1/classification_matrix.md` and are reused unchanged.
 All rules here are **proposals** for validation with PadCare `[A-07]`.
@@ -37,6 +39,8 @@ All rules here are **proposals** for validation with PadCare `[A-07]`.
 The Log step is meant to take about 2 minutes. Everything else is completed at Triage `[D-15]`.
 Mandatory at Log: customer account, site, reporter (name, contact, role), channel, date/time received (defaults to now and can be backdated), customer's words (verbatim), and the logger's best-guess type.
 *Full field specification: Phase 5.*
+
+If CS already replied informally before logging (e.g., "checking" on WhatsApp), the logger records **"customer already acknowledged at [time]"**. This is kept as a customer update, but only an acknowledgement that includes a case reference counts towards R3 † (F-10).
 
 On save:
 - Case ID generated.
@@ -102,8 +106,8 @@ This turns "the third bad-odour complaint" (C-02) into a visible, rule-driven ev
 | Level | Definition (observable test) | Examples from the brief |
 |---|---|---|
 | **Hygiene-Critical** | A hygiene or health exposure **exists at the site now**: waste uncollected beyond schedule with units full, overflowing units, a damaged or leaking unit, contamination | S-01 (if units are full or overdue), the overflow half of S-03 |
-| **Service-Impacting** | PadCare failed an agreed service or billed incorrectly, **without** a current hygiene exposure | Late visit with units not yet full, unit not cleaned properly, SE conduct, S-02 |
-| **Low-Impact** | No service, hygiene or financial consequence | Cosmetic issues; a document error with no effect on the amount; a commercial query with no service failure |
+| **Service-Impacting** | PadCare failed an agreed service, **without** a current hygiene exposure; **or** an invoice the customer cannot act on: wrong amount, or wrong entity/site/address that stops them processing it † (F-1) | Late visit with units not yet full, unit not cleaned properly, SE conduct, S-02 |
+| **Low-Impact** | No service, hygiene or financial consequence | Cosmetic issues; an invoice error that does **not** stop the customer processing it (e.g., a typo in the contact name); a commercial query with no service failure |
 
 **Escalators.** Each raises the level by one, capped at Hygiene-Critical:
 - **Recurrence:** the 3rd or later case at the site for the same category within 90 days (2.4).
@@ -111,7 +115,7 @@ This turns "the third bad-odour complaint" (C-02) into a visible, rule-driven ev
 - **Duration:** missed collection overdue by **≥ 3 days** past its scheduled date `[A-08]` (threshold to be validated per site type).
 
 **Who decides.**
-- The system **proposes** a level from CS's answers to three impact questions: Is there a hygiene exposure now? How many sites/users are affected? Is the service/billing commitment broken? Recurrence and duration are filled in automatically from history and the schedule `[A-02]`.
+- The system **proposes** a level from CS's answers to the impact questions: Is there a hygiene exposure now? How many sites/users are affected? Is the service commitment broken? *(Billing:)* Is the amount wrong, or can the customer not process the invoice? † Recurrence and duration are filled in automatically from history and the schedule `[A-02]`.
 - CS **confirms** the level.
 - CS may raise it, with a reason.
 - **Lowering Hygiene-Critical** requires a reason and is visible to the Ops City Manager.
@@ -138,7 +142,7 @@ CS sends: case reference, the type as the customer would understand it ("a misse
 
 | Case type | First resolution owner after Triage | Typical further handoffs | Escalation contact |
 |---|---|---|---|
-| Operational complaint | **SE** assigned to the site, if known from the schedule `[A-02]`; else the **Ops City Manager** to dispatch an SE. CS keeps it if it can be resolved by a call (e.g., conduct explanation) | SE → CS (evidence) | Ops City Manager; KAM is notified for KAM accounts at Hygiene-Critical or the 3rd recurrence |
+| Operational complaint | **Hygiene-Critical: Ops City Manager**, with the SE visit as a linked task † (F-4). **Otherwise:** the SE scheduled for the site `[A-02]`, else the Ops City Manager to dispatch. CS keeps it if it can be resolved by a call (e.g., conduct explanation) | SE → CS (evidence) | Ops City Manager; KAM is notified for KAM accounts at Hygiene-Critical or the 3rd recurrence |
 | Billing complaint | **Finance** | Finance → CS (outcome to communicate); Finance → master-data owner if the site record is wrong (S-02) `[A-18]` | Finance escalation contact `[A-19]`; KAM notified if a KAM account |
 | Service request | **Ops City Manager** (fulfilment) | → KAM (or CS where there is no KAM) for commercial approval if charges change `[A-16]` → SE (installation) | Ops City Manager |
 | Account-level concern | **KAM**; if no KAM, the Ops City Manager of the account's primary city `[A-10]` | Spawns linked child cases for specific site failures | — (already at the top of the brief's role list) |
@@ -151,13 +155,24 @@ The **communication owner stays CS** for every type `[D-16]`. CS sends all custo
 |---|---|
 | Sending owner / receiving owner | Both recorded |
 | Reason | Mandatory, chosen from a list (e.g., "needs site visit", "invoice correction", "commercial approval", "escalation") plus free text |
-| Required information | A checklist per handoff type. **CS → Finance:** invoice number, invoice month, disputed line or amount, what the customer expects, customer evidence attached. **CS → SE / Ops:** site, exact location on site (e.g., 4th floor), access contact, problem, severity |
+| Required information | A checklist per handoff type. **CS → Finance:** invoice number, invoice month, disputed line or amount, what the customer expects, customer evidence attached; for a wrong site/address, the correct address and effective date (F-7). Finance's own checklist: **identify all invoices affected since the effective date** † (F-8). **CS → SE / Ops:** site, exact location on site (e.g., 4th floor), access contact, problem, severity |
 | Assigned at / due by | Timestamped; acceptance deadline from SLA R4 |
-| Acceptance | The receiver **accepts** (ownership transfers; status `In Progress`) or **returns** it with a reason (back to the sender, status stays `Assigned` to the sender). A return is not a rejection into nowhere |
+| Acceptance | The receiver **accepts** (ownership transfers; status `In Progress`) or **returns** it with a reason (back to the sender, **status `In Progress` with the sender**, so the sender can complete the information or put the case On Hold – Customer † (F-2)). A return is not a rejection into nowhere |
 | Accountability before acceptance | **The sender remains accountable until acceptance** |
 | No response by the deadline | Escalated to the receiver's escalation contact. The sender is notified and stays accountable |
 
-### 3.3 Statuses during routing
+### 3.3 Linked tasks † (F-3)
+Some work by another team does **not** need ownership to move. Examples: the SE visit for a Hygiene-Critical case owned by the Ops City Manager; a site master-data correction needed by Finance (S-02); an installation for a service request.
+
+These are **linked tasks** inside the case:
+- **Fields:** task owner, due date, done/not done, evidence.
+- **The case owner stays accountable** for the case; the task owner is accountable for the task.
+- Task acceptance and overdue escalation follow the handoff timers (R4, 4.3).
+- **A mandatory task that is not done blocks resolution** (4.4).
+
+*Rule of thumb:* hand off when the **next decision** belongs to another team; create a task when only a **piece of work** does.
+
+### 3.4 Statuses during routing
 `Assigned` = waiting for the receiver to accept. `In Progress` = accepted by the current owner. Each new handoff returns the case to `Assigned`.
 This makes the "in nobody's inbox" period (C-04) **visible and measurable** as time spent in `Assigned`.
 
@@ -169,8 +184,8 @@ This makes the "in nobody's inbox" period (C-04) **visible and measurable** as t
 
 | Type | Typical actions | Resolution evidence required before `Awaiting Confirmation` (system-enforced) |
 |---|---|---|
-| Operational complaint | Check the schedule: was the visit scheduled? marked done? → plan the visit → SE visits → fix | A visit record linked to the case **and** proof (photo of serviced unit or SPOC sign-off) **and**, for recurrences, a root-cause note. **Data-integrity flag:** if the schedule shows the visit as "completed" but the customer says it wasn't, the case cannot be resolved without an Ops City Manager note |
-| Billing complaint | Finance checks the invoice against site/service records → corrects, issues a credit note, or confirms it is correct | Corrected invoice no. **or** credit note no. **or** written explanation. **Plus** confirmation that the site/billing master was corrected, where the cause was master data (S-02) `[D-18]` |
+| Operational complaint | Check the schedule: was the visit scheduled? marked done? → plan the visit → SE visits → fix | A visit record linked to the case **and** proof (photo of serviced unit or SPOC sign-off) **and**, for recurrences, a root-cause note **and**, for *Missed collection*, the **next regular visit confirmed in the schedule** † (F-6). All mandatory linked tasks done. **Data-integrity flag:** if the schedule shows the visit as "completed" but the customer says it wasn't, the case cannot be resolved without an Ops City Manager note |
+| Billing complaint | Finance checks the invoice against site/service records → corrects, issues a credit note, or confirms it is correct | Corrected invoice no(s). (all affected invoices) **or** credit note no. **or** written explanation. **Plus** the master-data task completed, where the cause was master data (S-02) `[D-18]` |
 | Service request | Approval (if commercial) → schedule → fulfil | Fulfilment record (e.g., installation done with location, date and photo) **or** a decline reason communicated to the customer |
 | Account-level concern | Pull the account's case history → meeting → action plan → child cases for specific failures | Meeting held (date, attendees), action plan with owners and dates, review date. The customer agreeing to the plan is the confirmation |
 
@@ -210,6 +225,7 @@ When resolution evidence is recorded, the case goes to `Awaiting Confirmation` a
 | Confirms | `Closed – Confirmed` |
 | Rejects ("still overflowing") | Back to `In Progress` with the **last resolution owner**. Rejection count +1; reason recorded. The SLA continues from the original receipt time, not reset. A 2nd rejection escalates (4.3) |
 | No response | Reminders at 2 and 4 business days; `Closed – No Response` at 5 business days. This closure is **excluded from the "customer-confirmed" rate** (C-05 metric) |
+| **Reporter or SPOC signed off on site** in the SE app (operational) † (F-5) | Counts as confirmation → `Closed – Confirmed (on site)`. CS sends a closure note, not a question. A sign-off by anyone else (e.g., security staff) still needs the CS request |
 | Customer unreachable but the SE confirms on the next visit (operational only) | May be recorded as confirmation with the SE as the confirmer. Shown separately in reporting |
 
 ### 5.3 Closure rules
@@ -244,6 +260,7 @@ This is the raw material for Phase 7 metrics (C-06).
 | `handoff_initiated` / `handoff_accepted` / `handoff_returned` | 3.2 | Time in `Assigned`, return rate (C-04) |
 | `status_changed` (incl. hold start/end) | All | Ageing, SLA clocks |
 | `escalated` (trigger, to whom, decision) | 4.3 | Escalation rate |
+| `task_created` / `task_done` (owner, due) | 3.3 | Task ageing by team (C-04) |
 | `resolution_recorded` (evidence type) | 4.4 | Time to resolution |
 | `confirmation_requested` / `confirmed` / `rejected` / `no_response` | 5.x | Confirmation rate, rejection rate (C-05) |
 | `closed` (reason) / `reopened` | 5.3–5.4 | Reopen rate (C-05) |
@@ -259,7 +276,8 @@ stateDiagram-v2
     New --> InProgress : Triaged, CS resolves it directly
     New --> Closed : Duplicate / invalid (reason)
     Assigned --> InProgress : Receiver accepts
-    Assigned --> Assigned : Returned to sender / escalated (not accepted)
+    Assigned --> InProgress : Returned to sender (sender resumes)
+    Assigned --> Assigned : Escalated (not accepted)
     InProgress --> Assigned : Handoff to another owner
     InProgress --> OnHoldCustomer : Waiting on customer only
     OnHoldCustomer --> InProgress : Customer responds
@@ -274,7 +292,7 @@ stateDiagram-v2
 | Status | Meaning | Accountable owner | Who may move it out |
 |---|---|---|---|
 | `New` | Logged, not yet triaged | Account CS owner (or city CS queue) | CS |
-| `Assigned` | Handed off, not yet accepted | **Sender** (until acceptance) | Receiver (accept/return); escalation contact |
+| `Assigned` | Handed off, not yet accepted | **Sender** (until acceptance) | Receiver (accept → `In Progress` with the receiver; return → `In Progress` with the sender); escalation contact |
 | `In Progress` | Owner is working on it | Current resolution owner | Owner; CS (for hold/closure paths) |
 | `On Hold – Customer` | Waiting on the customer only; clock paused | CS | CS; system (time-out) |
 | `Awaiting Confirmation` | Evidence recorded; customer asked to confirm | CS | CS; system (time-out) |

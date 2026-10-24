@@ -61,15 +61,15 @@ Status values: `Not started` · `In progress` · `Done` · `Verified` (passed Ph
 
 | Req ID | Assessment requirement | Required output | Planned implementation | Validation method | Status |
 |---|---|---|---|---|---|
-| T2-01 | Pick two of five; at least one must be #2 (billing) or #5 (account-level) | Two walkthroughs | S-01 + S-02 (confirmed, D-07) | Selection includes S-02 or S-05 | Not started |
-| T2-02 | Narrate: how/where it enters; info captured at intake, and by whom | Section per walkthrough | Stage-referenced timeline | Uses Task 1 stage names verbatim | Not started |
-| T2-03 | Narrate: classification — category, severity, priority — and why | Section | Applies Task 1 rules explicitly | Same result as classification table | Not started |
-| T2-04 | Narrate: owner at each stage; handoffs | Section | Owner column in timeline | No ownerless gap | Not started |
-| T2-05 | Narrate: what gets done to resolve (calls, visits, credit notes) | Section | Action log | Matches resolution evidence rule | Not started |
-| T2-06 | Narrate: how closure happens — who confirms, on what basis | Section | Closure step | Matches closure rule | Not started |
-| T2-07 | Narrate: how long the whole thing takes (per SLAs) | Elapsed-time view | Illustrative timeline consistent with SLA matrix | Sums agree with SLA matrix | Not started |
-| T2-D1 | Deliverable: ~1 page per complaint, referencing stages explicitly | 2 × ~1 page | Table-led walkthrough | Page length check | Not started |
-| T2-D2 | Deliverable: Reasoning note — did the walkthroughs surface anything you'd change? | 3–6 line note | Cite ≥1 real inconsistency found + v1/v2 fix (assessment calls self-critique "gold") | Names a concrete flaw | Not started |
+| T2-01 | Pick two of five; at least one must be #2 (billing) or #5 (account-level) | Two walkthroughs | S-01 + S-02 (confirmed, D-07) | Selection includes S-02 or S-05 | Done |
+| T2-02 | Narrate: how/where it enters; info captured at intake, and by whom | Section per walkthrough | Stage-referenced timeline | Uses Task 1 stage names verbatim | Done |
+| T2-03 | Narrate: classification — category, severity, priority — and why | Section | Applies Task 1 rules explicitly | Same result as classification table | Done |
+| T2-04 | Narrate: owner at each stage; handoffs | Section | Owner column in timeline | No ownerless gap | Done |
+| T2-05 | Narrate: what gets done to resolve (calls, visits, credit notes) | Section | Action log | Matches resolution evidence rule | Done |
+| T2-06 | Narrate: how closure happens — who confirms, on what basis | Section | Closure step | Matches closure rule | Done |
+| T2-07 | Narrate: how long the whole thing takes (per SLAs) | Elapsed-time view | Illustrative timeline consistent with SLA matrix | Sums agree with SLA matrix | Done |
+| T2-D1 | Deliverable: ~1 page per complaint, referencing stages explicitly | 2 × ~1 page | Table-led walkthrough | Page length check | Done |
+| T2-D2 | Deliverable: Reasoning note — did the walkthroughs surface anything you'd change? | 3–6 line note | Cite ≥1 real inconsistency found + v1/v2 fix (assessment calls self-critique "gold") | Names a concrete flaw | Done |
 
 ## T3. Task 3 — Intake form functional specification
 
