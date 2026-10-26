@@ -83,8 +83,8 @@ const c = [];
 c.push(new Paragraph({ spacing: { before: 2400, after: 120 }, children: [new TextRun({ text: 'PadCare Labs', color: GREY, size: 26 })] }));
 c.push(new Paragraph({ spacing: { after: 120 }, children: [new TextRun({ text: 'Complaint Management in PadCareOne', bold: true, size: 48, color: TEAL })] }));
 c.push(new Paragraph({ spacing: { after: 600 }, children: [new TextRun({ text: 'Product Analyst (Process & Systems) — take-home assessment', size: 26 })] }));
-c.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: '[Candidate Name]', bold: true, size: 24, highlight: 'yellow' })] }));
-c.push(new Paragraph({ spacing: { after: 900 }, children: [new TextRun({ text: '[Date]', size: 22, color: GREY, highlight: 'yellow' })] }));
+c.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: 'Dipanshu Tyagi', bold: true, size: 24 })] }));
+c.push(new Paragraph({ spacing: { after: 900 }, children: [new TextRun({ text: '26 October 2026', size: 22, color: GREY })] }));
 c.push(H3('The design in five lines'));
 c.push(B('**Every issue becomes a Case** logged by whoever receives it, owned by the account\'s CS owner from the first minute.'));
 c.push(B('**Four case types** (operational, billing, service request, account-level) chosen by five ordered questions; a **status check is attached to its original case**, never a new complaint.'));
@@ -379,7 +379,7 @@ c.push(P('**Check result:** all five sample complaints run end to end; all eight
 
 // ======================= DOCUMENT =======================
 const doc = new Document({
-  creator: 'Candidate',
+  creator: 'Dipanshu Tyagi',
   title: 'PadCare — Complaint Management in PadCareOne',
   styles: {
     default: { document: { run: { font: 'Calibri', size: 20 }, paragraph: { spacing: { line: 264 } } } },
